@@ -1,0 +1,10 @@
+﻿
+@model IEnumerable<Test2.Models.LoaiSP>
+<div class="list-group">
+    @foreach (var item in Model)
+            {
+                <a href="@Url.Action("PhanLoai","Home",new { id = item.MaLoaiSP})">
+                    @item.TenLoai
+                </a>
+            }
+</div>

@@ -1,0 +1,87 @@
+﻿@model Test2.Models.SanPham
+
+@{
+    ViewBag.Title = "ChitietSP";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div id="page-wrapper">
+    <div>
+        <h3>Sản phẩm</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt style="width:160px">Tên sản phẩm</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+
+            <dt style="width:160px">Mô tả</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+
+            <dt style="width:160px">Giá tiền</dt>
+
+            <dd>
+                @String.Format("{0:0:0}", Model.GiaTien) VNĐ
+            </dd>
+
+            <dt style="width:160px">Ngày đăng</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
+
+            <dt style="width:160px">Trọng Lượng</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrongLuong)
+            </dd>
+
+            <dt style="width:160px">Hạn sử dụng</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HSD)
+            </dd>
+
+            <dt style="width:160px">Ngày sản xuất</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NSX)
+            </dd>
+
+            <dt style="width:160px">Mã loại</dt>
+
+            <dd>
+                @Model.LoaiSP.TenLoai
+            </dd>
+
+            <dt style="width:160px">Mã nhà cung cấp</dt>
+
+            <dd>
+                @Model.NhaCungCap.TenNCC
+            </dd>
+
+            <dt style="width:160px">Hình</dt>
+
+            <dd>
+                <img src="@Url.Content("~/images/CafeProduct/"+ Model.HinhAnh)" width="150" />
+            </dd>
+
+            <dt style="width:160px">Tình trạng</dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa thông tin", "Edit", new { id = Model.MaSP }) |
+        @Html.ActionLink("Về lại danh sách", "Cafe")
+    </p>
+</div>

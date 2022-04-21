@@ -1,0 +1,86 @@
+﻿@using Test2.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SanPham>
+
+@{
+    ViewBag.Title = "Sản phẩm";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+
+<div class="shop-area pt-120 pb-120">
+    <div class="container">
+        <div class="row flex-row-reverse">
+            <div class="col-lg-9">
+                <div class="shop-bottom-area">
+                    <div class="tab-content jump">
+                        <div id="shop-1" class="tab-pane active">
+                            <div class="row">
+                                @foreach (var caphe in Model)
+                                {
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                                        <div class="single-product-wrap mb-35">
+                                            <div class="product-img product-img-zoom mb-15">
+                                                <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
+                                                    <img src="~/images/CafeProduct/@caphe.HinhAnh" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-content-wrap-2 text-center">
+                                                <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                                <div class="product-price-2">
+                                                    <span>@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap-2 product-content-position text-center">
+                                                <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                                <div class="product-price-2">
+                                                    <span>@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
+                                                </div>
+                                                <div class="pro-add-to-cart">
+                                                    <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
+                                                        <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pro-pagination-style text-center mt-10">
+                        Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+                        <div>
+                           @Html.PagedListPager(Model,page=>Url.Action("SanPham",new { page = page }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="sidebar-wrapper sidebar-wrapper-mrg-right">
+                    <div class="sidebar-widget mb-40">
+                        <h4 class="sidebar-widget-title">Tìm kiếm </h4>
+                        <div class="sidebar-search">
+
+                            @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post)) 
+                                {
+                                <form class="sidebar-search-form" action="KetQuaTimKiem">
+                                    <input name="txtTimKiem" type="text" placeholder="Nhập từ khóa...">
+                                    <button class="button-search"><i class="icon-magnifier"></i></button>
+                                </form>
+                                 }
+                        </div>
+                    </div>
+                    <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">
+                        <h4 class="sidebar-widget-title">Sản phẩm </h4>
+                        <div class="shop-catigory">
+                            <ul>
+                                <li>@Html.Action("LoaiCaPhe", "Home")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

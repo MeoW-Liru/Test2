@@ -1,0 +1,242 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/Favicon_CafeTeam.png">
+    <link rel="stylesheet" href="~/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="~/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="~/css/style.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <script src="~/js/vendor/vendor.min.js"></script>
+    <script src="~/js/plugins/plugins.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/plugins/ajax-mail.js"></script>
+    <script src="~/js/plugins/easyzoom.js"></script>
+    <script src="~/js/plugins/jquery-ui-touch-punch.js"></script>
+    <script src="~/js/plugins/jquery-ui.js"></script>
+    <script src="~/js/plugins/jquery.instagramfeed.min.js"></script>
+    <script src="~/js/plugins/jquery.nice-select.min.js"></script>
+    <script src="~/js/plugins/jquery.syotimer.min.js"></script>
+    <script src="~/js/plugins/magnific-popup.js"></script>
+    <script src="~/js/plugins/plugins.js"></script>
+    <script src="~/js/plugins/plugins.min.js"></script>
+    <script src="~/js/plugins/scrollup.js"></script>
+    <script src="~/js/plugins/slick.js"></script>
+    <script src="~/js/plugins/sticky-sidebar.js"></script>
+    <script src="~/js/plugins/wow.js"></script>
+    <script src="~/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="~/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="~/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="~/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="~/js/vendor/vendor.js"></script>
+    <script src="~/js/vendor/vendor.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <link rel="stylesheet" href="~/mail-php/mail.php">
+</head>
+<body>
+    <div class="main-wrapper">
+        <header class="header-area">
+            <div class="container">
+                <div class="header-large-device">
+                    <div class="header-top header-top-ptb-2 border-bottom-1">
+                        <div class="row align-items-center">
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="search-wrap-2">
+                                    @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post))
+                                    {
+                                        <form action="KetQuaTimKiem">
+                                            <input name="txtTimKiem" placeholder="Tìm kiếm..." type="text">
+                                            <button class="button-search"><i class="icon-magnifier"></i></button>
+                                        </form>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-2">
+                                <div class="logo text-center">
+                                    <a href="~/Home/Index"><img src="~/images/CafeLayout/Logo_CafeTeam_3.png" alt="logo-cafe"></a>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-5">
+                                <div class="header-top-right">
+                                    <div class="header-login-regi">
+                                        @*<a href="login-register.html"><i class="icon-user"></i> Đăng nhập / Đăng ký</a>*@
+                                        <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
+                                        <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
+                                    </div>
+                                    <div class="header-cart-2">
+                                        @*<a class="cart-active" href="#"><i class="icon-basket-loaded"></i> <span class="black">02</span> $264.50</a>*@
+                                        <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
+                                            <i class="icon-basket-loaded"></i><span class="red">@ViewBag.Tongsoluong</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-bottom">
+                        <div class="row align-items-center">
+                            <div class="col-12">
+                                <div class="main-menu main-menu-padding-2 main-menu-center main-menu-font-width-400 main-menu-lh-1">
+                                    <nav>
+                                        <ul>
+                                            <li>
+                                                <a href="~/Home/Index">Trang Chủ </a>
+                                            </li>
+                                            <li>
+                                                <a href="~/Home/SanPham">Sản Phẩm </a>
+                                                <ul class="sub-menu-style">
+                                                    @Html.Action("LoaiCaPhe", "Home")
+                                                </ul>
+                                            </li>
+                                            <li><a href="~/Home/LienHe">Liên Hệ </a></li>
+                                            <li><a href="~/Home/">Blog và tin tức</a></li> @*Chỗ này sẽ fix thành blog*@ 
+                                            <li><a href="~/Home/">Chat online với shop</a></li> @*Chỗ này sẽ fix thành chat online*@
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-small-device small-device-ptb-1">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <div class="mobile-logo">
+                                <a href="Index">
+                                    <img alt="" src="~/images/CafeLayout/Logo_CafeTeam_3.png">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="header-action header-action-flex">
+                                <div class="same-style-2">
+                                    <a href="Login"><i class="icon-user"></i></a>
+                                </div>
+                                <div class="same-style-2 header-cart">
+                                    <a class="cart-active" href="#">
+                                        <i class="icon-basket-loaded"></i><span class="pro-count black">02</span>
+                                    </a>
+                                </div>
+                                <div class="same-style-2 main-menu-icon">
+                                    <a class="mobile-header-button-active" href="#"><i class="icon-menu"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- mini cart start -->
+        <div class="sidebar-cart-active">
+            <div class="sidebar-cart-all">
+                <a class="cart-close" href="#"><i class="icon_close"></i></a>
+                <div class="cart-content">
+                    <h3>Giỏ Hàng</h3>
+                    
+                        <ul>
+                            <li class="single-product-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="" alt=""></a>
+                                </div>
+                                <div class="cart-title">
+                                    <h4><a href="#"></a></h4>
+                                    <span></span>
+                                </div>
+                                @*<div class="cart-delete">
+                                    <a href="#">×</a>
+                                </div>*@
+                            </li>
+                        </ul>
+                    
+
+                    <div class="cart-total">
+                        <h4>Tổng tiền: <span></span></h4>
+                    </div>
+                    <div class="cart-checkout-btn">
+                        <a class="btn-hover cart-btn-style" href="~/Giohang/Giohang">xem giỏ hàng</a>
+                        <a class="no-mrg btn-hover cart-btn-style" href="#">thanh toán</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu start -->
+        <div class="mobile-header-active mobile-header-wrapper-style">
+            <div class="clickalbe-sidebar-wrap">
+                <a class="sidebar-close"><i class="icon_close"></i></a>
+                <div class="mobile-header-content-area">
+                    <div class="mobile-search mobile-header-padding-border-1">
+
+                        @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post))
+                        {
+                            <form class="search-form" action="KetQuaTimKiem">
+                                <input name="txtTimKiem" type="text" placeholder="Tìm kiếm…">
+                                <button class="button-search"><i class="icon-magnifier"></i></button>
+                            </form>
+                        }
+
+                    </div>
+                    <div class="mobile-menu-wrap mobile-header-padding-border-2">
+                        <!-- mobile menu start -->
+                        <nav>
+                            <ul class="mobile-menu">
+                                <li class="menu-item-has-children">
+                                    <a href="index.html">Trang Chủ</a>
+                                </li>
+                                <li class="menu-item-has-children ">
+                                    <a href="#">Sản Phẩm</a>
+                                    <ul class="dropdown">
+                                        @Html.Action("LoaiCaPhe", "Home")
+                                    </ul>
+                                </li>
+                                <li><a href="#">Liên hệ</a></li>
+                            </ul>
+                        </nav>
+                        <!-- mobile menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <!--footer-->
+
+    <footer class="footer-area pt-85 pb-90">
+        <div class="container">
+            <div class="footer-middle footer-middle-mrg pb-90plus">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="contact-info-wrap-2 text-center">
+                            <div class="footer-logo footer-logo-mrg">
+                                <a href="~/Home/Index"><img src="~/images/CafeLayout/Logo_CafeTeam_3_50.png" alt="logo"></a>
+                            </div>
+                            <p><b>Địa chỉ: </b>362/5b Gia Phú, Phường 3, Quận 6, Tp. HCM</p>
+                            <p><b>Điện thoại: </b>0936560299</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="footer-right-wrap">
+                            <div class="col-lg-6 col-md-6r">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.9671750204307!2d106.64683382922328!3d10.744601317113991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e6166568e8d%3A0x1796c6bb47097bba!2zMzYyLzUgxJDGsOG7nW5nIEdpYSBQaMO6LCBQaMaw4budbmcgMywgUXXhuq1uIDYsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1648632668518!5m2!1svi!2s" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom copyright text-center">
+            <p><a>© @DateTime.Now.Year Nhóm 9 - Lập Trình Web</a></p>
+        </div>
+    </footer>
+</body>
+</html>

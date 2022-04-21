@@ -1,0 +1,54 @@
+﻿@using Test2.Models
+@using PagedList.Mvc;
+@using System.Linq
+@model  PagedList.PagedList<SanPham>
+
+@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/_Layout.cshtml";
+}
+
+<div class="main-wrapper">
+    <div class="product-area pb-80">
+        <div class="container">
+            <div class="tab-content jump">
+                <div style="color:red;font-size:30px;padding-top:20px;padding-bottom:20px">@ViewBag.Thongbao</div>
+                <div id="product-1" class="tab-pane active">
+                    <div class="row">
+                        @foreach (var caphe in Model)
+                        {
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="single-product-wrap mb-35">
+                                    <div class="product-img product-img-zoom mb-15">
+                                        <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
+                                            <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
+                                        </a>
+                                    </div>
+                                    <div class="product-content-wrap-2 text-center">
+                                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                        <div class="product-price-2">
+                                            <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-content-wrap-2 product-content-position text-center">
+                                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                        <div class="product-price-2">
+                                            <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
+                                        </div>
+                                        <div class="pro-add-to-cart">
+                                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
+                                                <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End_Sản Phẩm HOT-->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

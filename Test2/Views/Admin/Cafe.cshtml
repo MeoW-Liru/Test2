@@ -1,0 +1,117 @@
+﻿@using Test2.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Test2.Models.SanPham>
+
+@helper Truncate(string input,int lenght)
+{
+    if(input.Length<lenght)
+    {
+        @input
+    }
+    else
+    {
+        @input.Substring(0,lenght)<text>...</text>
+    }
+}
+
+@{
+    ViewBag.Title = "Cafe";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<div id="page-wrapper">
+    <h3>
+        QUẢN LÝ THÔNG TIN SẢN PHẨM
+    </h3>
+    <p>
+        @Html.ActionLink("Tạo sản phẩm", "ThemSP")
+    </p>
+    <table class="table">
+        <tr>
+            <th style="width:200px">
+               Tên sản phẩm
+            </th>
+            <th style="width:200px">
+               Mô tả
+            </th>
+            <th style="width:200px">
+                Giá tiền
+            </th>
+            <th style="width:200px">
+                Ngày đăng sản phẩm
+            </th>
+            <th style="width:200px" >
+                trọng lượng
+            </th>
+            <th style="width:200px">
+                Hạn sử dụng
+            </th>
+            <th style="width:200px">
+                Ngày sản xuất
+            </th>
+            <th style="width:200px" >
+                Mã loại
+            </th>
+            <th style="width:200px">
+                Nhà cung cấp
+            </th>
+            <th style="width:200px">
+                Hình
+            </th>
+            <th style="width:200px" >
+                Trạng thái
+            </th>
+            <th style="width:300px">Thao tác</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    @Truncate(item.MoTa,100)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTien) VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrongLuong) Gram
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
+                </td>
+                <td>
+                    <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnh)" width="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }) |
+                    @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }) |
+                    @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="pro-pagination-style">
+        Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+        <ul>
+            @Html.PagedListPager(Model, page => Url.Action("SanPham", new { page = page }))
+        </ul>
+    </div>
+</div>

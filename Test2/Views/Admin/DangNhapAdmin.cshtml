@@ -1,0 +1,39 @@
+﻿
+
+@{ ViewBag.Title = "Login Admin";
+    Layout = "~/Views/_LayoutAdminLogin.cshtml";
+}
+
+<h1>Admin Login Form </h1>
+<h3 style="color:red; text-align:center; padding-top: 20px">@ViewBag.Thongbao</h3>
+<div class="clear-loading spinner">
+    <span></span>
+</div>
+<div class="w3ls-login box box--big">
+    @using (Html.BeginForm())
+    {
+        <div class="agile-field-txt">
+            <label><i class="fa fa-user" aria-hidden="true"></i> Tên đăng nhập </label>
+            <input type="text" name="UserName" placeholder="Nhập tên đăng nhập..." required="" />
+        </div>
+        <div class="agile-field-txt">
+            <label><i class="fa fa-unlock-alt" aria-hidden="true"></i> Mật khẩu </label>
+            <input type="password" name="PassWord" placeholder="Nhập mật khẩu..." required="" id="myInput" />
+            <div class="agile_label">
+                <input id="check3" name="check3" type="checkbox" value="show password" onclick="myFunction()">
+                <label class="check" for="check3">Hiện mật khẩu</label>
+            </div>
+        </div>
+        <!-- script for show password -->
+        <script>
+            function myFunction() {
+                var x = document.getElementById("myInput");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }</script>
+        <input type="submit" value="Đăng nhập">
+    }
+</div>

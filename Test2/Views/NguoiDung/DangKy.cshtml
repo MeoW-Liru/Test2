@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+<div class="login-register-area pt-115 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a data-toggle="tab" href="@Url.Action("DangKy","NguoiDung")">
+                            <h4> đăng ký </h4>
+                        </a>
+                    </div>
+                        <div id="lg2" class="tab-pane">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    @using (Html.BeginForm())
+                                    {
+                                        <input name="TenDN" placeholder="Tên Đăng Nhập" type="text" required>
+                                        <input name="Password" placeholder="Mật khẩu" type="password" required>
+                                        <input name="HoVaTen" placeholder="Họ Và Tên" type="text" required>
+                                        <input name="Email" placeholder="Email" type="text" required>
+                                        <input name="SDT" placeholder="Số Điện Thoại" type="text" required>
+                                        <input name="DiaChi" placeholder="Địa Chỉ" type="text" required>
+                                        <input name="NgaySinh" placeholder="Ngày Sinh" type="date" required/>
+                                        <div class="button-box">
+                                        <button type="submit">Đăng Ký</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

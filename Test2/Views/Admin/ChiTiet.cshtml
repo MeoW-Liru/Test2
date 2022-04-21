@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Test2.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<div id="page-wrapper">
+<h3>
+    QUẢN LÝ CHI TIẾT ĐƠN HÀNG
+</h3>
+
+<table class="table" width="300px">
+    <tr>
+    <tr>
+        <th style="width:300px">
+            Mã Sản Phẩm 
+        </th>
+        <th style="width:300px">
+           Mã Đơn Hàng
+        </th>
+        <th style="width:300px">
+        Số Lượng Sản Phẩm
+        </th>
+        <th style="width:300px">
+       Thành Tiền
+        </th>
+      
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DonHang.MaDH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien) VNĐ
+            </td>
+        </tr>
+    }
+</table>
+</div>
+

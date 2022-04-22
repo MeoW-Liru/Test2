@@ -58,7 +58,7 @@ namespace Test2.Controllers
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
                 Session["UserName"] = kh;
-                return RedirectToAction("SanPham", "Home");
+                return RedirectToAction("GioHang", "Giohang");
             }
             else
             {

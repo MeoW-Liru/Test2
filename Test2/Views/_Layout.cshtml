@@ -68,9 +68,13 @@
                                         <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
                                     </div>
                                     <div class="header-cart-2">
-                                        @*<a class="cart-active" href="#"><i class="icon-basket-loaded"></i> <span class="black">02</span> $264.50</a>*@
+
+                                        @*<a class="cart-active" href="#">
+                                            <i class="icon-basket-loaded"></i> <span class="black">02</span> $264.50
+                                        </a>*@
+
                                         <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
-                                            <i class="icon-basket-loaded"></i><span class="red">@ViewBag.Tongsoluong</span>
+                                            <i class="icon-basket-loaded"></i> <span class="red">@ViewBag.Tongsoluong</span>@ViewBag.TongTien
                                         </a>
                                     </div>
                                 </div>

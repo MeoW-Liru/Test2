@@ -8,42 +8,47 @@
 <h3>
     QUẢN LÝ CHI TIẾT ĐƠN HÀNG
 </h3>
-
+    @foreach (var m in ViewBag.Main)
+    {
+        <h3>Số Hóa Đơn:@m.donHang.MaDH</h3>
+        <h3>Tên Khách Hàng:@m.khachhang.HoVaTen</h3>
+    }
 <table class="table" width="300px">
     <tr>
-    <tr>
-        <th style="width:300px">
-            Mã Sản Phẩm 
-        </th>
-        <th style="width:300px">
-           Mã Đơn Hàng
-        </th>
-        <th style="width:300px">
-        Số Lượng Sản Phẩm
-        </th>
-        <th style="width:300px">
-       Thành Tiền
-        </th>
-      
+        <th>Số Thứ Tự</th>
+        <th>Tên sản phẩm</th>
+        <th>Đơn vị tính</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th>Tổng tiền</th>
     </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaSP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DonHang.MaDH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuongSP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThanhTien) VNĐ
-            </td>
-        </tr>
+    @{
+        double tongtien = 0;
+        int i = 0;
     }
+            @foreach (var item in ViewBag.Sub)
+            {
+                i++;
+                tongtien += (Convert.ToDouble(@item.ctdh.SoLuongSP) * Convert.ToDouble(@item.ctdh.ThanhTien));
+<tr>
+    <td>@i</td>
+    <td>@item.SP.TenSP</td>
+    <td>@item.SP.GiaTien</td>
+    <td>@item.ctdh.SoLuongSP</td>
+    <td>@String.Format("{0:0,##0}", item.ctdh.ThanhTien)</td>
+    <td>@String.Format("{0:0,##0}", item.TongTien)</td>
+</tr>
+                
+            }
+<tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th>Tổng Tiền:</th>
+    <th><text>@String.Format("{0:0,##0}",tongtien)</text></th>
+</tr>
+
 </table>
 </div>
-

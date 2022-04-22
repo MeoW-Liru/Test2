@@ -20,7 +20,8 @@ $(function() {
 			url: $(form).attr('action'),
 			data: formData
 		})
-		.done(function(response) {
+			.
+			e(function (response) {
 			// Make sure that the formMessages div has the 'success' class.
 			$(formMessages).removeClass('error');
 			$(formMessages).addClass('success');

@@ -15,6 +15,7 @@ namespace Test2.Controllers
         // GET: Home
         dbCoffeeDataContext data = new dbCoffeeDataContext();
 
+
         private List<SanPham> layCaPhe(int count)
         {
             //Sắp xếp theo ngày đăng
@@ -40,6 +41,7 @@ namespace Test2.Controllers
         {
             var caphe = layCaPhe(6);
             return View(caphe);
+
         }
 
         public ActionResult CafeHot()

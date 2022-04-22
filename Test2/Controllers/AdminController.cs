@@ -221,8 +221,6 @@ namespace Test2.Controllers
 
         public ActionResult ChiTiet(int MaDH)
         {
-
-
             using (dbCoffeeDataContext db = new dbCoffeeDataContext())
             {
                 List<KhachHang> khachhang = db.KhachHangs.ToList();
@@ -264,13 +262,13 @@ namespace Test2.Controllers
             DataTable dt = new DataTable("Gird");
             dt.Columns.AddRange(new DataColumn[] {
                 new DataColumn("Mã Đơn Hàng"),
-                 new DataColumn("Mã Khách Hàng"),
-                  new DataColumn("Tên Khách Hàng "),
-                   new DataColumn ("NgayGiao"),
-                   new DataColumn ("NgayLap"),
-                    new DataColumn("Địa Chỉ"),
-                    new DataColumn("Ghi Chú"),
-                    new DataColumn("Đã Thanh Toán")});
+                new DataColumn("Mã Khách Hàng"),
+                new DataColumn("Tên Khách Hàng "),
+                new DataColumn ("NgayGiao"),
+                new DataColumn ("NgayLap"),
+                new DataColumn("Địa Chỉ"),
+                new DataColumn("Ghi Chú"),
+                new DataColumn("Đã Thanh Toán")});
             var emps = from emp in data.DonHangs.ToList() select emp;
             foreach (var emp in emps)
             {

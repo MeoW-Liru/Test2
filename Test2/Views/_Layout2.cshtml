@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Test2.Models
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="~/css/plugins/plugins.min.css">
     <link rel="stylesheet" href="~/css/style.min.css">
 
-   
+
     <!--full css-->
     <link rel="stylesheet" href="~/css/vendor/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/vendor/signericafat.css">
@@ -68,7 +69,7 @@
             <div class="container">
                 <div class="header-large-device">
 
-                
+
                     <div class="header-bottom">
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
@@ -96,7 +97,7 @@
                             </div>
                             <div class="col-xl-2 col-lg-3">
                                 <div class="header-action header-action-flex header-action-mrg-right">
-                                    <div class="same-style-2 header-search-1">
+                                    @*<div class="same-style-2 header-search-1">
                                         <a class="search-toggle" href="#">
                                             <i class="icon-magnifier s-open"></i>
                                             <i class="icon_close s-close"></i>
@@ -107,9 +108,24 @@
                                                 <button class="button-search"><i class="icon-magnifier"></i></button>
                                             </form>
                                         </div>
+                                    </div>*@
+                                    <div class="header-top-right">
+                                        @if (Session["UserName"] == null)
+                                        {
+                                             <a href="@Url.Action("DangNhap", "NguoiDung")"><i class="icon-user"></i></a> }
+                                        else
+                                        {
+                                            <ul>
+                                                <li>
+                                                    Xin Chào : @Session["UserName"]
+                                                </li>
+                                                <li>
+                                                    @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")
+                                                </li>
+                                            </ul>
+                                        }
                                     </div>
                                     <div class="same-style-2">
-                                        <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i></a>
                                     </div>
                                     <div class="same-style-2 header-cart">
                                         <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
@@ -136,8 +152,8 @@
                                     <a href="Login"><i class="icon-user"></i></a>
                                 </div>
                                 @*<div class="same-style-2">
-                                    <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count red">03</span></a>
-                                </div>*@
+                                        <a href="wishlist.html"><i class="icon-heart"></i><span class="pro-count red">03</span></a>
+                                    </div>*@
 
                                 <div class="same-style-2 header-cart">
                                     <a class="cart-active" href="#">

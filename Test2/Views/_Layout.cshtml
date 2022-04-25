@@ -1,4 +1,4 @@
-﻿
+﻿@using Test2.Models
 
 <!DOCTYPE html>
 
@@ -62,23 +62,36 @@
                             </div>
                             <div class="col-xl-4 col-lg-5">
                                 <div class="header-top-right">
-                                    <div class="header-login-regi">
-                                        @*<a href="login-register.html"><i class="icon-user"></i> Đăng nhập / Đăng ký</a>*@
-                                        <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
-                                        <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
-                                    </div>
+
+                                    @if (Session["UserName"] == null)
+                                    {
+                                        <div class="header-login-regi">
+                                             <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
+                                             <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <ul>
+                                            <li>
+                                                Xin Chào : @Session["UserName"]
+                                            </li>
+                                            <li>
+                                                @Html.ActionLink("Đăng xuất","DangXuat","NguoiDung")
+                                            </li>
+                                        </ul>
+                                    }
                                     <div class="header-cart-2">
-
-                                        @*<a class="cart-active" href="#">
-                                            <i class="icon-basket-loaded"></i> <span class="black">02</span> $264.50
-                                        </a>*@
-
                                         <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
                                             <i class="icon-basket-loaded"></i> <span class="red">@ViewBag.Tongsoluong</span>@ViewBag.TongTien
                                         </a>
                                     </div>
                                 </div>
                             </div>
+
+
+
+
                         </div>
                     </div>
                     <div class="header-bottom">

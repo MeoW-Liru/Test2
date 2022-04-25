@@ -53,6 +53,7 @@ namespace Test2.Controllers
         {
             var tendn = collection["TenDN"];
             var matkhau = collection["Password"];
+
             KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
             if(kh != null)
             {
@@ -66,5 +67,12 @@ namespace Test2.Controllers
             }
             return View();
         }
+
+        public ActionResult DangXuat()
+        {
+            Session["UserName"] = null;
+            return Redirect("/");
+        }
+
     }
 }

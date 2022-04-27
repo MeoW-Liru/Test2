@@ -59,8 +59,6 @@ namespace Test2.Controllers
         {
             ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
-
-
             if(fileupload == null)
             {
                 ViewBag.Thongbao = "Vui lòng chọn ảnh bìa";
@@ -126,14 +124,55 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("Cafe");
         }
-
+        [HttpGet]
         public ActionResult SuaSP(string id)
         {
-            var sanpham = data.SanPhams.First(m => m.MaSP == id);
+            //var sanpham = data.SanPhams.First(m => m.MaSP == id);
+            SanPham sanpham = data.SanPhams.FirstOrDefault(m => m.MaSP == id);
+            ViewBag.MaSP = sanpham.MaSP;
+            if (sanpham == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
             ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sanpham.MaLoaiSP);
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
             return View(sanpham);
         }
+
+        //Cách 1:
+        //[HttpPost]
+        //[ValidateInput(false)]
+        //public ActionResult SuaSP(SanPham sp, HttpPostedFileBase fileupload)
+        //{
+        //    ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sp.MaLoaiSP);
+        //    ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sp.MaNCC);
+        //    if (fileupload == null)
+        //    {
+        //        ViewBag.Thongbao = "Chọn hình ảnh vào";
+        //        return View();
+        //    }
+        //    else
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            var fileName = Path.GetFileName(fileupload.FileName);
+        //            var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), fileName);
+        //            if (System.IO.File.Exists(path))
+        //                ViewBag.Thongbao = "Hình ảnh đã tồn tại";
+        //            else
+        //            {
+        //                fileupload.SaveAs(path);
+        //            }
+        //            sp.HinhAnh = fileName;
+        //            UpdateModel(sp);
+        //            data.SubmitChanges();
+        //        }
+        //        return RedirectToAction("Cafe");
+        //    }
+        //}
+
+        ////Cách 2
         [HttpPost]
         public ActionResult SuaSP(string id, FormCollection collection)
         {
@@ -158,21 +197,21 @@ namespace Test2.Controllers
             }
             else
             {
-                    sanpham.MaSP = maCP;
-                    sanpham.TenSP = tenSP;
-                    sanpham.MoTa = moTa;
-                    sanpham.GiaTien = giaTien;
-                    sanpham.NgayDang = ngayDang;
-                    sanpham.TrongLuong = trongLuong;
-                    sanpham.HSD = hanSD;
-                    sanpham.NSX = ngaySX;
-                    sanpham.MaLoaiSP = maLoaiSP;
-                    sanpham.MaNCC = maNCC;
-                    sanpham.HinhAnh = HinhAnh;
-                    //sanpham.Status = trangThai;
-                    UpdateModel(sanpham);
-                    data.SubmitChanges();
-                    return RedirectToAction("Cafe");
+                sanpham.MaSP = maCP;
+                sanpham.TenSP = tenSP;
+                sanpham.MoTa = moTa;
+                sanpham.GiaTien = giaTien;
+                sanpham.NgayDang = ngayDang;
+                sanpham.TrongLuong = trongLuong;
+                sanpham.HSD = hanSD;
+                sanpham.NSX = ngaySX;
+                sanpham.MaLoaiSP = maLoaiSP;
+                sanpham.MaNCC = maNCC;
+                sanpham.HinhAnh = HinhAnh;
+                //sanpham.Status = trangThai;
+                UpdateModel(sanpham);
+                data.SubmitChanges();
+                return RedirectToAction("Cafe");
             }
             return this.SuaSP(id);
         }
@@ -186,6 +225,9 @@ namespace Test2.Controllers
             file.SaveAs(Server.MapPath("~/images/CafeProduct" + file.FileName));
             return "~/images/CafeProduct" + file.FileName;
         }
+
+
+
 
         public ActionResult BangDieuKhien()
         {

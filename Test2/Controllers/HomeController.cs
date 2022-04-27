@@ -16,11 +16,17 @@ namespace Test2.Controllers
         dbCoffeeDataContext data = new dbCoffeeDataContext();
 
 
+        private List<SuKien> LaySuKien(int count)
+        {
+            return data.SuKiens.OrderByDescending(b => b.NgayDang).Take(count).ToList();
+        }
+
         private List<SanPham> layCaPhe(int count)
         {
             //Sắp xếp theo ngày đăng
             return data.SanPhams.OrderByDescending(a => a.NgayDang).Take(count).ToList();
         }
+
 
         public ActionResult LoaiCaPhe()
         {
@@ -28,21 +34,24 @@ namespace Test2.Controllers
             return PartialView(loai);
         }
 
-        public ActionResult PhanLoai(string id, int ? page)
+        public ActionResult PhanLoai(string id, int? page)
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
 
             var sanpham = from sp in data.SanPhams where sp.MaLoaiSP == id select sp;
-           return View(sanpham.ToPagedList(pageNum,pageSize));
+            return View(sanpham.ToPagedList(pageNum, pageSize));
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var caphe = layCaPhe(6);
-            return View(caphe);
+            int pageSize = 8;
+            int pageNum = (page ?? 1);
+            var caphe = layCaPhe(8);
+            return View(caphe.ToPagedList(pageNum,pageSize));
 
         }
+
 
         public ActionResult CafeHot()
         {
@@ -50,12 +59,13 @@ namespace Test2.Controllers
             return View(cafehot);
         }
 
-        public ActionResult SanPham(int ? page)
+
+        public ActionResult SanPham(int? page)
         {
-            int pageSize =6;
+            int pageSize = 6;
             int pageNum = (page ?? 1);
             var caphe = layCaPhe(8);
-            return View(caphe.ToPagedList(pageNum,pageSize));
+            return View(caphe.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult Details(string id)
@@ -108,6 +118,22 @@ namespace Test2.Controllers
         public ActionResult LienHe()
         {
             return View();
+        }
+
+        public ActionResult Blog(int? page)
+        {
+            int pageSize = 6;
+            int pageNum = (page ?? 1);
+            var sukien = LaySuKien(8);
+            return View(sukien.ToPagedList(pageNum, pageSize));
+        }
+
+        public ActionResult ChitietBlog(string id)
+        {
+            var sukien = from sk in data.SuKiens
+                          where sk.MaSK == id
+                          select sk;
+            return View(sukien.Single());
         }
     }
 }

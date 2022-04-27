@@ -1,0 +1,50 @@
+﻿@using Test2.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SuKien>
+
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+  <div class="breadcrumb-area bg-gray">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <ul>
+                        <li>
+                            <a href="~/Home/Index">Trang chủ</a>
+                        </li>
+                        <li class="active">Blog</li>
+                    </ul>
+                </div>
+            </div>
+  </div>
+  <div class="blog-area pt-120 pb-120">
+      <div class="container">
+          <div class="row">
+              @foreach (var sukien in Model)
+              {
+  <div class="col-lg-4 col-md-6 col-12 col-sm-6">
+      <div class="blog-wrap mb-40">
+          <div class="blog-img mb-20">
+              <a href="@Url.Action("ChitietBlog","Home",new{ id = sukien.MaSK})"><img src="~/images/CafeProduct/@sukien.HinhAnh" alt="blog-img"></a>
+          </div>
+          <div class="blog-content">
+              <div class="blog-meta">
+                  <ul>
+                      <li>@*<a href="#">*@News @*</a>*@</li>
+                      <li>@sukien.NgayDang</li>
+                  </ul>
+              </div>
+              <h1><a href="blog-details.html">@sukien.TieuDe</a></h1> 
+          </div>
+      </div>
+  </div>            }
+          </div>
+      </div>
+      <div class="pro-pagination-style text-center mt-10">
+          Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+          <div>
+              @Html.PagedListPager(Model, page => Url.Action("Blog", new { page = page }))
+          </div>
+      </div>
+  </div>

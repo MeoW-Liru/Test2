@@ -1,4 +1,9 @@
-﻿@model IEnumerable<Test2.Models.SanPham>
+﻿
+@using Test2.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SanPham>
+
+
 @{ ViewBag.Title = "Trang chủ";
     Layout = "~/Views/_Layout.cshtml"; }
 @*Đây là trang quảng cáo*@
@@ -103,7 +108,7 @@
             <h3><a href="@Url.Action("Details","Home",new{ id = cafehot.MaSP})"><span class="blod">@cafehot.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
         </div>
     </div>
-</div>            }
+</div>      }
         </div>
     </div>
 </div>
@@ -112,17 +117,17 @@
 <div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg)">
     <div class="container">
         @*<div class="deal-content-1">
-            <span>deal of the day</span>
-            <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
-            <div class="timer-wrap">
-                <h4>Expires in:</h4>
-                <div class="timer-style-1" id="timer-1-active"></div>
-            </div>
-            <div class="deal-btn">
-                <a href="product-details.html">Buy now</a>
-            </div>
-        </div>*@
+                <span>deal of the day</span>
+                <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
+                <div class="timer-wrap">
+                    <h4>Expires in:</h4>
+                    <div class="timer-style-1" id="timer-1-active"></div>
+                </div>
+                <div class="deal-btn">
+                    <a href="product-details.html">Buy now</a>
+                </div>
+            </div>*@
     </div>
 </div>
 
@@ -178,6 +183,12 @@
             </div>
         </div> <!--End_Sản Phẩm HOT-->}
                 </div>
+            </div>
+        </div>
+        <div class="pro-pagination-style text-center mt-10">
+            Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+            <div>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
             </div>
         </div>
     </div>

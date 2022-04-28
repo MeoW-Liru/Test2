@@ -608,6 +608,7 @@
     </None>
     <Content Include="Views\Home\Blog.cshtml" />
     <Content Include="Views\Home\ChitietBlog.cshtml" />
+    <Content Include="Views\Admin\BlogList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -254,6 +254,13 @@ namespace Test2.Controllers
             return View();
         }
 
+        public ActionResult BlogList (int ? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.SuKiens.ToList().OrderBy(n => n.MaSK).ToPagedList(pageNumber, pageSize));
+        }
+
         public ActionResult Cafe(int ? page)
         {
             int pageNumber = (page ?? 1);

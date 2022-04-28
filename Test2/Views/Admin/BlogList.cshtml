@@ -1,0 +1,106 @@
+﻿@using Test2.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Test2.Models.SuKien>
+
+@helper Truncate(string input, int lenght)
+{if (input.Length < lenght)
+                    {
+    @input }
+                    else
+                    {
+    @input.Substring(0, lenght)<text>...</text>}
+}
+
+
+@{ ViewBag.Title = "BlogList";
+                Layout = "~/Views/_LayoutAdmin.cshtml"; }
+<div id="page-wrapper">
+    <h3>Danh sách các Tin vắn đang hiển thị</h3>
+
+    <p>
+        @Html.ActionLink("Thêm tin", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th style="width:200px">
+                Hình Ngoài List:
+            </th>
+            <th style="width:200px">
+                Tiêu Đề:
+            </th>
+            <th style="width:200px">
+                Mô tả:
+            </th>
+            <th style="width:200px">
+                Ngày đăng:
+            </th>
+            <th style="width:200px">
+                Tình trạng:
+            </th>
+            <th style="width:200px">
+                Mô tả chi tiêt:
+            </th>
+            <th style="width:200px">
+                Mô tả thêm
+            </th>
+            <th style="width:200px">
+                Hình 1:
+            </th>
+            <th style="width:200px">
+                Hình 2:
+            </th>
+            <th style="width:200px">
+                Hình banner bự:
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnh)" width="150" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TieuDe)
+    </td>
+    <td>
+        @Truncate(item.MoTa, 100)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayDang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+        @Truncate(item.MoTaChiTiet, 100)
+    </td>
+    <td>
+        @Truncate(item.MoTaThem, 100)
+    </td>
+    <td>
+        <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnhChiTiet)" width="150" />
+    </td>
+    <td>
+        <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnhChiTietThem)" width="150" />
+    </td>
+    <td>
+        <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnhTongQuat)" width="150" />
+    </td>
+    <td>
+        @Html.ActionLink("Chỉnh tin", "Edit", new { id = item.MaSK }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSK }) |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.MaSK })
+    </td>
+</tr>
+}
+
+    </table>
+    <div class="pro-pagination-style">
+        Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+        <ul>
+            @Html.PagedListPager(Model, page => Url.Action("BlogList", new { page = page }))
+        </ul>
+    </div>
+</div>

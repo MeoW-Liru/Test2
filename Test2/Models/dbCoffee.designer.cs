@@ -1957,6 +1957,16 @@ namespace Test2.Models
 		
 		private System.Nullable<bool> _Status;
 		
+		private string _MoTaChiTiet;
+		
+		private string _MoTaThem;
+		
+		private string _HinhAnhChiTiet;
+		
+		private string _HinhAnhChiTietThem;
+		
+		private string _HinhAnhTongQuat;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1973,6 +1983,16 @@ namespace Test2.Models
     partial void OnNgayDangChanged();
     partial void OnStatusChanging(System.Nullable<bool> value);
     partial void OnStatusChanged();
+    partial void OnMoTaChiTietChanging(string value);
+    partial void OnMoTaChiTietChanged();
+    partial void OnMoTaThemChanging(string value);
+    partial void OnMoTaThemChanged();
+    partial void OnHinhAnhChiTietChanging(string value);
+    partial void OnHinhAnhChiTietChanged();
+    partial void OnHinhAnhChiTietThemChanging(string value);
+    partial void OnHinhAnhChiTietThemChanged();
+    partial void OnHinhAnhTongQuatChanging(string value);
+    partial void OnHinhAnhTongQuatChanged();
     #endregion
 		
 		public SuKien()
@@ -2096,6 +2116,106 @@ namespace Test2.Models
 					this._Status = value;
 					this.SendPropertyChanged("Status");
 					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoTaChiTiet", DbType="NVarChar(MAX)")]
+		public string MoTaChiTiet
+		{
+			get
+			{
+				return this._MoTaChiTiet;
+			}
+			set
+			{
+				if ((this._MoTaChiTiet != value))
+				{
+					this.OnMoTaChiTietChanging(value);
+					this.SendPropertyChanging();
+					this._MoTaChiTiet = value;
+					this.SendPropertyChanged("MoTaChiTiet");
+					this.OnMoTaChiTietChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoTaThem", DbType="NVarChar(MAX)")]
+		public string MoTaThem
+		{
+			get
+			{
+				return this._MoTaThem;
+			}
+			set
+			{
+				if ((this._MoTaThem != value))
+				{
+					this.OnMoTaThemChanging(value);
+					this.SendPropertyChanging();
+					this._MoTaThem = value;
+					this.SendPropertyChanged("MoTaThem");
+					this.OnMoTaThemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HinhAnhChiTiet", DbType="VarChar(MAX)")]
+		public string HinhAnhChiTiet
+		{
+			get
+			{
+				return this._HinhAnhChiTiet;
+			}
+			set
+			{
+				if ((this._HinhAnhChiTiet != value))
+				{
+					this.OnHinhAnhChiTietChanging(value);
+					this.SendPropertyChanging();
+					this._HinhAnhChiTiet = value;
+					this.SendPropertyChanged("HinhAnhChiTiet");
+					this.OnHinhAnhChiTietChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HinhAnhChiTietThem", DbType="VarChar(MAX)")]
+		public string HinhAnhChiTietThem
+		{
+			get
+			{
+				return this._HinhAnhChiTietThem;
+			}
+			set
+			{
+				if ((this._HinhAnhChiTietThem != value))
+				{
+					this.OnHinhAnhChiTietThemChanging(value);
+					this.SendPropertyChanging();
+					this._HinhAnhChiTietThem = value;
+					this.SendPropertyChanged("HinhAnhChiTietThem");
+					this.OnHinhAnhChiTietThemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HinhAnhTongQuat", DbType="VarChar(MAX)")]
+		public string HinhAnhTongQuat
+		{
+			get
+			{
+				return this._HinhAnhTongQuat;
+			}
+			set
+			{
+				if ((this._HinhAnhTongQuat != value))
+				{
+					this.OnHinhAnhTongQuatChanging(value);
+					this.SendPropertyChanging();
+					this._HinhAnhTongQuat = value;
+					this.SendPropertyChanged("HinhAnhTongQuat");
+					this.OnHinhAnhTongQuatChanged();
 				}
 			}
 		}

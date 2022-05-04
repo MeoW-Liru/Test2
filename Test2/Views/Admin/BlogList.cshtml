@@ -18,7 +18,7 @@
     <h3>Danh sách các Tin vắn đang hiển thị</h3>
 
     <p>
-        @Html.ActionLink("Thêm tin", "Create")
+        @Html.ActionLink("Thêm tin", "ThemBlog")
     </p>
     <table class="table">
         <tr>
@@ -90,7 +90,7 @@
     </td>
     <td>
         @Html.ActionLink("Chỉnh tin", "Edit", new { id = item.MaSK }) |
-        @Html.ActionLink("Chi tiết", "Details", new { id = item.MaSK }) |
+        @Html.ActionLink("Chi tiết", "ChiTietBlog", new { id = item.MaSK }) |
         @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK })
     </td>
 </tr>

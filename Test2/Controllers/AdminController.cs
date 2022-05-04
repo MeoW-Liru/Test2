@@ -256,12 +256,40 @@ namespace Test2.Controllers
         }
 
 
+        //Chi Tiết Blog
+        [HttpGet]
+        public ActionResult ChiTietBlog(string id)
+        {
+            SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+            ViewBag.MaSK = sk.MaSK;
+            if (sk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sk);
+        }
+
+
         //Thêm blog
         [HttpGet]
         public ActionResult ThemBlog()
         {
             return View();
         }
+        //Thêm Blog
+        // Chưa xong
+
+
+
+
+        //Sửa Blog
+
+        //Sửa Blog
+
+
+
+
 
         //Xóa Blog
         [HttpGet]
@@ -369,7 +397,7 @@ namespace Test2.Controllers
             {
                 wb.Worksheets.Add(dt);
                 using (MemoryStream stream = new MemoryStream())
-                {
+                { 
                     wb.SaveAs(stream);
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Hóa-Đơn.xlsx");
                 }

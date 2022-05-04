@@ -1,8 +1,6 @@
-﻿
-@using Test2.Models
+﻿@using Test2.Models
 @using PagedList.Mvc;
 @model PagedList.PagedList<SanPham>
-
 
 @{ ViewBag.Title = "Trang chủ";
     Layout = "~/Views/_Layout.cshtml"; }
@@ -195,8 +193,7 @@
 </div>
 
 
-
-
+@*Cần sửa database chỗ này*@ 
 <div class="blog-area pt-115">
     <div class="container">
         <div class="section-title-2 text-center mb-45">
@@ -205,60 +202,29 @@
         </div>
         <div class="border-bottom-2 blog-area-pb">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-wrap mb-30">
-                        <div class="blog-img mb-25">
-                            <a href="blog-details.html"><img src="assets/images/blog/blog-1.jpg" alt="blog-img"></a>
+                @foreach (var sukien in Model)
+                {
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-wrap mb-30">
+                    <div class="blog-img mb-25">
+                        <a href="blog-details.html"><img src="assets/images/blog/blog-1.jpg" alt="blog-img"></a>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <ul>
+                                <li><a href="#">News </a></li>
+                                <li>May 25, 2020</li>
+                            </ul>
                         </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <ul>
-                                    <li><a href="#">News </a></li>
-                                    <li>May 25, 2020</li>
-                                </ul>
-                            </div>
-                            <h3><a href="blog-details.html">Five things you only know if you’re at Chanel's Hamburg Show</a></h3>
-                        </div>
+                        <h3><a href="blog-details.html">Five things you only know if you’re at Chanel's Hamburg Show</a></h3>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-wrap mb-30">
-                        <div class="blog-img mb-25">
-                            <a href="blog-details.html"><img src="assets/images/blog/blog-2.jpg" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <ul>
-                                    <li><a href="#">Inspiration </a></li>
-                                    <li>May 25, 2020</li>
-                                </ul>
-                            </div>
-                            <h3><a href="blog-details.html">Basic colord mixed - trendind 2020</a></h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="blog-wrap mb-30">
-                        <div class="blog-img mb-25">
-                            <a href="blog-details.html"><img src="assets/images/blog/blog-3.jpg" alt="blog-img"></a>
-                        </div>
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <ul>
-                                    <li><a href="#">Lookbook </a></li>
-                                    <li>May 25, 2020</li>
-                                </ul>
-                            </div>
-                            <h3><a href="blog-details.html">Calvin Klein Shoes Collection 2020, Activites Summer</a></h3>
-                        </div>
-                    </div>
-                </div>
+            </div>
+            }
             </div>
         </div>
     </div>
 </div>
-
-
 
 <!-- All JS is here
 ============================================ -->

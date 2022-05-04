@@ -29,7 +29,6 @@ namespace Test2.Controllers
             var diachi = collection["DiaChi"];
             var ngaysinh = string.Format("{0:MM/dd/yyyy}",collection["NgaySinh"]);
 
-
             kh.UserName = tendn;
             kh.PassWord = matkhau;
             kh.HoVaTen = hovaten;

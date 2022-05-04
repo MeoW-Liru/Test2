@@ -128,6 +128,7 @@ namespace Test2.Controllers
             return View(sukien.ToPagedList(pageNum, pageSize));
         }
 
+
         public ActionResult ChitietBlog(string id)
         {
             var sukien = from sk in data.SuKiens

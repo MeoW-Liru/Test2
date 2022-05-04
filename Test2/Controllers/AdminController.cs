@@ -143,8 +143,10 @@ namespace Test2.Controllers
         //Cách 1:
         //[HttpPost]
         //[ValidateInput(false)]
-        //public ActionResult SuaSP(SanPham sp, HttpPostedFileBase fileupload)
+        //public ActionResult SuaSP(SanPham sp, HttpPostedFileBase fileupload,FormCollection collection)
         //{
+
+
         //    ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sp.MaLoaiSP);
         //    ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sp.MaNCC);
         //    if (fileupload == null)
@@ -177,7 +179,6 @@ namespace Test2.Controllers
         public ActionResult SuaSP(string id, FormCollection collection)
         {
             var sanpham = data.SanPhams.First(m => m.MaSP == id);
-
             var maCP = collection["macp"];
             var tenSP = collection["tensp"];
             var moTa = collection["mota"];
@@ -254,6 +255,46 @@ namespace Test2.Controllers
             return View();
         }
 
+
+        //Thêm blog
+        [HttpGet]
+        public ActionResult ThemBlog()
+        {
+            return View();
+        }
+
+        //Xóa Blog
+        [HttpGet]
+        public ActionResult XoaBlog(string id)
+        {
+            SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+            ViewBag.MaSK = sk.MaSK;
+            if (sk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sk);
+        }
+        [HttpPost, ActionName("XoaBlog")]
+        public ActionResult XacNhanXoaSuKien(string id)
+        {
+            SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+            ViewBag.MaSK = sk.MaSK;
+            if (sk == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.SuKiens.DeleteOnSubmit(sk);
+            data.SubmitChanges();
+            return RedirectToAction("BlogList");
+        }
+        //Xóa Blog
+
+
+
+        //Xuất Blog
         public ActionResult BlogList (int ? page)
         {
             int pageNumber = (page ?? 1);

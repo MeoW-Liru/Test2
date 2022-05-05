@@ -1,0 +1,40 @@
+﻿@model Test2.Models.LoaiSP
+
+@{
+    ViewBag.Title = "XoaLoaiSP";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<div id="page-wrapper">
+<h2>Xóa sản phẩm :@Model.TenLoai</h2>
+
+<h3>Bạn có chắc muốn xóa không</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenLoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Quay Về", "ListLoaiSP")
+        </div>
+    }
+</div>
+</div>

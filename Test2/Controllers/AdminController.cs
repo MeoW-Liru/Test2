@@ -17,7 +17,7 @@ namespace Test2.Controllers
     {
         // GET: Admin
         dbCoffeeDataContext data = new dbCoffeeDataContext();
-        
+
         [HttpGet]
         public ActionResult DangNhapAdmin()
         {
@@ -44,7 +44,7 @@ namespace Test2.Controllers
             }
             return View();
         }
-        
+
 
         [HttpGet]
         public ActionResult ThemSP()
@@ -56,18 +56,18 @@ namespace Test2.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ThemSP(SanPham sp,HttpPostedFileBase fileupload)
+        public ActionResult ThemSP(SanPham sp, HttpPostedFileBase fileupload)
         {
             ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
-            if(fileupload == null)
+            if (fileupload == null)
             {
                 ViewBag.Thongbao = "Vui lòng chọn ảnh bìa";
-                    return View();
+                return View();
             }
             else
             {
-                if(ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     var filename = Path.GetFileName(fileupload.FileName);
 
@@ -91,7 +91,7 @@ namespace Test2.Controllers
         {
             SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
             ViewBag.MaSP = sp.MaSP;
-            if(sp == null)
+            if (sp == null)
             {
                 Response.StatusCode = 404;
                 return null;
@@ -111,7 +111,7 @@ namespace Test2.Controllers
             }
             return View(sp);
         }
-        [HttpPost,ActionName("XoaSP")]
+        [HttpPost, ActionName("XoaSP")]
         public ActionResult XacNhanXoaSP(string id)
         {
             SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
@@ -141,41 +141,6 @@ namespace Test2.Controllers
             return View(sanpham);
         }
 
-        //Cách 1:
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult SuaSP(SanPham sp, HttpPostedFileBase fileupload,FormCollection collection)
-        //{
-
-
-        //    ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sp.MaLoaiSP);
-        //    ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sp.MaNCC);
-        //    if (fileupload == null)
-        //    {
-        //        ViewBag.Thongbao = "Chọn hình ảnh vào";
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var fileName = Path.GetFileName(fileupload.FileName);
-        //            var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), fileName);
-        //            if (System.IO.File.Exists(path))
-        //                ViewBag.Thongbao = "Hình ảnh đã tồn tại";
-        //            else
-        //            {
-        //                fileupload.SaveAs(path);
-        //            }
-        //            sp.HinhAnh = fileName;
-        //            UpdateModel(sp);
-        //            data.SubmitChanges();
-        //        }
-        //        return RedirectToAction("Cafe");
-        //    }
-        //}
-
-        ////Cách 2
         [HttpPost]
         public ActionResult SuaSP(string id, FormCollection collection)
         {
@@ -246,7 +211,7 @@ namespace Test2.Controllers
 
             return View();
         }
-        
+
         public ActionResult Typo()
         {
             return View();
@@ -254,6 +219,62 @@ namespace Test2.Controllers
         public ActionResult Button()
         {
             return View();
+        }
+
+
+        public ActionResult ListLoaiSP(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.LoaiSPs.ToList().OrderBy(n => n.MaLoaiSP).ToPagedList(pageNumber, pageSize));
+        }
+
+
+        [HttpGet]
+        public ActionResult ThemLoaiSp()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThemLoaiSP(LoaiSP loaisp, FormCollection collection)
+        {
+            string sMaLoai = collection["txtMaLoaiSP"];
+            string sTenLoai = collection["txtTenLoai"];
+
+            loaisp.TenLoai = sTenLoai;
+            loaisp.MaLoaiSP = sMaLoai;
+            loaisp.Status = true;
+
+            data.LoaiSPs.InsertOnSubmit(loaisp);
+            data.SubmitChanges();
+            return RedirectToAction("ListLoaiSP");
+        }
+
+        [HttpGet]
+        public ActionResult XoaLoaiSP(string id)
+        {
+            LoaiSP loaisp = data.LoaiSPs.SingleOrDefault(n => n.MaLoaiSP == id);
+            ViewBag.MaLoaiSP = loaisp.MaLoaiSP;
+            if (loaisp == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(loaisp);
+        }
+        [HttpPost, ActionName("XoaLoaiSP")]
+        public ActionResult XacNhanXoaLoaiSP(string id)
+        {
+            LoaiSP loaisp = data.LoaiSPs.SingleOrDefault(n => n.MaLoaiSP == id);
+            ViewBag.MaLoaiSP = loaisp.MaLoaiSP;
+            if (loaisp == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.LoaiSPs.DeleteOnSubmit(loaisp);
+            data.SubmitChanges();
+            return RedirectToAction("ListLoaiSP");
         }
 
 
@@ -345,14 +366,11 @@ namespace Test2.Controllers
                 sukien.HinhAnhChiTietThem = ImageUpload[2].FileName;
             if (ImageUpload[3] != null)
                 sukien.HinhAnhTongQuat = ImageUpload[3].FileName;
-
             sukien.Status = true;
             data.SubmitChanges();
             return RedirectToAction("BlogList");
         }
-
         //Sửa Blog
-
 
 
 
@@ -393,6 +411,7 @@ namespace Test2.Controllers
             return View(data.SuKiens.ToList().OrderBy(n => n.MaSK).ToPagedList(pageNumber, pageSize));
         }
 
+        //Xuất sản phẩm
         public ActionResult Cafe(int ? page)
         {
             int pageNumber = (page ?? 1);
@@ -400,6 +419,7 @@ namespace Test2.Controllers
             return View(data.SanPhams.ToList().OrderBy(n=>n.MaSP).ToPagedList(pageNumber,pageSize));
         }
 
+        //Hóa đơn
         public ActionResult ChiTiet(int MaDH)
         {
             using (dbCoffeeDataContext db = new dbCoffeeDataContext())

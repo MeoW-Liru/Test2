@@ -310,15 +310,21 @@ namespace Test2.Controllers
 
 
         //Sửa Blog
+        [HttpGet]
+        public ActionResult SuaBlog(string id)
+        {
+            var blog = data.SuKiens.Where(n => n.MaSK == id).FirstOrDefault();
+            return View(blog);
+        }
+
         [HttpPost]
         public ActionResult SuaBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload,string id)
         {
-            SuKien UpdateSuKien = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+            SuKien UpdateSuKien = data.SuKiens.Where(n => n.MaSK == id).FirstOrDefault();
             UpdateSuKien.TieuDe = sukien.TieuDe;
             UpdateSuKien.MoTa = sukien.MoTa;
             UpdateSuKien.MoTaThem = sukien.MoTaChiTiet;
             UpdateSuKien.MoTaChiTiet = sukien.MoTaThem;
-
             for (int i = 0; i < ImageUpload.Length; i++)
             {
                 if (ImageUpload[i] != null && ImageUpload[i].ContentLength > 0)
@@ -339,18 +345,15 @@ namespace Test2.Controllers
                 sukien.HinhAnhChiTietThem = ImageUpload[2].FileName;
             if (ImageUpload[3] != null)
                 sukien.HinhAnhTongQuat = ImageUpload[3].FileName;
+
             sukien.Status = true;
-            UpdateModel(sukien);
             data.SubmitChanges();
             return RedirectToAction("BlogList");
         }
-        [HttpGet]
-        public ActionResult SuaBlog()
-        {
-            return View();
-        }
 
         //Sửa Blog
+
+
 
 
         //Xóa Blog

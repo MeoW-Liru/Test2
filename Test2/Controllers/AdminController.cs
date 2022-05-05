@@ -9,6 +9,7 @@ using PagedList.Mvc;
 using System.IO;
 using System.Data;
 using ClosedXML.Excel;
+using System.Data.Entity;
 
 namespace Test2.Controllers
 {
@@ -309,11 +310,47 @@ namespace Test2.Controllers
 
 
         //Sửa Blog
+        [HttpPost]
+        public ActionResult SuaBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload,string id)
+        {
+            SuKien UpdateSuKien = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+            UpdateSuKien.TieuDe = sukien.TieuDe;
+            UpdateSuKien.MoTa = sukien.MoTa;
+            UpdateSuKien.MoTaThem = sukien.MoTaChiTiet;
+            UpdateSuKien.MoTaChiTiet = sukien.MoTaThem;
+
+            for (int i = 0; i < ImageUpload.Length; i++)
+            {
+                if (ImageUpload[i] != null && ImageUpload[i].ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(ImageUpload[i].FileName);
+                    var path = Path.Combine(Server.MapPath("~/images/BlogPicture"), fileName);
+                    if (!System.IO.File.Exists(path))
+                    {
+                        ImageUpload[i].SaveAs(path);
+                    }
+                }
+            }
+            if (ImageUpload[0] != null)
+                sukien.HinhAnh = ImageUpload[0].FileName;
+            if (ImageUpload[1] != null)
+                sukien.HinhAnhChiTiet = ImageUpload[1].FileName;
+            if (ImageUpload[2] != null)
+                sukien.HinhAnhChiTietThem = ImageUpload[2].FileName;
+            if (ImageUpload[3] != null)
+                sukien.HinhAnhTongQuat = ImageUpload[3].FileName;
+            sukien.Status = true;
+            UpdateModel(sukien);
+            data.SubmitChanges();
+            return RedirectToAction("BlogList");
+        }
+        [HttpGet]
+        public ActionResult SuaBlog()
+        {
+            return View();
+        }
 
         //Sửa Blog
-
-
-
 
 
         //Xóa Blog
@@ -344,8 +381,6 @@ namespace Test2.Controllers
             return RedirectToAction("BlogList");
         }
         //Xóa Blog
-
-
 
         //Xuất Blog
         public ActionResult BlogList (int ? page)

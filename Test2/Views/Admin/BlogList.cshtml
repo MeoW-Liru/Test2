@@ -89,7 +89,7 @@
         <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnhTongQuat)" width="150" />
     </td>
     <td>
-        @Html.ActionLink("Chỉnh tin", "Edit", new { id = item.MaSK }) |
+        @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }) |
         @Html.ActionLink("Chi tiết", "ChiTietBlog", new { id = item.MaSK }) |
         @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK })
     </td>

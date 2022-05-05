@@ -612,6 +612,7 @@
     <Content Include="Views\Admin\ThemBlog.cshtml" />
     <Content Include="Views\Admin\XoaBlog.cshtml" />
     <Content Include="Views\Admin\ChiTietBlog.cshtml" />
+    <Content Include="Views\Admin\SuaBlog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

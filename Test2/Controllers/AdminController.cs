@@ -277,10 +277,35 @@ namespace Test2.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult ThemBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload)
+        {
+            for (int i = 0; i < ImageUpload.Length; i++)
+            {
+                if (ImageUpload[i] != null && ImageUpload[i].ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(ImageUpload[i].FileName);
+                    var path = Path.Combine(Server.MapPath("~/images/BlogPicture"), fileName);
+                    if(!System.IO.File.Exists(path))
+                    {
+                        ImageUpload[i].SaveAs(path);
+                    }
+                }
+            }
+            if (ImageUpload[0] != null)
+                sukien.HinhAnh = ImageUpload[0].FileName;
+            if (ImageUpload[1] != null)
+                sukien.HinhAnhChiTiet = ImageUpload[1].FileName;
+            if (ImageUpload[2] != null)
+                sukien.HinhAnhChiTietThem = ImageUpload[2].FileName;
+            if (ImageUpload[3] != null)
+                sukien.HinhAnhTongQuat = ImageUpload[3].FileName;
+            sukien.Status = true;
+            data.SuKiens.InsertOnSubmit(sukien);
+            data.SubmitChanges();
+            return RedirectToAction("BlogList");
+        }
         //Thêm Blog
-        // Chưa xong
-
-
 
 
         //Sửa Blog

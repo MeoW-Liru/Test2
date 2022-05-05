@@ -43,15 +43,6 @@
             <th style="width:200px">
                 Mô tả thêm
             </th>
-            <th style="width:200px">
-                Hình 1:
-            </th>
-            <th style="width:200px">
-                Hình 2:
-            </th>
-            <th style="width:200px">
-                Hình banner bự:
-            </th>
             <th></th>
         </tr>
 
@@ -78,15 +69,6 @@
     </td>
     <td>
         @Truncate(item.MoTaThem, 100)
-    </td>
-    <td>
-        <img src="@Url.Content("~/images/BlogPicture/"+ item.HinhAnhChiTiet)" width="150" />
-    </td>
-    <td>
-        <img src="@Url.Content("~/images/BlogPicture/"+ item.HinhAnhChiTietThem)" width="150" />
-    </td>
-    <td>
-        <img src="@Url.Content("~/images/BlogPicture/"+ item.HinhAnhTongQuat)" width="150" />
     </td>
     <td>
         @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }) |

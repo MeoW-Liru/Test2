@@ -158,8 +158,8 @@ namespace Test2.Controllers
             var HinhAnh = collection["HinhAnh"];
             //var trangThai = bool.Parse(collection["trangthai"]);
             sanpham.MaSP = id;
-            if (string.IsNul
-                pty(tenSP))
+            if (string.IsNullOrEmpty
+                (tenSP))
             {
                 ViewData["Error"] = "Don't empty!";
             }

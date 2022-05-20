@@ -59,7 +59,6 @@ namespace Test2.Controllers
             return View(cafehot);
         }
 
-
         public ActionResult SanPham(int? page)
         {
             int pageSize = 6;
@@ -135,6 +134,14 @@ namespace Test2.Controllers
                           where sk.MaSK == id
                           select sk;
             return View(sukien.Single());
+        }
+
+        public ActionResult BlogKT(int? page)
+        {
+            int pageSize = 3;
+            int pageNum = (page ?? 1);
+            var sukien = LaySuKien(8);
+            return View(sukien.ToPagedList(pageNum, pageSize));
         }
     }
 }

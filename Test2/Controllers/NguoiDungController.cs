@@ -57,7 +57,7 @@ namespace Test2.Controllers
             if(kh != null)
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
-                Session["UserName"] = kh;
+                Session["UserName"] = tendn;
                 return RedirectToAction("GioHang", "Giohang");
             }
             else

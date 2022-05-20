@@ -155,10 +155,10 @@
                         <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
                     </a>
                     @*<div class="product-action-2 tooltip-style-2">
-                            <button title="Yêu Thích"><i class="icon-heart"></i></button>
-                            <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                            <button title="So Sánh"><i class="icon-refresh"></i></button>
-                        </div>*@
+                        <button title="Yêu Thích"><i class="icon-heart"></i></button>
+                        <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
+                        <button title="So Sánh"><i class="icon-refresh"></i></button>
+                    </div>*@
                 </div>
                 <div class="product-content-wrap-2 text-center">
                     <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
@@ -183,6 +183,15 @@
                 </div>
             </div>
         </div>
+        <div class="blog-area pt-115">
+            <div class="container">
+                <div class="section-title-2 text-center mb-45">
+                    <h2><span>Tin Vắn</span> & Blog</h2>
+                    <p>Những tin tức thứ vị về đời sống và cà phê</p>
+                </div>
+                @Html.Action("BlogKT", "Home")
+            </div>
+        </div>
         <div class="pro-pagination-style text-center mt-10">
             Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
             <div>
@@ -193,38 +202,6 @@
 </div>
 
 
-@*Cần sửa database chỗ này*@ 
-<div class="blog-area pt-115">
-    <div class="container">
-        <div class="section-title-2 text-center mb-45">
-            <h2><span>Tin Vắn</span> & Blog</h2>
-            <p>Những tin tức thứ vị về đời sống và cà phê</p>
-        </div>
-        <div class="border-bottom-2 blog-area-pb">
-            <div class="row">
-                @foreach (var sukien in Model)
-                {
-            <div class="col-lg-4 col-md-6">
-                <div class="blog-wrap mb-30">
-                    <div class="blog-img mb-25">
-                        <a href="blog-details.html"><img src="assets/images/blog/blog-1.jpg" alt="blog-img"></a>
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <ul>
-                                <li><a href="#">News </a></li>
-                                <li>May 25, 2020</li>
-                            </ul>
-                        </div>
-                        <h3><a href="blog-details.html">Five things you only know if you’re at Chanel's Hamburg Show</a></h3>
-                    </div>
-                </div>
-            </div>
-            }
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- All JS is here
 ============================================ -->

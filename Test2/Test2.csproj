@@ -672,6 +672,7 @@
     <Content Include="Views\Admin\ListLoaiSP.cshtml" />
     <Content Include="Views\Admin\ThemLoaiSp.cshtml" />
     <Content Include="Views\Admin\XoaLoaiSP.cshtml" />
+    <Content Include="Views\Home\BlogKT.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

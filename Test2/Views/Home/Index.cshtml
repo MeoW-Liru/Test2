@@ -7,8 +7,9 @@
 @*Đây là trang quảng cáo*@
 <div class="slider-area">
     <div class="container">
+        <div id="slide">
         <div class="hero-slider-active-1 nav-style-2 dot-style-2 dot-style-2-position-1 dot-style-2-active-black">
-            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg); ">
+            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg); width: 1170px; height :285px ">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slider-content-2 slider-animated-1">
@@ -16,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner6.jpg); ">
+            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner6.jpg); width: 1170px; height: 285px">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slider-content-2 slider-animated-1">
@@ -24,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner.png); ">
+            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner.png); width: 1170px; height: 285px">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slider-content-2 slider-animated-1">
@@ -92,22 +93,7 @@
             <h2><span>New</span> Arrivals</h2>
             <p>Các loại cà phê mới nhập của quán</p>
         </div>
-        <div class="product-slider-active dot-style-2 dot-style-2-position-static dot-style-2-mrg-1 dot-style-2-active-black">
-            @foreach (var cafehot in Model)
-            {
-<div class="product-plr-1">
-    <div class="single-product-wrap mb-35">
-        <div class="product-img product-img-zoom mb-20">
-            <a href="@Url.Action("Details","Home",new{ id = cafehot.MaSP})">
-                <img alt="@cafehot.TenSP" src="~/images/CafeProduct/@cafehot.HinhAnh" />
-            </a>
-        </div>
-        <div class="product-content-2 text-center">
-            <h3><a href="@Url.Action("Details","Home",new{ id = cafehot.MaSP})"><span class="blod">@cafehot.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
-        </div>
-    </div>
-</div>      }
-        </div>
+        @Html.Action("CafeHot","Home")
     </div>
 </div>
 
@@ -145,7 +131,6 @@
         <div class="tab-content jump">
             <div id="product-1" class="tab-pane active">
                 <div class="row">
-
                     @foreach (var caphe in Model)
                     {
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
@@ -189,7 +174,7 @@
                     <h2><span>Tin Vắn</span> & Blog</h2>
                     <p>Những tin tức thứ vị về đời sống và cà phê</p>
                 </div>
-                @Html.Action("BlogKT", "Home")
+                @Html.Action("BlogKT","Home")
             </div>
         </div>
         <div class="pro-pagination-style text-center mt-10">

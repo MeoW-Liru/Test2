@@ -62,7 +62,7 @@ namespace Test2.Controllers
             }
             return iTongTien;
         }
-
+ 
         public ActionResult Giohang()
         {
             List<Giohang> lstGiohang = Laygiohang();

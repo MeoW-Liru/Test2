@@ -52,11 +52,12 @@ namespace Test2.Controllers
 
         }
 
-
-        public ActionResult CafeHot()
+        public ActionResult CafeHot(int? page)
         {
-            var cafehot = layCaPhe(3);
-            return View(cafehot);
+            int pageSize = 6;
+            int pageNum = (page ?? 1);
+            var sukien = layCaPhe(8);
+            return View(sukien.ToPagedList(pageNum, pageSize));
         }
 
         public ActionResult SanPham(int? page)

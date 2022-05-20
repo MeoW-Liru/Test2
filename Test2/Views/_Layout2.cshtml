@@ -30,8 +30,6 @@
 
 
 
-
-
     <!--JS-->
 
     <script src="~/js/vendor/vendor.min.js"></script>
@@ -98,26 +96,26 @@
                             <div class="col-xl-2 col-lg-3">
                                 <div class="header-action header-action-flex header-action-mrg-right">
                                     @*<div class="same-style-2 header-search-1">
-                                        <a class="search-toggle" href="#">
-                                            <i class="icon-magnifier s-open"></i>
-                                            <i class="icon_close s-close"></i>
-                                        </a>
-                                        <div class="search-wrap-1">
-                                            <form action="#">
-                                                <input placeholder="Search products…" type="text">
-                                                <button class="button-search"><i class="icon-magnifier"></i></button>
-                                            </form>
-                                        </div>
-                                    </div>*@
-                                    <div class="header-top-right">
+                                            <a class="search-toggle" href="#">
+                                                <i class="icon-magnifier s-open"></i>
+                                                <i class="icon_close s-close"></i>
+                                            </a>
+                                            <div class="search-wrap-1">
+                                                <form action="#">
+                                                    <input placeholder="Search products…" type="text">
+                                                    <button class="button-search"><i class="icon-magnifier"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>*@
+                                    <div class="header-action-mrg-right">
                                         @if (Session["UserName"] == null)
                                         {
-                                             <a href="@Url.Action("DangNhap", "NguoiDung")"><i class="icon-user"></i></a> }
+                                            <a href="@Url.Action("DangNhap", "NguoiDung")"><i class="icon-user"></i></a> }
                                         else
                                         {
                                             <ul>
-                                                <li>
-                                                    Xin Chào : @Session["UserName"]
+                                                <li style="color:red" class="header-top-right">
+                                                    Xin Chào : @Session["UserName"].ToString()
                                                 </li>
                                                 <li>
                                                     @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")
@@ -339,7 +337,7 @@
         </div>
 
         <!--footer-->
-        <div class="subscribe-area bg-gray pt-115 pb-115">
+        <div class="subscribe-area bg-gray" style="height: 90px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5 col-md-5">
@@ -366,7 +364,7 @@
                 </div>
             </div>
         </div>
-        <footer class="footer-area bg-gray pb-30">
+        <footer class="footer-area" style="height: 50px">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -384,12 +382,12 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="footer-right-wrap">
                             <div class="col-lg-6 col-md-6r">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.9671750204307!2d106.64683382922328!3d10.744601317113991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e6166568e8d%3A0x1796c6bb47097bba!2zMzYyLzUgxJDGsOG7nW5nIEdpYSBQaMO6LCBQaMaw4budbmcgMywgUXXhuq1uIDYsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1648632668518!5m2!1svi!2s" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.9671750204307!2d106.64683382922328!3d10.744601317113991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752e6166568e8d%3A0x1796c6bb47097bba!2zMzYyLzUgxJDGsOG7nW5nIEdpYSBQaMO6LCBQaMaw4budbmcgMywgUXXhuq1uIDYsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1648632668518!5m2!1svi!2s" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
                     <div class="footer-bottom copyright text-center">
-                        <p><a>© @DateTime.Now.Year Nhóm 9 - Lập Trình Web</a></p>
+                        <p><a>© @DateTime.Now.Year Đồ án cơ sở</a></p>
                     </div>
                 </div>
             </div>

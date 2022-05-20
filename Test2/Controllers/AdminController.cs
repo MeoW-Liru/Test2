@@ -34,7 +34,7 @@ namespace Test2.Controllers
             if (ad != null)
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
-                Session["UserName"] = ad;
+                Session["UserName"] = tendn;
                 return RedirectToAction("Cafe", "Admin");
             }
             else
@@ -309,7 +309,7 @@ namespace Test2.Controllers
                 {
                     var fileName = Path.GetFileName(ImageUpload[i].FileName);
                     var path = Path.Combine(Server.MapPath("~/images/BlogPicture"), fileName);
-                    if(!System.IO.File.Exists(path))
+                    if (!System.IO.File.Exists(path))
                     {
                         ImageUpload[i].SaveAs(path);
                     }
@@ -340,7 +340,7 @@ namespace Test2.Controllers
         }
 
         [HttpPost]
-        public ActionResult SuaBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload,string id)
+        public ActionResult SuaBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload, string id)
         {
             SuKien UpdateSuKien = data.SuKiens.Where(n => n.MaSK == id).FirstOrDefault();
             UpdateSuKien.TieuDe = sukien.TieuDe;
@@ -405,7 +405,7 @@ namespace Test2.Controllers
         //Xóa Blog
 
         //Xuất Blog
-        public ActionResult BlogList (int ? page)
+        public ActionResult BlogList(int? page)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
@@ -413,11 +413,11 @@ namespace Test2.Controllers
         }
 
         //Xuất sản phẩm
-        public ActionResult Cafe(int ? page)
+        public ActionResult Cafe(int? page)
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
-            return View(data.SanPhams.ToList().OrderBy(n=>n.MaSP).ToPagedList(pageNumber,pageSize));
+            return View(data.SanPhams.ToList().OrderBy(n => n.MaSP).ToPagedList(pageNumber, pageSize));
         }
 
         //Hóa đơn
@@ -474,19 +474,24 @@ namespace Test2.Controllers
             var emps = from emp in data.DonHangs.ToList() select emp;
             foreach (var emp in emps)
             {
-                dt.Rows.Add(emp.MaDH, emp.MaKH,emp.KhachHang.HoVaTen ,emp.NgayLap, emp.NgayGiao, emp.DiaChi, emp.GhiChu, emp.Status);
+                dt.Rows.Add(emp.MaDH, emp.MaKH, emp.KhachHang.HoVaTen, emp.NgayLap, emp.NgayGiao, emp.DiaChi, emp.GhiChu, emp.Status);
 
             }
             using (XLWorkbook wb = new XLWorkbook())
             {
                 wb.Worksheets.Add(dt);
                 using (MemoryStream stream = new MemoryStream())
-                { 
+                {
                     wb.SaveAs(stream);
                     return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Hóa-Đơn.xlsx");
                 }
             }
 
+        }
+
+        public ActionResult QuanLyKH()
+        {
+            return View(data.KhachHangs.ToList());
         }
     }
 }

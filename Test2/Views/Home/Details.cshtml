@@ -1,8 +1,6 @@
-﻿
-@{
-    ViewBag.Title = "Chi tiết";
-    Layout = "~/Views/_Layout2.cshtml";
-}
+﻿@{ ViewBag.Title = "Chi tiết";
+                Layout = "~/Views/_Layout2.cshtml"; }
+
 
 <div class="product-details-area pt-120 pb-115">
     <div class="container">
@@ -38,78 +36,74 @@
                             </div>
                         </div>
                     </div>
-                    <p>Tao lao mia laon</p>
                     <div class="pro-details-price">
-                        <span class="new-price">@String.Format("{0:0,0}", @Model.GiaTien) đ</span>
+                        <span class="new-price"> Giá sản phẩm : @String.Format("{0:0,0}", @Model.GiaTien) đ</span>
                     </div>
-                    <div class="pro-details-quality">
-                        <span>Số lượng:</span>
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
-                        </div>
-                    </div>
+
                     <div class="product-details-meta">
                         <ul>
                             <li><span>Loại:</span>@Model.LoaiSP.TenLoai</li>
                         </ul>
-                        <ul>
-                            <li><span>Ngày Đăng:</span>@Model.NgayDang</li>
-                        </ul>
+
                     </div>
                     <div class="pro-details-action-wrap">
                         <div class="pro-details-add-to-cart">
                             <a title="Thêm Vào Giỏ Hàng" href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = @Model.MaSP , @strURL=Request.Url.ToString() })">Thêm Vào Giỏ Hàng </a>
                         </div>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<div class="description-review-wrapper pb-110">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="dec-review-topbar nav mb-45">
-                    <a class="active" data-toggle="tab" href="#des-details1">Mô tả</a>
-                    <a data-toggle="tab" href="#des-details2">Chi tiết</a>
-                </div>
-                <div class="tab-content dec-review-bottom">
-                    <div id="des-details1" class="tab-pane active">
-                        <div class="description-wrap">
-                            <p>@Model.MoTa</p>
+                    </br>
+                    <div class="col-lg-12">
+                        <div class="dec-review-topbar nav mb-45">
+                            <a class="active" data-toggle="tab" href="#des-details1">Mô tả</a>
+                            <a data-toggle="tab" href="#des-details2">Chi tiết</a>
                         </div>
-                    </div>
-                    <div id="des-details2" class="tab-pane">
-                        <div class="specification-wrap table-responsive">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="title width1">Sản phẩm</td>
-                                        <td>@Model.TenSP</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Trọng lượng</td>
-                                        <td>@Model.TrongLuong</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Hạn sử dụng</td>
-                                        <td>@Model.HSD</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Ngày sản xuất</td>
-                                        <td>@Model.NSX</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Tình trạng</td> <!--Làm sao để hiện còn hàng?-->
-                                        <td>@Model.Status</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="title width1">Nhà cung cấp</td>
-                                        <td>@Model.NhaCungCap.TenNCC</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="tab-content dec-review-bottom">
+                            <div id="des-details1" class="tab-pane active">
+                                <div class="description-wrap">
+                                    <p>@Model.MoTa</p>
+                                </div>
+                            </div>
+                            <div id="des-details2" class="tab-pane">
+                                <div class="specification-wrap table-responsive">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="title width1">Sản phẩm</td>
+                                                <td>@Model.TenSP</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title width1">Trọng lượng</td>
+                                                <td>@Model.TrongLuong</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title width1">Hạn sử dụng</td>
+                                                <td>@Model.HSD</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title width1">Ngày sản xuất</td>
+                                                <td>@Model.NSX</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="title width1">Tình trạng</td> <!--Làm sao để hiện còn hàng?-->
+
+                                                @if (@Model.Status == true)
+                                                {
+                                                    <td>Còn hàng</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Hết hàng</td>
+                                                }
+
+                                            </tr>
+                                            <tr>
+                                                <td class="title width1">Nhà cung cấp</td>
+                                                <td>@Model.NhaCungCap.TenNCC</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

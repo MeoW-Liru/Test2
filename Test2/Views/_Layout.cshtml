@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-2">
                                 <div class="logo text-center">
-                                    <a href="~/Home/Index"><img src="~/images/CafeLayout/Logo_CafeTeam_3.png" alt="logo-cafe"></a>
+                                    <a href="~/Home/Index"><img src="~/images/CafeLayout/Logo_CafeTeam_3.png" alt="logo-cafe" style="height:170px;width: 170px"></a>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-5">
@@ -66,18 +66,18 @@
                                     @if (Session["UserName"] == null)
                                     {
                                         <div class="header-login-regi">
-                                             <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
-                                             <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
+                                            <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
+                                            <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
                                         </div>
                                     }
                                     else
                                     {
                                         <ul>
-                                            <li>
-                                                Xin Chào : @Session["UserName"]
+                                            <li style="color: red">
+                                                Xin Chào : @Session["UserName"] 
                                             </li>
                                             <li>
-                                                @Html.ActionLink("Đăng xuất","DangXuat","NguoiDung")
+                                                @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")
                                             </li>
                                         </ul>
                                     }
@@ -88,9 +88,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
 
                         </div>
                     </div>
@@ -228,7 +225,7 @@
 
     <!--footer-->
 
-    <footer class="footer-area pt-85 pb-90">
+    <footer class="footer-area pt-85 pb-90" style="height:50px">
         <div class="container">
             <div class="footer-middle footer-middle-mrg pb-90plus">
                 <div class="row">
@@ -252,7 +249,7 @@
             </div>
         </div>
         <div class="footer-bottom copyright text-center">
-            <p><a>© @DateTime.Now.Year Nhóm 9 - Lập Trình Web</a></p>
+            <p><a>© @DateTime.Now.Year Team Qúy/Khoa - Lập Trình Web</a></p>
         </div>
     </footer>
 </body>

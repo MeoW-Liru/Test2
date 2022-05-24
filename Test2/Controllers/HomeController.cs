@@ -144,5 +144,14 @@ namespace Test2.Controllers
             var sukien = LaySuKien(8);
             return View(sukien.ToPagedList(pageNum, pageSize));
         }
+        ////// tra
+        ///
+        public ActionResult Tra(int? page)
+        {
+            int pageSize = 6;
+            int pageNum = (page ?? 1);
+            var tra = from sp in data.SanPhams where sp.MaLoaiSP == "SP7" select sp;
+            return View(tra.ToPagedList(pageNum, pageSize));
+        }
     }
 }

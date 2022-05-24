@@ -133,38 +133,38 @@
                 <div class="row">
                     @foreach (var caphe in Model)
                     {
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="single-product-wrap mb-35">
-                <div class="product-img product-img-zoom mb-15">
-                    <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
-                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
-                    </a>
-                    @*<div class="product-action-2 tooltip-style-2">
-                        <button title="Yêu Thích"><i class="icon-heart"></i></button>
-                        <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                        <button title="So Sánh"><i class="icon-refresh"></i></button>
-                    </div>*@
-                </div>
-                <div class="product-content-wrap-2 text-center">
-                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
-                    <div class="product-price-2">
-                        <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
-                    </div>
-                </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+                            <div class="single-product-wrap mb-35">
+                                <div class="product-img product-img-zoom mb-15">
+                                    <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
+                                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
+                                    </a>
+                                    @*<div class="product-action-2 tooltip-style-2">
+                                        <button title="Yêu Thích"><i class="icon-heart"></i></button>
+                                        <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
+                                        <button title="So Sánh"><i class="icon-refresh"></i></button>
+                                    </div>*@
+                                </div>
+                                <div class="product-content-wrap-2 text-center">
+                                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                    <div class="product-price-2">
+                                        <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
+                                    </div>
+                                </div>
 
-                <div class="product-content-wrap-2 product-content-position text-center">
-                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
-                    <div class="product-price-2">
-                        <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
-                    </div>
-                    <div class="pro-add-to-cart">
-                        <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
-                            <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> <!--End_Sản Phẩm HOT-->}
+                                <div class="product-content-wrap-2 product-content-position text-center">
+                                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                                    <div class="product-price-2">
+                                        <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
+                                    </div>
+                                    <div class="pro-add-to-cart">
+                                        <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
+                                            <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!--End_Sản Phẩm HOT-->}
                 </div>
             </div>
         </div>
@@ -174,9 +174,20 @@
                     <h2><span>Tin Vắn</span> & Blog</h2>
                     <p>Những tin tức thứ vị về đời sống và cà phê</p>
                 </div>
-                @Html.Action("BlogKT","Home")
+                @Html.Action("BlogKT", "Home")
             </div>
         </div>
+        <!-- TRa ...........................-->
+        <div class="blog-area pt-115">
+            <div class="container">
+                <div class="section-title-2 text-center mb-45">
+                    <h2><span>Xanh</span> & Tra</h2>
+                    <p>Tra Xanh XAnh Xanh</p>
+                </div>
+                @Html.Action("Tra", "Home")
+            </div>
+        </div>
+
         <div class="pro-pagination-style text-center mt-10">
             Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
             <div>

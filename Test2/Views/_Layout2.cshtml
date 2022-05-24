@@ -108,14 +108,14 @@
                                             </div>
                                         </div>*@
                                     <div class="header-action-mrg-right">
-                                        @if (Session["UserName"] == null)
+                                        @if (Session["UserName1"] == null)
                                         {
                                             <a href="@Url.Action("DangNhap", "NguoiDung")"><i class="icon-user"></i></a> }
                                         else
                                         {
                                             <ul>
                                                 <li style="color:red" class="header-top-right">
-                                                    Xin Chào : @Session["UserName"].ToString()
+                                                    Xin Chào : @Session["UserName1"].ToString()
                                                 </li>
                                                 <li>
                                                     @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")

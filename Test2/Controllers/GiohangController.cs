@@ -1,9 +1,13 @@
-﻿using System;
+﻿using SendGrid.Helpers.Mail;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
+//using Xamarin.Essentials;
+using Test2.common;
 
 namespace Test2.Controllers
 {
@@ -151,6 +155,24 @@ namespace Test2.Controllers
                 data.ChiTietDonHangs.InsertOnSubmit(ctdh);
             }
             data.SubmitChanges();
+
+
+            // viet mail o sday //////////////////////////////////////////
+
+            String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
+            content = content.Replace("{{CustomerName}}",kh.HoVaTen);
+            content = content.Replace("{{Phone}}", kh.SDT);
+            content = content.Replace("{{Email}}", kh.Email);
+            content = content.Replace("{{Address}}", kh.DiaChi);
+            content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
+            content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
+            content = content.Replace("{{Total}}", TongTien().ToString());
+            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ Tiệm cafe của Anh Khoa và Quý", content);
+            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ Tiệm cafe của Anh Khoa và Quý", content);
+            //////////////////////////////////////////////////////
+
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");
         }

@@ -54,9 +54,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.NgaySinh)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Status)
-                                    </td>
+                                    @if (item.Status == true){<td>Sẵng sàng</td>}else{<td>Bị khóa</td>}
                                     <td>
                                         @Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
                                         @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |

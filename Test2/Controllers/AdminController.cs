@@ -45,7 +45,6 @@ namespace Test2.Controllers
             return View();
         }
 
-
         [HttpGet]
         public ActionResult ThemSP()
         {
@@ -129,7 +128,7 @@ namespace Test2.Controllers
         public ActionResult SuaSP(string id)
         {
             //var sanpham = data.SanPhams.First(m => m.MaSP == id);
-            SanPham sanpham = data.SanPhams.FirstOrDefault(m => m.MaSP == id);
+            SanPham sanpham = data.SanPhams.Where(m => m.MaSP == id).FirstOrDefault();
             ViewBag.MaSP = sanpham.MaSP;
             if (sanpham == null)
             {
@@ -141,58 +140,96 @@ namespace Test2.Controllers
             return View(sanpham);
         }
 
+        //[HttpPost]
+        //public ActionResult SuaSP(string id, FormCollection collection)
+        //{
+        //    var sanpham = data.SanPhams.First(m => m.MaSP == id);
+        //    var maCP = collection["macp"];
+        //    var tenSP = collection["tensp"];
+        //    var moTa = collection["mota"];
+        //    var giaTien = Decimal.Parse(collection["giatien"]);
+        //    var ngayDang = Convert.ToDateTime(collection["ngaydang"]);
+        //    var trongLuong = Double.Parse(collection["trongluong"]);
+        //    var hanSD = Convert.ToDateTime(collection["hansd"]);
+        //    var ngaySX = Convert.ToDateTime(collection["ngaysx"]);
+        //    var maLoaiSP = collection["maloasp"];
+        //    var maNCC = collection["mancc"];
+        //    var HinhAnh = collection["HinhAnh"];
+        //    //var trangThai = bool.Parse(collection["trangthai"]);
+        //    sanpham.MaSP = id;
+        //    if (string.IsNullOrEmpty
+        //        (tenSP))
+        //    {
+        //        ViewData["Error"] = "Don't empty!";
+        //    }
+        //    else
+        //    {
+        //        sanpham.MaSP = maCP;
+        //        sanpham.TenSP = tenSP;
+        //        sanpham.MoTa = moTa;
+        //        sanpham.GiaTien = giaTien;
+        //        sanpham.NgayDang = ngayDang;
+        //        sanpham.TrongLuong = trongLuong;
+        //        sanpham.HSD = hanSD;
+        //        sanpham.NSX = ngaySX;
+        //        sanpham.MaLoaiSP = maLoaiSP;
+        //        sanpham.MaNCC = maNCC;
+        //        sanpham.HinhAnh = HinhAnh;
+        //        //sanpham.Status = trangThai;
+        //        UpdateModel(sanpham);
+        //        data.SubmitChanges();
+        //        return RedirectToAction("Cafe");
+        //    }
+        //    return this.SuaSP(id);
+        //}
+
+        //public string ProcessUpload(HttpPostedFileBase file)
+        //{
+        //    if (file == null)
+        //    {
+        //        return "";
+        //    }
+        //    file.SaveAs(Server.MapPath("~/images/CafeProduct" + file.FileName));
+        //    return "~/images/CafeProduct" + file.FileName;
+        //}
+
+
         [HttpPost]
-        public ActionResult SuaSP(string id, FormCollection collection)
+        public ActionResult SuaSP(SanPham sanpham, HttpPostedFileBase[] ImageUpload, string id)
         {
-            var sanpham = data.SanPhams.First(m => m.MaSP == id);
-            var maCP = collection["macp"];
-            var tenSP = collection["tensp"];
-            var moTa = collection["mota"];
-            var giaTien = Decimal.Parse(collection["giatien"]);
-            var ngayDang = Convert.ToDateTime(collection["ngaydang"]);
-            var trongLuong = Double.Parse(collection["trongluong"]);
-            var hanSD = Convert.ToDateTime(collection["hansd"]);
-            var ngaySX = Convert.ToDateTime(collection["ngaysx"]);
-            var maLoaiSP = collection["maloasp"];
-            var maNCC = collection["mancc"];
-            var HinhAnh = collection["HinhAnh"];
-            //var trangThai = bool.Parse(collection["trangthai"]);
-            sanpham.MaSP = id;
-            if (string.IsNullOrEmpty
-                (tenSP))
+            SanPham UpdateSanPham = data.SanPhams.Where(n => n.MaSP == id).FirstOrDefault();
+            UpdateSanPham.TenSP = sanpham.TenSP;
+            UpdateSanPham.MoTa = sanpham.MoTa;
+            UpdateSanPham.GiaTien = sanpham.GiaTien;
+            UpdateSanPham.NgayDang = sanpham.NgayDang;
+            UpdateSanPham.TrongLuong = sanpham.TrongLuong;
+            UpdateSanPham.HSD = sanpham.HSD;
+            UpdateSanPham.NSX = sanpham.NSX;
+            UpdateSanPham.MaLoaiSP = sanpham.MaLoaiSP;
+            UpdateSanPham.MaNCC = sanpham.MaNCC;
+            UpdateSanPham.Status = sanpham.Status;
+            for (int i = 0; i < ImageUpload.Length; i++)
             {
-                ViewData["Error"] = "Don't empty!";
+                if (ImageUpload[i] != null && ImageUpload[i].ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(ImageUpload[i].FileName);
+                    var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), fileName);
+                    if (!System.IO.File.Exists(path))
+                    {
+                        ImageUpload[i].SaveAs(path);
+                    }
+                }
             }
-            else
-            {
-                sanpham.MaSP = maCP;
-                sanpham.TenSP = tenSP;
-                sanpham.MoTa = moTa;
-                sanpham.GiaTien = giaTien;
-                sanpham.NgayDang = ngayDang;
-                sanpham.TrongLuong = trongLuong;
-                sanpham.HSD = hanSD;
-                sanpham.NSX = ngaySX;
-                sanpham.MaLoaiSP = maLoaiSP;
-                sanpham.MaNCC = maNCC;
-                sanpham.HinhAnh = HinhAnh;
-                //sanpham.Status = trangThai;
-                UpdateModel(sanpham);
-                data.SubmitChanges();
-                return RedirectToAction("Cafe");
-            }
-            return this.SuaSP(id);
+            if (ImageUpload[0] != null)
+                UpdateSanPham.HinhAnh = ImageUpload[0].FileName;
+            data.SubmitChanges();
+            return RedirectToAction("Cafe");
         }
 
-        public string ProcessUpload(HttpPostedFileBase file)
-        {
-            if (file == null)
-            {
-                return "";
-            }
-            file.SaveAs(Server.MapPath("~/images/CafeProduct" + file.FileName));
-            return "~/images/CafeProduct" + file.FileName;
-        }
+
+
+
+
 
 
 
@@ -360,14 +397,14 @@ namespace Test2.Controllers
                 }
             }
             if (ImageUpload[0] != null)
-                sukien.HinhAnh = ImageUpload[0].FileName;
+                UpdateSuKien.HinhAnh = ImageUpload[0].FileName;
             if (ImageUpload[1] != null)
-                sukien.HinhAnhChiTiet = ImageUpload[1].FileName;
+                UpdateSuKien.HinhAnhChiTiet = ImageUpload[1].FileName;
             if (ImageUpload[2] != null)
-                sukien.HinhAnhChiTietThem = ImageUpload[2].FileName;
+                UpdateSuKien.HinhAnhChiTietThem = ImageUpload[2].FileName;
             if (ImageUpload[3] != null)
-                sukien.HinhAnhTongQuat = ImageUpload[3].FileName;
-            sukien.Status = true;
+                UpdateSuKien.HinhAnhTongQuat = ImageUpload[3].FileName;
+            UpdateSuKien.Status = sukien.Status;
             data.SubmitChanges();
             return RedirectToAction("BlogList");
         }

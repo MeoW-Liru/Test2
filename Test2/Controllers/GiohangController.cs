@@ -150,6 +150,7 @@ namespace Test2.Controllers
                 ctdh.ThanhTien = (decimal)item.dThanhtien;
                 data.ChiTietDonHangs.InsertOnSubmit(ctdh);
             }
+            dh.Status = false;
             data.SubmitChanges();
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");

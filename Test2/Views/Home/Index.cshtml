@@ -9,7 +9,7 @@
     <div class="container">
         <div id="slide">
         <div class="hero-slider-active-1 nav-style-2 dot-style-2 dot-style-2-position-1 dot-style-2-active-black">
-            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg); width: 1170px; height :285px ">
+            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner6.jpg); width: 1170px; height :285px ">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slider-content-2 slider-animated-1">
@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/banner6.jpg); width: 1170px; height: 285px">
+            <div class="single-hero-slider single-animation-wrap slider-height-1 custom-d-flex custom-align-item-center bg-img hm2-slider-bg" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg); width: 1170px; height: 285px">
                 <div class="row">
                     <div class="col-12">
                         <div class="hero-slider-content-2 slider-animated-1">
@@ -97,28 +97,25 @@
     </div>
 </div>
 
-@*Quảng cáo*@
-<div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg)">
-    <div class="container">
-        @*<div class="deal-content-1">
-                <span>deal of the day</span>
-                <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
-                <div class="timer-wrap">
-                    <h4>Expires in:</h4>
-                    <div class="timer-style-1" id="timer-1-active"></div>
-                </div>
-                <div class="deal-btn">
-                    <a href="product-details.html">Buy now</a>
-                </div>
-            </div>*@
-    </div>
-</div>
-
-
 <!--Begin_Sản Phẩm HOT-->
 <div class="product-area pb-80">
     <div class="container">
+        <div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg)">
+            <div class="container">
+                @*<div class="deal-content-1">
+                    <span>deal of the day</span>
+                    <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
+                    <div class="timer-wrap">
+                        <h4>Expires in:</h4>
+                        <div class="timer-style-1" id="timer-1-active"></div>
+                    </div>
+                    <div class="deal-btn">
+                        <a href="product-details.html">Buy now</a>
+                    </div>
+                </div>*@
+            </div>
+        </div>
         <div class="section-title-2 text-center mb-45">
             <h2 style="padding-top:30px">Sản Phẩm <span>HOT</span></h2>
             <p>Các loại cà phê có danh số hàng đầu hiện tại.</p>
@@ -137,7 +134,7 @@
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-15">
                     <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
-                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
+                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="270" height="340"  />
                     </a>
                     @*<div class="product-action-2 tooltip-style-2">
                         <button title="Yêu Thích"><i class="icon-heart"></i></button>
@@ -168,13 +165,39 @@
                 </div>
             </div>
         </div>
+        @*Quảng cáo trà*@
+        <div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/banner/BannerTra.jpg)">
+            <div class="container">
+                @*<div class="deal-content-1">
+                    <span>deal of the day</span>
+                    <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
+                    <div class="timer-wrap">
+                        <h4>Expires in:</h4>
+                        <div class="timer-style-1" id="timer-1-active"></div>
+                    </div>
+                    <div class="deal-btn">
+                        <a href="product-details.html">Buy now</a>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="blog-area pt-115">
+            <div class="container">
+                <div class="section-title-2 text-center mb-45">
+                    <h2><span>Xanh</span> & Tra</h2>
+                    <p>Các dòng sản phẩm trà xanh hiện tại đang bán</p>
+                </div>
+                @Html.Action("Tra", "Home")
+            </div>
+        </div>
         <div class="blog-area pt-115">
             <div class="container">
                 <div class="section-title-2 text-center mb-45">
                     <h2><span>Tin Vắn</span> & Blog</h2>
                     <p>Những tin tức thứ vị về đời sống và cà phê</p>
                 </div>
-                @Html.Action("BlogKT","Home")
+                @Html.Action("BlogKT", "Home")
             </div>
         </div>
         <div class="pro-pagination-style text-center mt-10">

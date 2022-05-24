@@ -221,7 +221,7 @@ namespace Test2.Controllers
                 }
             }
             if (ImageUpload[0] != null)
-                UpdateSanPham.HinhAnh = ImageUpload[0].FileName;
+            UpdateSanPham.HinhAnh = ImageUpload[0].FileName;
             data.SubmitChanges();
             return RedirectToAction("Cafe");
         }

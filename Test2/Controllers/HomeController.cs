@@ -144,7 +144,7 @@ namespace Test2.Controllers
             int pageNum = (page ?? 1);
             var sukien = LaySuKien(8);
             return View(sukien.ToPagedList(pageNum, pageSize));
-        }
+       }
 
         public ActionResult Tra(int? page)
         {

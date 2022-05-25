@@ -34,7 +34,8 @@ namespace Test2.Controllers
             if (ad != null)
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
-                Session["UserName"] = tendn;
+                Session["UserName1"] = tendn;
+             
                 return RedirectToAction("Cafe", "Admin");
             }
             else

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "QuenMatKhau";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+<div class="login-register-area pt-115 pb-120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 ml-auto mr-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a data-toggle="tab" href="@Url.Action("QuenMatKhau","NguoiDung")">
+                            <h4> Quên mật khẩu </h4>
+                        </a>
+                    </div>
+                    <div id="lg2" class="tab-pane">
+                        <div class="login-form-container">
+                            <div class="login-register-form">
+                                @using (Html.BeginForm())
+                                {
+                                    <label>Nhập Email của bạn</label>
+                                    <input name="Email" placeholder="Email" type="text" required>
+                                    <div class="button-box">
+                                        <button type="submit">Xác nhận</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    

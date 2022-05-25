@@ -36,6 +36,7 @@
         </div>
     </div>
 </div>
+    </div>
 @*---------------------------------*@
 
 
@@ -138,7 +139,7 @@
                             <div class="single-product-wrap mb-35">
                                 <div class="product-img product-img-zoom mb-15">
                                     <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">
-                                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="200" />
+                                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width: 270px ; height: 340px />
                                     </a>
                                     @*<div class="product-action-2 tooltip-style-2">
                                         <button title="Yêu Thích"><i class="icon-heart"></i></button>
@@ -169,63 +170,81 @@
                 </div>
             </div>
         </div>
-        <div class="blog-area pt-115">
-            <div class="container">
-                <div class="section-title-2 text-center mb-45">
-                    <h2><span>Tin Vắn</span> & Blog</h2>
-                    <p>Những tin tức thứ vị về đời sống và cà phê</p>
-                </div>
-                @Html.Action("BlogKT", "Home")
-            </div>
-        </div>
         <!-- TRa ...........................-->
-        <div class="blog-area pt-115">
+        <!--Begin_Sản Phẩm HOT-->
+        <div class="product-area pb-80">
             <div class="container">
                 <div class="section-title-2 text-center mb-45">
-                    <h2><span>Xanh</span> & Tra</h2>
-                    <p>Tra Xanh XAnh Xanh</p>
+                    <h2 style="padding-top:30px">Trà <span>Xanh</span></h2>
+                    <p>Các loại trà xanh ngon nhất hiện nay</p>
                 </div>
-                @Html.Action("Tra", "Home")
+                
+                
+                    <div id="product-1" class="tab-pane active">
+                        <div class="row">
+                            @Html.Action("Tra", "Home")
+                        </div>
+                    </div>
+               
+                @*
+                <div class="blog-area pt-115">
+                    <div class="container">
+                        <div class="section-title-2 text-center mb-45">
+                            <h2><span>Xanh</span> & Tra</h2>
+                            <p>Tra Xanh XAnh Xanh</p>
+                            @Html.Action("Tra", "Home")
+                        </div>
+                    </div>
+                </div>
+                    *@
+                <div class="blog-area pt-115">
+                    <div class="container">
+                        <div class="section-title-2 text-center mb-45">
+                            <h2><span>Tin Vắn</span> & Blog</h2>
+                            <p>Những tin tức thứ vị về đời sống và cà phê</p>
+                        </div>
+                        @Html.Action("BlogKT", "Home")
+                    </div>
+                </div>
+
+
+                <div class="pro-pagination-style text-center mt-10">
+                    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+                    <div>
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="pro-pagination-style text-center mt-10">
-            Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
-            <div>
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
-            </div>
-        </div>
-    </div>
-</div>
 
 
+        <!-- All JS is here
+    ============================================ -->
 
-<!-- All JS is here
-============================================ -->
+        <script src="~/js/vendor/modernizr-3.6.0.min.js"></script>
+        <script src="~/js/vendor/jquery-3.5.1.min.js"></script>
+        <script src="~/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+        <script src="~/js/vendor/bootstrap.bundle.min.js"></script>
+        <script src="~/js/plugins/slick.js"></script>
+        <script src="~/js/plugins/jquery.syotimer.min.js"></script>
+        <script src="~/js/plugins/jquery.instagramfeed.min.js"></script>
+        <script src="~/js/plugins/jquery.nice-select.min.js"></script>
+        <script src="~/js/plugins/wow.js"></script>
+        <script src="~/js/plugins/jquery-ui-touch-punch.js"></script>
+        <script src="~/js/plugins/jquery-ui.js"></script>
+        <script src="~/js/plugins/magnific-popup.js"></script>
+        <script src="~/js/plugins/sticky-sidebar.js"></script>
+        <script src="~/js/plugins/easyzoom.js"></script>
+        <script src="~/js/plugins/scrollup.js"></script>
+        <script src="~/js/plugins/ajax-mail.js"></script>
 
-<script src="~/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="~/js/vendor/jquery-3.5.1.min.js"></script>
-<script src="~/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-<script src="~/js/vendor/bootstrap.bundle.min.js"></script>
-<script src="~/js/plugins/slick.js"></script>
-<script src="~/js/plugins/jquery.syotimer.min.js"></script>
-<script src="~/js/plugins/jquery.instagramfeed.min.js"></script>
-<script src="~/js/plugins/jquery.nice-select.min.js"></script>
-<script src="~/js/plugins/wow.js"></script>
-<script src="~/js/plugins/jquery-ui-touch-punch.js"></script>
-<script src="~/js/plugins/jquery-ui.js"></script>
-<script src="~/js/plugins/magnific-popup.js"></script>
-<script src="~/js/plugins/sticky-sidebar.js"></script>
-<script src="~/js/plugins/easyzoom.js"></script>
-<script src="~/js/plugins/scrollup.js"></script>
-<script src="~/js/plugins/ajax-mail.js"></script>
+        <!-- Use the minified version files listed below for better performance and remove the files listed above
+    <script src="~/js/vendor/vendor.min.js"></script>
+    <script src="~/js/plugins/plugins.min.js"></script>  -->
+        <!-- Main JS -->
+        <script src="~/js/main.js"></script>
 
-<!-- Use the minified version files listed below for better performance and remove the files listed above
-<script src="~/js/vendor/vendor.min.js"></script>
-<script src="~/js/plugins/plugins.min.js"></script>  -->
-<!-- Main JS -->
-<script src="~/js/main.js"></script>
-
-<link rel="stylesheet" href="~/css/vendor/vendor.min.css">
-<link rel="stylesheet" href="~/css/plugins/plugins.min.css">
-<link rel="stylesheet" href="~/css/style.min.css">
+        <link rel="stylesheet" href="~/css/vendor/vendor.min.css">
+        <link rel="stylesheet" href="~/css/plugins/plugins.min.css">
+        <link rel="stylesheet" href="~/css/style.min.css">

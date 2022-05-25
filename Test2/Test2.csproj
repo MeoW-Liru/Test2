@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DonHang.html" />
+    <Content Include="Content\MatKhau.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.css" />
@@ -540,6 +541,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Tra.cshtml" />
     <Content Include="Views\NguoiDung\ChinhSuaTK.cshtml" />
+    <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
+    <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

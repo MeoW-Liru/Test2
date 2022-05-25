@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
 using System.Data.Entity;
+using System.Configuration;
+using System.Text;
 
 namespace Test2.Controllers
 {
@@ -133,6 +135,76 @@ namespace Test2.Controllers
             }
             return this.ChinhSuaTK(id);
         }
+
+        /// <summary>
+        /// ///////////////// quên mật khẩu ở đây 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
+        private string RandomString(int size, bool lowerCase)
+        {
+            StringBuilder sb = new StringBuilder();
+            char c;
+            Random rand = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                c = Convert.ToChar(Convert.ToInt32(rand.Next(65, 87)));
+                sb.Append(c);
+            }
+            if (lowerCase)
+                return sb.ToString().ToLower();
+            return sb.ToString();
+
+        }
+
+        [HttpGet]
+        public ActionResult QuenMatKhau()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult QuenMatKhau(FormCollection collection)
+        {
+            var Email = collection["Email"];
+            // KhachHang khachHang = data.KhachHangs.FirstOrDefault(m => m.Email == Email);
+            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.Email==Email);
+            if (kh != null)
+            {
+                String t = RandomString(8, false);
+                kh.UserName = kh.UserName;
+                kh.HoVaTen = kh.HoVaTen;
+                kh.PassWord = t;
+                kh.Email = kh.Email;
+                kh.SDT = kh.SDT;
+                kh.NgaySinh = kh.NgaySinh;
+                kh.DiaChi = kh.DiaChi;
+                ///    khachHang.Status = trangThai;
+                ///    
+
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/MatKhau.html"));
+                content = content.Replace("{{CustomerName}}", kh.HoVaTen);
+                content = content.Replace("{{Password}}", t);
+
+               
+                new common.MailHelper().sendMail(Email, "Cấp mật khẩu mới từ Tiệm cafe của Anh Khoa và Quý", content);
+
+                UpdateModel(kh);
+                data.SubmitChanges();
+                return RedirectToAction("EmailThongBao", "NguoiDung");
+            }
+            else
+            {
+                ViewBag.ThongBao = "Địa chỉ Email chưa đăng ký tài khoản !!! ";
+            }
+            return View();
+        }
+
+        public ActionResult EmailThongBao()
+        {
+            return View();
+        }
+
 
     }
 }

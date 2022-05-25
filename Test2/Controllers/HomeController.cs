@@ -28,6 +28,7 @@ namespace Test2.Controllers
         }
 
 
+
         public ActionResult LoaiCaPhe()
         {
             var loai = from LoaiSP in data.LoaiSPs select LoaiSP;
@@ -43,12 +44,13 @@ namespace Test2.Controllers
             return View(sanpham.ToPagedList(pageNum, pageSize));
         }
 
+
         public ActionResult Index(int? page)
         {
             int pageSize = 8;
             int pageNum = (page ?? 1);
             var caphe = layCaPhe(8);
-            return View(caphe.ToPagedList(pageNum,pageSize));
+            return View(caphe.ToPagedList(pageNum, pageSize));
 
         }
 
@@ -96,7 +98,6 @@ namespace Test2.Controllers
             return View(listKQTK.OrderBy(n => n.TenSP).ToPagedList(pageNum, pageSize));
         }
 
-
         [HttpGet]
         // GET: SearchSanPham
         public ActionResult KetQuaTimKiem(int? page, string sTuKhoa)
@@ -132,8 +133,8 @@ namespace Test2.Controllers
         public ActionResult ChitietBlog(string id)
         {
             var sukien = from sk in data.SuKiens
-                          where sk.MaSK == id
-                          select sk;
+                         where sk.MaSK == id
+                         select sk;
             return View(sukien.Single());
         }
 
@@ -143,9 +144,8 @@ namespace Test2.Controllers
             int pageNum = (page ?? 1);
             var sukien = LaySuKien(8);
             return View(sukien.ToPagedList(pageNum, pageSize));
-        }
-        ////// tra
-        ///
+       }
+
         public ActionResult Tra(int? page)
         {
             int pageSize = 6;

@@ -31,9 +31,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.TenLoai)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
+                        @if (item.Status == true){<td>Còn Kinh Doanh</td> }else{<td>Hết Kinh Doanh</td>}
                     <td>
                         @Html.ActionLink("Xóa", "XoaLoaiSP", new { id = item.MaLoaiSP })
                     </td>

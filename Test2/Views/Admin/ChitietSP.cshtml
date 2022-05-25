@@ -73,10 +73,14 @@
             </dd>
 
             <dt style="width:160px">Tình trạng</dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Status)
-            </dd>
+                                                @if (@Model.Status == true)
+                                                {
+                                                    <d>Còn hàng</d>
+                                                }
+                                                else
+                                                {
+                                                    <d>Hết hàng</d>
+                                                }
 
         </dl>
     </div>

@@ -115,7 +115,7 @@
                                         {
                                             <ul>
                                                 <li style="color:red" class="header-top-right">
-                                                    Xin Chào : @Session["UserName"].ToString()
+                                                    Xin Chào : <a href="@Url.Action("ChinhSuaTK","NguoiDung", new { id = Session["MaKH"]})"> @Session["UserName1"]
                                                 </li>
                                                 <li>
                                                     @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")

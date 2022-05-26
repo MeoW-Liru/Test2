@@ -175,6 +175,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\DonHang.html" />
+    <Content Include="Content\MatKhau.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
@@ -502,6 +504,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="common\common.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GiohangController.cs" />
@@ -676,6 +679,9 @@
     <Content Include="Views\Home\CafeHot.cshtml" />
     <Content Include="Views\Admin\QuanLyKH.cshtml" />
     <Content Include="Views\Home\Tra.cshtml" />
+    <Content Include="Views\NguoiDung\ChinhSuaTK.cshtml" />
+    <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
+    <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

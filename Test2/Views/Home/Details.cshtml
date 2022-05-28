@@ -88,12 +88,10 @@
 
                                                 @if (@Model.Status == true)
                                                 {
-                                                    <td>Còn hàng</td>
-                                                }
+                                    <td>Còn hàng</td> }
                                                 else
                                                 {
-                                                    <td>Hết hàng</td>
-                                                }
+                                    <td>Hết hàng</td>}
 
                                             </tr>
                                             <tr>
@@ -105,9 +103,24 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="blog-area">
+            <div class="">
+                <div class="col-lg-9">
+                    <h1>--------------------------------------------------------</h1>
+                    <h1>Thông tin thú vị về sản phẩm</h1>
+                    <div class="blog-details-img">
+                        <img alt="" src="~/images/CafeProduct/@Model.HinhAnhMoTa">
+                    </div>
+                    <div class="description-wrap">
+                        <p>@Model.MoTaThem</p>
+                        @*Mô tả 1*@
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 </div>

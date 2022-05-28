@@ -6,13 +6,13 @@
 }
 
 <div id="page-wrapper">
-    <h2>SuaBlog</h2>
+    <h2>Sửa Thông tin Blog</h2>
 
     @using (Html.BeginForm("SuaBlog", "Admin",FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
     <h4>SuKien</h4>
     <hr />
     <input type="text" name="Mã Sự kiện" value="@Model.MaSK" hidden />

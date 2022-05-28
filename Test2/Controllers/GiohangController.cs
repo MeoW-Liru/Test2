@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MoMo;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
+using Newtonsoft.Json.Linq;
 
 namespace Test2.Controllers
 {
@@ -127,11 +129,15 @@ namespace Test2.Controllers
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();
 
+            // Select tổng hóa đơn chưa thanh toán.
+
             return View(lstGiohang);
         }
 
         public ActionResult DatHang(FormCollection collection)
         {
+           // if( n<5){ cụm dưới} n: là đơn hàng giao tại nhà chưa thanh toán 
+           // else{ Thông báo bạn chỉ  dc đặt thanh toán trực tuyến  }; // đây là nút đặt hàng giao sau 
             DonHang dh = new DonHang();
             KhachHang kh = (KhachHang)Session["UserName"];
             List<Giohang> gh = Laygiohang();
@@ -175,6 +181,157 @@ namespace Test2.Controllers
         {
             return View();
         }
+
+
+        public ActionResult ThanhToanOnline()
+        {
+            List<Giohang> gioHang = Session["GioHang"] as List<Giohang>;
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOOJOI20210710";
+            string accessKey = "iPXneGmrJH0G8FOP";
+            string serectKey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string orderInfo = "Đơn hàng của bạn";
+            string returnUrl = "https://localhost:44332/Giohang/ReturnUrl";
+            string notifyurl = "http://ba1adf48beba.ngrok.io/Giohang/NotifyUrl";
+
+            string amount = gioHang.Sum(n => n.dThanhtien).ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            string rawHash =
+                "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            string signature = crypto.signSHA256(rawHash, serectKey);
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+            };
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+
+        public ActionResult ReturnUrl(FormCollection collection)
+        {
+            string param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
+            param = Server.UrlDecode(param);
+            MoMoSecurity crypto = new MoMoSecurity();
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string signature = crypto.signSHA256(param, serectkey);
+            if (signature != Request["signature"].ToString())
+            {
+                ViewBag.message = "Thông tin Request không hợp lệ";
+                return View();
+            }
+            if (!Request.QueryString["errorCode"].Equals("0"))
+            {
+                ViewBag.message = "Thanh toán thất bại";
+            }
+            else
+            {
+                DonHang dh = new DonHang();
+                KhachHang kh = (KhachHang)Session["UserName"];
+                List<Giohang> gh = Laygiohang();
+                dh.MaKH = kh.MaKH;
+                dh.NgayLap = DateTime.Now;
+                var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
+                ////// lỗi ko xài đc cái chọn ngày giao nó sẽ mặc định chọn ngày hôm nay
+                dh.NgayGiao = DateTime.Today;
+                ///// quý đã thử tìm cách nhưng chưa thanh
+                dh.DiaChi = kh.DiaChi;
+                dh.Status = true;
+                data.DonHangs.InsertOnSubmit(dh);
+                data.SubmitChanges();
+                foreach (var item in gh)
+                {
+                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ctdh.MaDH = dh.MaDH;
+                    ctdh.MaSP = item.sMaSP;
+                    ctdh.SoLuongSP = item.iSoluong;
+                    ctdh.ThanhTien = (decimal)item.dThanhtien;
+                    data.ChiTietDonHangs.InsertOnSubmit(ctdh);
+                }
+                data.SubmitChanges();
+                Session["Giohang"] = null;
+                return RedirectToAction("XacNhan", "Giohang");
+
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
+                content = content.Replace("{{CustomerName}}", kh.HoVaTen);
+                content = content.Replace("{{Phone}}", kh.SDT);
+                content = content.Replace("{{Email}}", kh.Email);
+                content = content.Replace("{{Address}}", kh.DiaChi);
+                content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
+                content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
+                content = content.Replace("{{Total}}", TongTien().ToString());
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+                new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+
+            }
+            return View();
+        }
+        [HttpPost]
+        public JsonResult NotifyUrl()
+        {
+            string param = "";
+            param =
+                "partner_code=" + Request["partner_code"] +
+                "&access_key=" + Request["access_key"] +
+                "&amount=" + Request["amount"] +
+                "&order_id=" + Request["order_id"] +
+                "&order_info=" + Request["order_info"] +
+                "&order_type=" + Request["order_type"] +
+                "&transaction_id=" + Request["transaction_id"] +
+                "&message=" + Request["message"] +
+                "&response_time=" + Request["response_time"] +
+                "&status_code=" + Request["status_code"];
+            param = Server.UrlDecode(param);
+            MoMoSecurity crypto = new MoMoSecurity();
+            string serectkey = ConfigurationManager.AppSettings["serectkey"].ToString();
+            string signature = crypto.signSHA256(param, serectkey);
+            if (signature != Request["signature"].ToString())
+            {
+
+            }
+            string status_code = Request["status_code"].ToString();
+            if ((status_code != "0"))
+            {
+
+            }
+            else
+            {
+
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
+        }
+
+
+
 
     }
 }

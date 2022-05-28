@@ -77,16 +77,19 @@
                                 Điện thoại: @kh.SDT
                             </div>
                             <div class="your-order-middle">
-                                Ngày đặt hàng: @DateTime.Now.ToShortDateString() 
+                                Ngày đặt hàng: @DateTime.Now.ToShortDateString()
                             </div>
                             <div class="your-order-middle">
-                                Ngày giao:<input type="date" name="NgayGiao" required=""/>
+                                Ngày giao:<input type="date" name="NgayGiao" required="" />
                             </div>
                             <div class="total-shipping">
                                 <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
                             </div>
                             <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
-                            <input type="submit" class = "btn btn-success" value="Đặt Hàng" />
+                            <h4 class="grand-totall-title" >Thanh toán Online:<span> <a  style="padding:0px" href="@Url.Action("ThanhToanOnline", "Giohang")"> <img src="https://developers.momo.vn/v3/vi/img/logo2.svg" style="height:48px; width:48px;" /></a></span></h4>
+                            <h4 class="grand-totall-title">Tổng thanh khi nhận hàng: <span> <input type="submit" class="btn btn-success" value="Đặt Hàng" /></span></h4>
+                           
+
                         </div>
                     </div>
                 }

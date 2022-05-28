@@ -83,6 +83,9 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.7.0.0-preview.4.22229.4\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -521,6 +524,8 @@
     <Compile Include="Models\Don.cs" />
     <Compile Include="Models\Giohang.cs" />
     <Compile Include="Models\ThongTinHD.cs" />
+    <Compile Include="Other\MoMoSecurity.cs" />
+    <Compile Include="Other\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -658,7 +663,6 @@
     <Content Include="Views\Admin\XoaSP.cshtml" />
     <Content Include="Views\Admin\ChiTiet.cshtml" />
     <Content Include="Views\Admin\DonHang.cshtml" />
-    <Content Include="Views\Admin\SuaSP.cshtml" />
     <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
     <None Include="Properties\Settings.settings">
@@ -682,6 +686,7 @@
     <Content Include="Views\NguoiDung\ChinhSuaTK.cshtml" />
     <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
     <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
+    <Content Include="Views\Admin\SuaSP.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -22,7 +22,7 @@ namespace Test2.Models
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DatabaseCafeWeb")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Cafe2")]
 	public partial class dbCoffeeDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -63,7 +63,7 @@ namespace Test2.Models
     #endregion
 		
 		public dbCoffeeDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["DatabaseCafeWebConnectionString3"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["Cafe2ConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

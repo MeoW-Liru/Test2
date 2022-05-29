@@ -62,36 +62,88 @@
                 @using (Html.BeginForm())
                 {
                     @Html.ValidationSummary(true)
-                    <div class="col-lg-12 col-md-12">
-                        <div class="grand-totall">
-                            <div class="title-wrap">
-                                <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đơn hàng</h4>
-                            </div>
-                            <div class="your-order-middle">
-                                Họ tên: @kh.HoVaTen
-                            </div>
-                            <div class="your-order-middle">
-                                Địa chỉ: @kh.DiaChi
-                            </div>
-                            <div class="your-order-middle">
-                                Điện thoại: @kh.SDT
-                            </div>
-                            <div class="your-order-middle">
-                                Ngày đặt hàng: @DateTime.Now.ToShortDateString()
-                            </div>
-                            <div class="your-order-middle">
-                                Ngày giao:<input type="date" name="NgayGiao" required="" />
-                            </div>
-                            <div class="total-shipping">
-                                <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
-                            </div>
-                            <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
-                            <h4 class="grand-totall-title" >Thanh toán Online:<span> <a  style="padding:0px" href="@Url.Action("ThanhToanOnline", "Giohang")"> <img src="https://developers.momo.vn/v3/vi/img/logo2.svg" style="height:48px; width:48px;" /></a></span></h4>
-                            <h4 class="grand-totall-title">Thanh toán khi nhận hàng: <span> <input type="submit" class="btn btn-success" value="Đặt Hàng" /></span></h4>
+            <form name="abc">
+                <div class="col-lg-12 col-md-12">
+                    <div class="grand-totall">
+                        <div class="title-wrap">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đơn hàng</h4>
                         </div>
+                        <div class="your-order-middle">
+                            Họ tên: @kh.HoVaTen
+                        </div>
+                        <div class="your-order-middle">
+                            Địa chỉ: @kh.DiaChi
+                        </div>
+                        <div class="your-order-middle">
+                            Điện thoại: @kh.SDT
+                        </div>
+                        <div class="your-order-middle">
+                            Ngày đặt hàng: @DateTime.Now.ToShortDateString()
+                        </div>
+                        <div class="your-order-middle">
+                            Ngày giao:<input type="date" name="NgayGiao" required="" />
+                        </div>
+                        <div class="total-shipping">
+                            <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
+                        </div>
+                        <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
+                        <h4 class="grand-totall-title">
+                            Thanh toán Online:
+                            <span>
+                                <div id="paypal-button" onclick="document.forms["abc"].submit();"></div>
+                                <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+                            </span>
+                            <span><a style="padding: 0px; border-radius: 70%; background: #a50064 " href="@Url.Action("ThanhToanOnline", "Giohang")"> <img src="https://developers.momo.vn/v3/vi/img/logo2.svg" style="height: 2em; width: 6em; " /></a></span>
+                        </h4>
+                        <h4 class="grand-totall-title">Thanh toán khi nhận hàng: <span> <input type="submit" class="btn btn-success" value="Đặt Hàng" /></span></h4>
                     </div>
+                </div>
+            </form>
                 }
+                
             </div>
         </div>
     </div>
 </div>
+<script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'AQ51v3FW150elOP5UVO57z6LvL8R6oq__CleminAvy4PrbhFbej14ZVcCZB2bTVsQ-vpMwO9vkEAkDu3',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+
+        // Set up a payment
+        payment: function (data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        
+                        total: '0.01',
+                        currency: 'USD'
+                    }
+                }]
+            });
+        },
+        // Execute the payment
+        onAuthorize: function (data, actions) {
+            return actions.payment.execute().then(function () {
+                // Show a confirmation message to the buyer
+                window.alert('Thank you for your purchase!');
+            });
+        }
+    }, '#paypal-button');
+
+</script>

@@ -129,11 +129,15 @@ namespace Test2.Controllers
             ViewBag.Tongsoluong = TongSoLuong();
             ViewBag.Tongtien = TongTien();
 
+            // Select tổng hóa đơn chưa thanh toán.
+
             return View(lstGiohang);
         }
 
         public ActionResult DatHang(FormCollection collection)
         {
+           // if( n<5){ cụm dưới} n: là đơn hàng giao tại nhà chưa thanh toán 
+           // else{ Thông báo bạn chỉ  dc đặt thanh toán trực tuyến  }; // đây là nút đặt hàng giao sau 
             DonHang dh = new DonHang();
             KhachHang kh = (KhachHang)Session["UserName"];
             List<Giohang> gh = Laygiohang();

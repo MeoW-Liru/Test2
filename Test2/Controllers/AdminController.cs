@@ -53,6 +53,9 @@ namespace Test2.Controllers
             return View();
         }
 
+<<<<<<< HEAD
+
+=======
         //[HttpPost]
         //[ValidateInput(false)]
         //public ActionResult ThemSP(SanPham sp, HttpPostedFileBase fileupload)
@@ -85,6 +88,7 @@ namespace Test2.Controllers
         //        return RedirectToAction("Cafe");
         //    }
         //}
+>>>>>>> be86b894a2bef27ca5414b094d35a14b745ff313
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult ThemSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload)
@@ -169,58 +173,7 @@ namespace Test2.Controllers
             return View(sanpham);
         }
 
-        //[HttpPost]
-        //public ActionResult SuaSP(string id, FormCollection collection)
-        //{
-        //    var sanpham = data.SanPhams.First(m => m.MaSP == id);
-        //    var maCP = collection["macp"];
-        //    var tenSP = collection["tensp"];
-        //    var moTa = collection["mota"];
-        //    var giaTien = Decimal.Parse(collection["giatien"]);
-        //    var ngayDang = Convert.ToDateTime(collection["ngaydang"]);
-        //    var trongLuong = Double.Parse(collection["trongluong"]);
-        //    var hanSD = Convert.ToDateTime(collection["hansd"]);
-        //    var ngaySX = Convert.ToDateTime(collection["ngaysx"]);
-        //    var maLoaiSP = collection["maloasp"];
-        //    var maNCC = collection["mancc"];
-        //    var HinhAnh = collection["HinhAnh"];
-        //    //var trangThai = bool.Parse(collection["trangthai"]);
-        //    sanpham.MaSP = id;
-        //    if (string.IsNullOrEmpty
-        //        (tenSP))
-        //    {
-        //        ViewData["Error"] = "Don't empty!";
-        //    }
-        //    else
-        //    {
-        //        sanpham.MaSP = maCP;
-        //        sanpham.TenSP = tenSP;
-        //        sanpham.MoTa = moTa;
-        //        sanpham.GiaTien = giaTien;
-        //        sanpham.NgayDang = ngayDang;
-        //        sanpham.TrongLuong = trongLuong;
-        //        sanpham.HSD = hanSD;
-        //        sanpham.NSX = ngaySX;
-        //        sanpham.MaLoaiSP = maLoaiSP;
-        //        sanpham.MaNCC = maNCC;
-        //        sanpham.HinhAnh = HinhAnh;
-        //        //sanpham.Status = trangThai;
-        //        UpdateModel(sanpham);
-        //        data.SubmitChanges();
-        //        return RedirectToAction("Cafe");
-        //    }
-        //    return this.SuaSP(id);
-        //}
-
-        //public string ProcessUpload(HttpPostedFileBase file)
-        //{
-        //    if (file == null)
-        //    {
-        //        return "";
-        //    }
-        //    file.SaveAs(Server.MapPath("~/images/CafeProduct" + file.FileName));
-        //    return "~/images/CafeProduct" + file.FileName;
-        //}
+        
 
 
         [HttpPost]

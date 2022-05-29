@@ -86,10 +86,15 @@
                                 <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
                             </div>
                             <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
+<<<<<<< HEAD
                             <h4 class="grand-totall-title" >Thanh toán Online:<span> <a  style="padding:0px" href="@Url.Action("ThanhToanOnline", "Giohang")"> <img src="https://developers.momo.vn/v3/vi/img/logo2.svg" style="height:48px; width:48px;" /></a></span></h4>
                             <h4 class="grand-totall-title">Tổng thanh khi nhận hàng: <span> <input type="submit" class="btn btn-success" value="Đặt Hàng" /></span></h4>
                            
 
+=======
+                            <input type="submit" class = "btn btn-success" value="Đặt Hàng" />
+                            <a class="button-box" href="@Url.Action("ThanhToanOnline","Giohang")">Thanh Toán momo</a>
+>>>>>>> be86b894a2bef27ca5414b094d35a14b745ff313
                         </div>
                     </div>
                 }

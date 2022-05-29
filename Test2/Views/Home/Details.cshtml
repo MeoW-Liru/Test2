@@ -88,10 +88,12 @@
 
                                                 @if (@Model.Status == true)
                                                 {
-                                    <td>Còn hàng</td> }
+                                                    <td>Còn hàng</td>
+ }
                                                 else
                                                 {
-                                    <td>Hết hàng</td>}
+                                                    <td>Hết hàng</td>
+}
 
                                             </tr>
                                             <tr>
@@ -103,9 +105,81 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
+                </div>
+                
             </div>
         </div>
-    </div>
+
+        <div class="product-details-area pt-120 pb-115">
+        <div class="description-review-wrapper pb-110">
+            <div class=" container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="des-details4" class="tab-pane">
+                            <div class="review-wrapper">
+                                <h2>Review khách hàng</h2>
+                                <div class="single-review">
+                                    <div class="review-img">
+                                        <img src="assets/images/product-details/client-1.png" alt="">
+                                    </div>
+                                    <div class="review-content">
+                                        <div class="review-top-wrap">
+                                            <div class="review-name">
+                                                <h5><span>John Snow</span> - March 14, 2019</h5>
+                                            </div>
+                                            <div class="review-rating">
+                                                <i class="yellow icon_star"></i>
+                                                <i class="yellow icon_star"></i>
+                                                <i class="yellow icon_star"></i>
+                                                <i class="yellow icon_star"></i>
+                                                <i class="yellow icon_star"></i>
+                                            </div>
+                                        </div>
+                                        <p>Donec accumsan auctor iaculis. Sed suscipit arcu ligula, at egestas magna molestie a. Proin ac ex maximus, ultrices justo eget, sodales orci. Aliquam egestas libero ac turpis pharetra, in vehicula lacus scelerisque</p><br/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ratting-form-wrapper">
+                                
+                                <h2>Bình luận</h2>
+                               
+                                <div class="ratting-form">
+                                    <form action="#">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="rating-form-style mb-20">
+                                                    <label>Name <span>*</span></label>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="rating-form-style mb-20">
+                                                    <label>Email <span>*</span></label>
+                                                    <input type="email">
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="col-md-12">
+                                                <div class="rating-form-style mb-20">
+                                                    <label>Your review <span>*</span></label>
+                                                    <textarea name="Your Review"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div class="form-submit">
+                                                    <input type="submit" value="Submit">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
 </div>

@@ -13,6 +13,10 @@ namespace Test2
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.IgnoreRoute("{*botdetech}",
+                new { botdetch = @"(.*)BotDetectCaptcha\.ashx"}
+                );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -1,10 +1,15 @@
-﻿using System;
+﻿using BotDetect.Web.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net;
+using System.Configuration;
 
 namespace Test2.Controllers
 {
@@ -49,28 +54,65 @@ namespace Test2.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        //[CaptchaValidation("CaptchaCode", "DangNhapCaptcha","Nhập mã captcha sai")]
         public ActionResult DangNhap(FormCollection collection)
         {
+           
+            bool isCaptchavalid = ValidateCaptcha(Request["g-recaptcha-response"]);
+
+
+
+
             var makh = collection["MaKH"];
             var tendn = collection["TenDN"];
             var matkhau = collection["Password"];
-
             KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
-            if(kh != null)
+            if (kh != null)
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
                 Session["UserName1"] = tendn;
                 Session["UserName"] = kh;
                 Session["MaKH"] = kh.MaKH;
-
                 return RedirectToAction("GioHang", "Giohang");
             }
+
             else
             {
                 ViewBag.Thongbao = "Tên đăng nhập hoặc Mật khẩu không đúng";
             }
             return View();
+
+            //if (ModelState.IsValid)
+            //{
+
+            //    if (isCaptchavalid)
+            //    {
+
+            //    }
+            //    else
+            //    {
+            //        ModelState.AddModelError("", "Sai captcha Hay thu lai");
+            //        ModelState.Remove("Password");
+            //        return View();
+            //    }
+
         }
+
+
+        [AllowAnonymous]
+        public bool ValidateCaptcha(string response)
+        {
+            string secret = ConfigurationManager.AppSettings["GoogleSecretKey"];
+            var client = new WebClient();
+            var reply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
+            var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
+            return Convert.ToBoolean(captchaResponse.Success);
+        }
+
+
+
 
         [HttpGet]
         public ActionResult ChinhSuaTK(String id)
@@ -196,6 +238,9 @@ namespace Test2.Controllers
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+
+
 
     }
 }

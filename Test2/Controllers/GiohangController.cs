@@ -65,7 +65,24 @@ namespace Test2.Controllers
             }
             return iTongTien;
         }
- 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        private decimal TongTienDola()
+        {
+            decimal iTongTien = 0;
+            decimal dola = 23300;
+            List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
+            if (lstGiohang != null)
+            {
+                iTongTien = lstGiohang.Sum(n => n.dThanhtien);
+
+            }
+            return iTongTien/dola;
+        }
+
         public ActionResult Giohang()
         {
             List<Giohang> lstGiohang = Laygiohang();
@@ -143,7 +160,7 @@ namespace Test2.Controllers
             List<Giohang> gh = Laygiohang();
             dh.MaKH = kh.MaKH;
             dh.NgayLap = DateTime.Now;
-            var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
+            var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
             dh.NgayGiao = DateTime.Parse(ngaygiao);
             dh.DiaChi = kh.DiaChi;
             data.DonHangs.InsertOnSubmit(dh);

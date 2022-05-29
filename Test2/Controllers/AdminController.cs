@@ -53,42 +53,6 @@ namespace Test2.Controllers
             return View();
         }
 
-<<<<<<< HEAD
-
-=======
-        //[HttpPost]
-        //[ValidateInput(false)]
-        //public ActionResult ThemSP(SanPham sp, HttpPostedFileBase fileupload)
-        //{
-        //    ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
-        //    ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
-        //    if (fileupload == null)
-        //    {
-        //        ViewBag.Thongbao = "Vui lòng chọn ảnh bìa";
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var filename = Path.GetFileName(fileupload.FileName);
-
-        //            var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), filename);
-
-        //            if (System.IO.File.Exists(path))
-        //                ViewBag.Thongbao = "Hình ảnh đã tồn tại";
-        //            else
-        //            {
-        //                fileupload.SaveAs(path);
-        //            }
-        //            sp.HinhAnh = filename;
-        //            data.SanPhams.InsertOnSubmit(sp);
-        //            data.SubmitChanges();
-        //        }
-        //        return RedirectToAction("Cafe");
-        //    }
-        //}
->>>>>>> be86b894a2bef27ca5414b094d35a14b745ff313
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult ThemSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload)
@@ -115,8 +79,6 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("Cafe");
         }
-
-
 
 
         public ActionResult ChitietSP(string id)

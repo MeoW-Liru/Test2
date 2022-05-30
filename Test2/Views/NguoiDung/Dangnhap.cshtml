@@ -1,7 +1,9 @@
 ﻿
+@using System.Configuration
 @{
     ViewBag.Title = "Dangnhap";
     Layout = "~/Views/_Layout2.cshtml";
+    string _googlesitekey = ConfigurationManager.AppSettings["GoogleSitekey"];
 }
 <div class="login-register-area pt-115 pb-120">
     <div class="container">
@@ -18,18 +20,29 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    @using (Html.BeginForm())
+                                    @using (Html.BeginForm("DangNhap", "NguoiDung", FormMethod.Post))
                                     {
+                                        @Html.AntiForgeryToken()
                                         <input name="TenDN" placeholder="Tên đăng nhập" type="text" required>
                                         <input name="Password" placeholder="Mật khẩu" type="password" required>
+
+                                        @*<div class="g-recaptcha" data-sitekey="@_googlesitekey"></div>*@
+
+
+
                                         <div class="button-box">
                                             <button type="submit">Đăng nhập</button>
                                         </div>
+
+
                                     }
                                 </div>
+
                                 <div class="login-register-wrapper">
                                     <a href="@Url.Action("QuenMatKhau","NguoiDung")"> Bạn Quên Mật Khẩu ?</a>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -38,3 +51,4 @@
         </div>
     </div>
 </div>
+<script src='https://www.google.com/recaptcha/api.js' type="text/javascript"></script>

@@ -160,8 +160,8 @@ namespace Test2.Controllers
             List<Giohang> gh = Laygiohang();
             dh.MaKH = kh.MaKH;
             dh.NgayLap = DateTime.Now;
-            var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
-            dh.NgayGiao = DateTime.Parse(ngaygiao);
+          //  var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
+            dh.NgayGiao = DateTime.Now.AddDays(1);
             dh.DiaChi = kh.DiaChi;
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
@@ -277,7 +277,7 @@ namespace Test2.Controllers
                 dh.NgayLap = DateTime.Now;
                 var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
                 ////// lỗi ko xài đc cái chọn ngày giao nó sẽ mặc định chọn ngày hôm nay
-                dh.NgayGiao = DateTime.Today;
+                dh.NgayGiao = DateTime.Today.AddDays(2); // giao hàng sau 2 ngày
                 ///// quý đã thử tìm cách nhưng chưa thanh
                 dh.DiaChi = kh.DiaChi;
                 dh.Status = true;

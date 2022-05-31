@@ -89,6 +89,10 @@ namespace Test2.Controllers
                 }
                 return View();
             }
+            else
+            {
+                ViewBag.Thongbao = "Bạn chưa tích xác nhận bên dưới !!!";
+            }
             return View();
 
 

@@ -92,10 +92,7 @@ namespace Test2.Controllers
             }
             return View();
 
-
         }
-
-
 
 
 
@@ -164,7 +161,6 @@ namespace Test2.Controllers
             if (lowerCase)
                 return sb.ToString().ToLower();
             return sb.ToString();
-
         }
 
         [HttpGet]

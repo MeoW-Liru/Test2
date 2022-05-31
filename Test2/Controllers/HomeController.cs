@@ -69,15 +69,44 @@ namespace Test2.Controllers
             var caphe = layCaPhe(8);
             return View(caphe.ToPagedList(pageNum, pageSize));
         }
-
+       
         public ActionResult Details(string id)
         {
+            Session["masp"] = id;
             var sanpham = from sp in data.SanPhams
                           where sp.MaSP == id
                           select sp;
+
             return View(sanpham.Single());
         }
+        // bình luận ở đây///////////////////////////////////////////////////////////////////////////////////////
+        [HttpGet]
+        public ActionResult BinhLuan(string id)
+        {
+            var binhluan = from bl in data.BinhLuans
+                           where bl.MaSP == id
+                           select bl;
+            return View(binhluan.ToList());
+        }
 
+        [HttpPost]
+        public ActionResult BinhLuan(FormCollection collection, BinhLuan bl, String id)
+        {
+            var TenNguoiBL = collection["ten"];
+            var ngaybl = DateTime.Now;
+            var noidung = collection["noidung"];
+            var masp = collection["masp"];
+
+            bl.MaSP = masp;
+            bl.NgayLap = ngaybl;
+            bl.TenNguoiBL = TenNguoiBL;
+            bl.NoiDung = noidung;
+            data.BinhLuans.InsertOnSubmit(bl);
+            data.SubmitChanges();
+            return this.BinhLuan(id);
+
+        }
+        // end bình luận ./////////////////////////////////////
 
         [HttpPost]
         // GET: SearchSanPham

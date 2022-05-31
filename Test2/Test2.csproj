@@ -713,6 +713,7 @@
     <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
     <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
     <Content Include="Views\Admin\SuaSP.cshtml" />
+    <Content Include="Views\Home\BinhLuan.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

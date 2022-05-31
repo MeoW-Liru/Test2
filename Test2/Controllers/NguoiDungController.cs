@@ -10,6 +10,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Configuration;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using GoogleRecaptcha;
 
 namespace Test2.Controllers
 {
@@ -59,30 +62,44 @@ namespace Test2.Controllers
         //[CaptchaValidation("CaptchaCode", "DangNhapCaptcha","Nhập mã captcha sai")]
         public ActionResult DangNhap(FormCollection collection)
         {
-           
-            bool isCaptchavalid = ValidateCaptcha(Request["g-recaptcha-response"]);
 
 
 
-
-            var makh = collection["MaKH"];
-            var tendn = collection["TenDN"];
-            var matkhau = collection["Password"];
-            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
-            if (kh != null)
+            IRecaptcha<RecaptchaV2Result> recaptcha = new RecaptchaV2(
+            new RecaptchaV2Data() { Secret = "6LdnoyogAAAAAMWU62Rjz46xcm6i_Nx9Ys4wfido" });
+            var result = recaptcha.Verify();
+            if (result.Success) // Success!!!
             {
-                //ViewBag.Thongbao = "Đăng nhập thành công";
-                Session["UserName1"] = tendn;
-                Session["UserName"] = kh;
-                Session["MaKH"] = kh.MaKH;
-                return RedirectToAction("GioHang", "Giohang");
-            }
+                var makh = collection["MaKH"];
+                var tendn = collection["TenDN"];
+                var matkhau = collection["Password"];
+                KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
+                if (kh != null)
+                {
+                    //ViewBag.Thongbao = "Đăng nhập thành công";
+                    Session["UserName1"] = tendn;
+                    Session["UserName"] = kh;
+                    Session["MaKH"] = kh.MaKH;
+                    return RedirectToAction("GioHang", "Giohang");
+                }
 
-            else
-            {
-                ViewBag.Thongbao = "Tên đăng nhập hoặc Mật khẩu không đúng";
+                else
+                {
+                    ViewBag.Thongbao = "Tên đăng nhập hoặc Mật khẩu không đúng";
+                }
+                return View();
             }
             return View();
+
+
+
+
+
+
+
+            //bool isCaptchavalid = ValidateCaptcha(Request["g-recaptcha-response"]);
+
+
 
             //if (ModelState.IsValid)
             //{
@@ -102,6 +119,7 @@ namespace Test2.Controllers
 
 
         [AllowAnonymous]
+        [HttpPost]
         public bool ValidateCaptcha(string response)
         {
             string secret = ConfigurationManager.AppSettings["GoogleSecretKey"];
@@ -110,6 +128,9 @@ namespace Test2.Controllers
             var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
             return Convert.ToBoolean(captchaResponse.Success);
         }
+
+
+
 
 
 

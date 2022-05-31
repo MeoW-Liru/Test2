@@ -15,6 +15,6 @@ namespace Test2.Controllers
         [JsonProperty("thành công")]
         public string Success { get; set; }
         [JsonProperty("Lỗi")]
-        public List<string> Error { get; set; }
+        public List<string> ErrorCode { get; set; }
     }
 }

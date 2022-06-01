@@ -59,11 +59,9 @@ namespace Test2.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        //[CaptchaValidation("CaptchaCode", "DangNhapCaptcha","Nhập mã captcha sai")]
+
         public ActionResult DangNhap(FormCollection collection)
         {
-
-
 
             IRecaptcha<RecaptchaV2Result> recaptcha = new RecaptchaV2(
             new RecaptchaV2Data() { Secret = "6LdnoyogAAAAAMWU62Rjz46xcm6i_Nx9Ys4wfido" });
@@ -76,7 +74,6 @@ namespace Test2.Controllers
                 KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
                 if (kh != null)
                 {
-                    //ViewBag.Thongbao = "Đăng nhập thành công";
                     Session["UserName1"] = tendn;
                     Session["UserName"] = kh;
                     Session["MaKH"] = kh.MaKH;
@@ -95,46 +92,7 @@ namespace Test2.Controllers
             }
             return View();
 
-
-
-
-
-
-
-            //bool isCaptchavalid = ValidateCaptcha(Request["g-recaptcha-response"]);
-
-
-
-            //if (ModelState.IsValid)
-            //{
-
-            //    if (isCaptchavalid)
-            //    {
-
-            //    }
-            //    else
-            //    {
-            //        ModelState.AddModelError("", "Sai captcha Hay thu lai");
-            //        ModelState.Remove("Password");
-            //        return View();
-            //    }
-
         }
-
-
-        [AllowAnonymous]
-        [HttpPost]
-        public bool ValidateCaptcha(string response)
-        {
-            string secret = ConfigurationManager.AppSettings["GoogleSecretKey"];
-            var client = new WebClient();
-            var reply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, response));
-            var captchaResponse = JsonConvert.DeserializeObject<CaptchaResponse>(reply);
-            return Convert.ToBoolean(captchaResponse.Success);
-        }
-
-
-
 
 
 
@@ -203,7 +161,6 @@ namespace Test2.Controllers
             if (lowerCase)
                 return sb.ToString().ToLower();
             return sb.ToString();
-
         }
 
         [HttpGet]

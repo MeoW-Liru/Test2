@@ -54,7 +54,7 @@ namespace Test2.Controllers
             return iTongSoLuong;
         }
 
-        private decimal TongTien()
+        private decimal TongTienhang()
         {
             decimal iTongTien = 0;
             List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
@@ -65,6 +65,27 @@ namespace Test2.Controllers
             }
             return iTongTien;
         }
+        // Tien ship ............................
+
+        private decimal TienShip()
+        {
+            decimal TienShip =25000;
+           
+            return TienShip;
+        }
+
+        private decimal TongTienThu()
+        {
+            decimal iTongTien = 0;
+            List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
+            if (lstGiohang != null)
+            {
+                iTongTien = lstGiohang.Sum(n => n.dThanhtien);
+
+            }
+            return iTongTien + TienShip();
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -92,7 +113,7 @@ namespace Test2.Controllers
 
             }
             ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtien = TongTien();
+            ViewBag.Tongtien = TongTienhang();
             return View(lstGiohang);
         }
 
@@ -144,7 +165,9 @@ namespace Test2.Controllers
 
             List<Giohang> lstGiohang = Laygiohang();
             ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtien = TongTien();
+            ViewBag.Tongtienhang = TongTienhang();
+            ViewBag.TongtienThu = TongTienThu();
+            ViewBag.TienShip = TienShip();
 
             // Select tổng hóa đơn chưa thanh toán.
 
@@ -162,7 +185,8 @@ namespace Test2.Controllers
             dh.NgayLap = DateTime.Now;
           //  var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
             dh.NgayGiao = DateTime.Now.AddDays(1);
-            dh.DiaChi = kh.DiaChi;
+            dh.DiaChi = collection["diachi"];
+            dh.GhiChu = collection["cuthe"];
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
             foreach(var item in gh)
@@ -181,10 +205,11 @@ namespace Test2.Controllers
             content = content.Replace("{{CustomerName}}", kh.HoVaTen);
             content = content.Replace("{{Phone}}", kh.SDT);
             content = content.Replace("{{Email}}", kh.Email);
-            content = content.Replace("{{Address}}", kh.DiaChi);
+            content = content.Replace("{{Address}}", dh.DiaChi);
+            content = content.Replace("{{cuthe}}", collection["cuthe"]);
             content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
             content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
-            content = content.Replace("{{Total}}", TongTien().ToString());
+            content = content.Replace("{{Total}}", TongTienThu().ToString());
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
             new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
@@ -303,7 +328,7 @@ namespace Test2.Controllers
                 content = content.Replace("{{Address}}", kh.DiaChi);
                 content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
                 content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
-                content = content.Replace("{{Total}}", TongTien().ToString());
+                content = content.Replace("{{Total}}", TongTienThu().ToString());
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                 new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);

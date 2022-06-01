@@ -71,28 +71,95 @@
                         <div class="your-order-middle">
                             Họ tên: @kh.HoVaTen
                         </div>
-                        <div class="your-order-middle">
-                            Địa chỉ: @kh.DiaChi
-                        </div>
+                        @*
+        <div class="your-order-middle">
+            Địa chỉ: @kh.DiaChi
+        </div>
+                        *@
+
                         <div class="your-order-middle">
                             Điện thoại: @kh.SDT
                         </div>
                         <div class="your-order-middle">
                             Ngày đặt hàng: @DateTime.Now.ToShortDateString()
                         </div>
-                        @*
+
                         <div class="your-order-middle">
-                            Ngày giao:<input type="date" name="NgayGiao" required="" />
+                            Ngày giao:@DateTime.Now.AddDays(2).ToShortDateString()
                         </div>
-                            *@
+                        <div class="your-order-middle">
+                            <h5>Quận:</h5>
+                            <select name="diachi">
+                                <option>
+                                    Quận 1
+                                </option>
+                                <option>
+                                    Quận 3
+                                </option>
+                                <option>
+                                    Quận 4
+                                </option>
+                                <option>
+                                    Quận 5
+                                </option>
+                                <option>
+                                    Quận 6
+                                </option>
+                                <option>
+                                    Quận 7
+                                </option>
+                                <option>
+                                    Quận 8
+                                </option>
+                                <option>
+                                    Quận 10
+                                </option>
+                                <option>
+                                    Quận 11
+                                </option>
+                                <option>
+                                    Quận 12
+                                </option>
+                                <option>
+                                    Nhà Bè
+                                </option>
+                                <option>
+                                    Bình Tân
+                                </option>
+                                <option>
+                                    Hóc Môn
+                                </option>
+                                <option>
+                                    Tân Bình
+                                </option>
+                                <option>
+                                    Tân Phú
+                                </option>
+                                <option>
+                                    Gò Vấp
+                                </option>
+                                <option>
+                                    Phú Nhuận
+                                </option>
+                                <option>
+                                    Bình Thạnh
+                                </option>
+                            </select>
+                        </div>
+                        <div class="your-order-middle">
+                            <h5>Địa chỉ cụ thể:</h5> <input name="cuthe" type="text" />
+                        </div>
                         <div class="total-shipping">
                             <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
                         </div>
-                        <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
+
+                        <h4 class="grand-totall-title">Phí vận chuyển: <span>@String.Format("{0:0,0}", ViewBag.TienShip) đ</span></h4>
+                        <h4 class="grand-totall-title">Tổng tiền hàng: <span>@String.Format("{0:0,0}", ViewBag.Tongtienhang) đ</span></h4>
+                        <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.TongtienThu) đ</span></h4>
                         <h4 class="grand-totall-title">
                             Thanh toán Online:
                             <span>
-                                <div id="paypal-button" onclick="document.forms["abc"].submit();"></div>
+                                <div id="paypal-button" onclick="document.forms[" abc"].submit();"></div>
                                 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
                             </span>
                             <span><a style="padding: 0px; border-radius: 70%; background: #a50064 " href="@Url.Action("ThanhToanOnline", "Giohang")"> <img src="https://developers.momo.vn/v3/vi/img/logo2.svg" style="height: 2em; width: 6em; " /></a></span>

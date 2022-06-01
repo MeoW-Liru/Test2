@@ -1,0 +1,57 @@
+﻿@using Test2.Models
+
+@{
+    ViewBag.Title = "DonHang";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="col-lg-12 col-md-12">
+
+        <div class="grand-totall">
+            <div class="title-wrap">
+                <h4 class="cart-bottom-title section-bg-gary-cart">Thông tin đơn hàng</h4>
+            </div>
+            <div class="your-order-middle">
+                Họ tên: @Session["UserName1"]
+            </div>
+            @*<div class="your-order-middle">
+                    Địa chỉ: @kh.DiaChi
+                </div>*@
+
+            <div class="your-order-middle">
+                <label>Quận:</label>
+                <select name="diachi">
+
+                    <option>
+                        name
+                    </option>
+                    <option>
+                        Quận 1
+                    </option>
+                    <option>
+                        Quận 2
+                    </option>
+
+                </select>
+            </div>
+            <div class="your-order-middle">
+                Điện thoại:<input value="0905388525" type="text" name="sodienthoai" required="" />
+            </div>
+            <div class="your-order-middle">
+                Ngày đặt hàng: @DateTime.Now.ToShortDateString()
+            </div>
+            <div class="your-order-middle">
+                Ngày giao:<input value="@DateTime.Now.AddDays(2).ToShortDateString()" type="text" name="NgayGiao" required="" />
+            </div>
+            <div class="total-shipping">
+                <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>
+            </div>
+            <h4 class="grand-totall-title">Tổng thanh toán: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) đ</span></h4>
+            <input type="submit" class="btn btn-success" value="Đặt Hàng" />
+        </div>
+        
+    </div>
+}

@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Test2.Models;
 using PagedList;
 using PagedList.Mvc;
-
+using static ClosedXML.Excel.XLPredefinedFormat;
 
 namespace Test2.Controllers
 {
@@ -93,7 +93,7 @@ namespace Test2.Controllers
         public ActionResult BinhLuan(FormCollection collection, BinhLuan bl, String id)
         {
             var TenNguoiBL = collection["ten"];
-            var ngaybl = DateTime.Now;
+            var ngaybl = System.DateTime.Now;
             var noidung = collection["noidung"];
             var masp = collection["masp"];
 

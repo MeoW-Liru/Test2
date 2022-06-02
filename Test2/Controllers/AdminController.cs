@@ -511,6 +511,16 @@ namespace Test2.Controllers
             return TongDoanhThu;
         }
 
+        public ActionResult DoanhThu(int? page)
+        {
+           
+            var TongDonHangNgay = data.DonHangs.ToList();
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+            return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
+        }
+
+
 
         // cái này tạo ra 1 view cho họ nhập tháng rồi năm rồi sau đó cho nó quăng ra tháng năm tương ứng như y chan tìm sản phẩm
         // tạo sau chưa làm view 

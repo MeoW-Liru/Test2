@@ -1,0 +1,54 @@
+﻿@model PagedList.PagedList<Test2.Models.DonHang>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "DoanhThu";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<div id="page-wrapper">
+    <main>
+        <div class="container-fluid px-4">
+            <table class="table table-bordered table-dark">
+                <h1 style="margin:10px">Doanh thu theo ngày</h1>
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Ngày/Tháng/năm
+                        </th>
+                        <th>
+                            Doanh thu
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="table-light">
+                    @foreach (var item in Model.GroupBy(y => y.NgayLap).Distinct().Select(g => new
+                        {
+                            Pla = g.Key,
+                            Total = g.Sum(t => t.ThanhTien)
+                    }))
+                    {
+        <tr>
+            <td>
+                @item.Pla
+            </td>
+            <td>
+                @String.Format("{0:0,0}", item.Total)
+            </td>
+        </tr>
+}
+                </tbody>
+            </table>
+            <div style=" margin-bottom:50px;">
+                <div>
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                </div>
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("DoanhThu", new { page = page }))
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

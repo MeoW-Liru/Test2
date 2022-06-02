@@ -187,6 +187,7 @@ namespace Test2.Controllers
             dh.NgayGiao = DateTime.Now.AddDays(1);
             dh.DiaChi = collection["diachi"];
             dh.GhiChu = collection["cuthe"];
+            dh.ThanhTien = TongTienhang();
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
             foreach(var item in gh)
@@ -306,6 +307,7 @@ namespace Test2.Controllers
                 ///// quý đã thử tìm cách nhưng chưa thanh
                 dh.DiaChi = kh.DiaChi;
                 dh.Status = true;
+                dh.ThanhTien = TongTienhang();
                 data.DonHangs.InsertOnSubmit(dh);
                 data.SubmitChanges();
                 foreach (var item in gh)
@@ -371,9 +373,6 @@ namespace Test2.Controllers
             }
             return Json("", JsonRequestBehavior.AllowGet);
         }
-
-
-
 
     }
 }

@@ -97,7 +97,6 @@ namespace Test2.Controllers
 
 
 
-
         [HttpGet]
         public ActionResult ChinhSuaTK(String id)
         {

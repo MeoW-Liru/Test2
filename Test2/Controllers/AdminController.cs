@@ -522,21 +522,21 @@ namespace Test2.Controllers
 
 
 
-        // cái này tạo ra 1 view cho họ nhập tháng rồi năm rồi sau đó cho nó quăng ra tháng năm tương ứng như y chan tìm sản phẩm
-        // tạo sau chưa làm view 
-        // cũng hóa đơn tháng nhưng cho nhập để tìm 
-        public decimal ThongKeDoanhThuTheoThang(int thang, int Nam)
-        {
-            var listHoaDon = data.DonHangs.Where(n => n.NgayLap.Value.Month == thang &&
-            n.NgayLap.Value.Year == Nam);
-            decimal TongTien = 0;
-            foreach (var item in listHoaDon)
-            {
-                TongTien += decimal.Parse(item.ChiTietDonHangs.Sum(n => n.SoLuongSP * n.ThanhTien).Value.ToString());
-            }
-            return TongTien;
-        }
-        //
+        //// cái này tạo ra 1 view cho họ nhập tháng rồi năm rồi sau đó cho nó quăng ra tháng năm tương ứng như y chan tìm sản phẩm
+        //// tạo sau chưa làm view 
+        //// cũng hóa đơn tháng nhưng cho nhập để tìm 
+        //public decimal ThongKeDoanhThuTheoThang(int thang, int Nam)
+        //{
+        //    var listHoaDon = data.DonHangs.Where(n => n.NgayLap.Value.Month == thang &&
+        //    n.NgayLap.Value.Year == Nam);
+        //    decimal TongTien = 0;
+        //    foreach (var item in listHoaDon)
+        //    {
+        //        TongTien += decimal.Parse(item.ChiTietDonHangs.Sum(n => n.SoLuongSP * n.ThanhTien).Value.ToString());
+        //    }
+        //    return TongTien;
+        //}
+        ////
 
         public double TongDonHang()
         {

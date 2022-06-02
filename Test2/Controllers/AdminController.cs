@@ -430,7 +430,7 @@ namespace Test2.Controllers
         }
 
 
-        public ActionResult listDonhang(int?page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
+        public ActionResult listDonhang(int? page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
         {
             int pageNumber = (page ?? 1);
             int pageSize = 9;
@@ -474,6 +474,36 @@ namespace Test2.Controllers
         {
             return View(data.KhachHangs.ToList());
         }
+
+        [HttpGet]
+        public ActionResult XoaKh(int id)
+        {
+            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.MaKH == id);
+            ViewBag.MaKH = kh.MaKH;
+            if (kh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(kh);
+        }
+        [HttpPost, ActionName("XoaKh")]
+        public ActionResult XacNhanXoaKh(int id)
+        {
+            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.MaKH == id);
+            ViewBag.MaSK = kh.MaKH;
+            if (kh == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.KhachHangs.DeleteOnSubmit(kh);
+            data.SubmitChanges();
+            return RedirectToAction("QuanLyKH");
+        }
+
+
+
 
         public decimal ThongKeTongDoanhThu()
         {

@@ -13,6 +13,26 @@ namespace Test2
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            
+            Application["SoNguoiTruyCap"] = 0;
+            Application["Online"] = 0;
+           
         }
+
+        protected void Session_Start()
+        {
+            Application.Lock();
+            Application["SoNguoiTruyCap"] = (int)Application["SoNguoiTruyCap"] + 1;
+            Application["Online"] = (int)Application["Online"] + 1;
+            Application.UnLock();
+        }
+
+        protected void Session_End()
+        {
+            Application.Lock();
+            Application["Online"] = (int)Application["Online"] - 1;
+            Application.UnLock();
+        }
+
     }
 }

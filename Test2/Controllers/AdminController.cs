@@ -135,7 +135,7 @@ namespace Test2.Controllers
             return View(sanpham);
         }
 
-        
+
 
 
         [HttpPost]
@@ -166,7 +166,7 @@ namespace Test2.Controllers
                 }
             }
             if (ProductUpload[0] != null)
-            UpdateSanPham.HinhAnh = ProductUpload[0].FileName;
+                UpdateSanPham.HinhAnh = ProductUpload[0].FileName;
             if (ProductUpload[1] != null)
                 UpdateSanPham.HinhAnhMoTa = ProductUpload[1].FileName;
             data.SubmitChanges();
@@ -174,17 +174,6 @@ namespace Test2.Controllers
         }
 
 
-
-
-
-
-
-
-
-        public ActionResult BangDieuKhien()
-        {
-            return View();
-        }
 
         public ActionResult Form()
         {
@@ -440,6 +429,15 @@ namespace Test2.Controllers
             return View(data.DonHangs.ToList());
         }
 
+
+        public ActionResult listDonhang(int?page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.DonHangs.ToList().OrderBy(n => n.MaDH).ToPagedList(pageNumber, pageSize));
+        }
+
+
         ////In
         [HttpPost]
         public FileResult Export()
@@ -476,5 +474,52 @@ namespace Test2.Controllers
         {
             return View(data.KhachHangs.ToList());
         }
+
+        public decimal ThongKeTongDoanhThu()
+        {
+            decimal TongDoanhThu = data.ChiTietDonHangs.Sum(n => n.SoLuongSP * n.ThanhTien).Value;
+            return TongDoanhThu;
+        }
+
+
+        // cái này tạo ra 1 view cho họ nhập tháng rồi năm rồi sau đó cho nó quăng ra tháng năm tương ứng như y chan tìm sản phẩm
+        // tạo sau chưa làm view 
+        // cũng hóa đơn tháng nhưng cho nhập để tìm 
+        public decimal ThongKeDoanhThuTheoThang(int thang, int Nam)
+        {
+            var listHoaDon = data.DonHangs.Where(n => n.NgayLap.Value.Month == thang &&
+            n.NgayLap.Value.Year == Nam);
+            decimal TongTien = 0;
+            foreach (var item in listHoaDon)
+            {
+                TongTien += decimal.Parse(item.ChiTietDonHangs.Sum(n => n.SoLuongSP * n.ThanhTien).Value.ToString());
+            }
+            return TongTien;
+        }
+        //
+
+        public double TongDonHang()
+        {
+            double slDH = data.DonHangs.Count();
+            return slDH;
+        }
+
+        public double SoluongKhachHang()
+        {
+            double slKH = data.KhachHangs.Count();
+            return slKH;
+        }
+
+
+        public ActionResult BangDieuKhien()
+        {
+            ViewBag.Online = HttpContext.Application["Online"].ToString();
+            ViewBag.SoNguoiTruyCap = HttpContext.Application["SoNguoiTruyCap"].ToString();// lấy số lượng người truy cập
+            ViewBag.TongDonHang = TongDonHang();
+            ViewBag.SLKhachHang = SoluongKhachHang();
+            ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
+            return View();
+        }
+
     }
 }

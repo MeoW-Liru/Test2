@@ -45,6 +45,7 @@ namespace Test2.Controllers
             kh.SDT = sdt;
             kh.DiaChi = diachi;
             kh.NgaySinh = DateTime.Parse(ngaysinh);
+            kh.Status = true;
             data.KhachHangs.InsertOnSubmit(kh);
             data.SubmitChanges();
             return this.DangKy();
@@ -137,7 +138,7 @@ namespace Test2.Controllers
                 khachHang.SDT = SDT;
                 khachHang.NgaySinh = NgaySinh;
                 khachHang.DiaChi = DiaChi;
-
+                khachHang.Status = true;
                 UpdateModel(khachHang);
                 data.SubmitChanges();
                 return RedirectToAction("ChinhSuaTK");
@@ -184,8 +185,7 @@ namespace Test2.Controllers
                 kh.SDT = kh.SDT;
                 kh.NgaySinh = kh.NgaySinh;
                 kh.DiaChi = kh.DiaChi;
-                ///    khachHang.Status = trangThai;
-                ///    
+                kh.Status = true;
 
                 String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/MatKhau.html"));
                 content = content.Replace("{{CustomerName}}", kh.HoVaTen);

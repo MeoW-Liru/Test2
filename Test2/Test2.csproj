@@ -714,6 +714,7 @@
     <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
     <Content Include="Views\Admin\SuaSP.cshtml" />
     <Content Include="Views\Home\BinhLuan.cshtml" />
+    <Content Include="Views\Admin\listDonhang.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

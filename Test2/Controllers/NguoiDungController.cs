@@ -213,5 +213,78 @@ namespace Test2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // lịch su mau hang 
+
+        [HttpGet]
+        public ActionResult LichSuMua(int id)
+        {
+            List<DonHang> listDonHang = data.DonHangs.Where(n => n.MaKH == id).ToList();
+            if (listDonHang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(listDonHang);
+        }
+       
+        [HttpGet]
+        public ActionResult LSFix(string id)
+        {
+            DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
+            return View(donhang);
+        }
+        [HttpPost]
+        public ActionResult LSFix(string id, FormCollection collection)
+        {
+            DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
+            var MaKH = collection["MaKH"];
+            var ngaylap = collection["NgayLap"];
+            var ngaygiao = collection["NgayGiao"];
+            var ThanhTien = collection["ThanhTien"];
+            var DiaChi = collection["DiaChi"];
+            var ghichu = collection["GhiChu"];
+            var status = collection["Status"];
+            var status2 = collection["Status2"];
+
+            donhang.MaDH= int.Parse(id);
+            if (string.IsNullOrEmpty(MaKH))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+               
+                    donhang.MaKH = int.Parse(MaKH);
+                    donhang.NgayLap = Convert.ToDateTime(ngaylap);
+                    donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
+                    donhang.GhiChu = ghichu;
+                    donhang.DiaChi = DiaChi;
+                    donhang.Status = Convert.ToBoolean(status);
+                    donhang.Status2 = Convert.ToBoolean(status2);
+                    UpdateModel(donhang);
+                    data.SubmitChanges();
+                    return RedirectToAction("LSFix");
+                }
+                //else
+                //{
+                //    donhang.MaKH = int.Parse(MaKH);
+                //    donhang.NgayLap = Convert.ToDateTime(ngaylap);
+                //    donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
+                //    donhang.GhiChu = ghichu;
+                //    donhang.DiaChi = DiaChi;
+                //    donhang.Status = Convert.ToBoolean(status);
+                //    donhang.Status2 = true;
+
+                //    UpdateModel(donhang);
+                //    data.SubmitChanges();
+                //    return RedirectToAction("LSFix");
+                //}
+            //}
+
+            return View(donhang);
+           
+        }
+
+
     }
 }

@@ -54,25 +54,25 @@ namespace Test2.Controllers
             return iTongSoLuong;
         }
 
-        private decimal TongTienhang()
-        {
-            decimal iTongTien = 0;
-            List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
-            if (lstGiohang != null)
-            {
-                iTongTien = lstGiohang.Sum(n => n.dThanhtien);
+        //private decimal TongTienhang()
+        //{
+        //    decimal iTongTien = 0;
+        //    List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
+        //    if (lstGiohang != null)
+        //    {
+        //        iTongTien = lstGiohang.Sum(n => n.dThanhtien);
 
-            }
-            return iTongTien;
-        }
+        //    }
+        //    return iTongTien;
+        //}
         // Tien ship ............................
 
-        private decimal TienShip()
-        {
-            decimal TienShip =25000;
+        //private decimal TienShip()
+        //{
+        //    decimal TienShip =25000;
            
-            return TienShip;
-        }
+        //    return TienShip;
+        //}
 
         private decimal TongTienThu()
         {
@@ -83,7 +83,7 @@ namespace Test2.Controllers
                 iTongTien = lstGiohang.Sum(n => n.dThanhtien);
 
             }
-            return iTongTien + TienShip();
+            return iTongTien ;
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Test2.Controllers
 
             }
             ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtien = TongTienhang();
+            ViewBag.Tongtien = TongTienThu();
             return View(lstGiohang);
         }
 
@@ -164,10 +164,9 @@ namespace Test2.Controllers
             }
 
             List<Giohang> lstGiohang = Laygiohang();
-            ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtienhang = TongTienhang();
+           
             ViewBag.TongtienThu = TongTienThu();
-            ViewBag.TienShip = TienShip();
+           
 
             // Select tổng hóa đơn chưa thanh toán.
 
@@ -187,7 +186,9 @@ namespace Test2.Controllers
             dh.NgayGiao = DateTime.Now.AddDays(1);
             dh.DiaChi = collection["diachi"];
             dh.GhiChu = collection["cuthe"];
-            dh.ThanhTien = TongTienhang();
+            dh.Status = true;
+            dh.Status2 = true;
+            dh.ThanhTien = TongTienThu();
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
             foreach(var item in gh)
@@ -207,9 +208,8 @@ namespace Test2.Controllers
             content = content.Replace("{{Phone}}", kh.SDT);
             content = content.Replace("{{Email}}", kh.Email);
             content = content.Replace("{{Address}}", dh.DiaChi);
-            content = content.Replace("{{cuthe}}", collection["cuthe"]);
+            content = content.Replace("{{cuthe}}", dh.GhiChu);
             content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
-            content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
             content = content.Replace("{{Total}}", TongTienThu().ToString());
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
@@ -303,11 +303,12 @@ namespace Test2.Controllers
                 dh.NgayLap = DateTime.Now;
                 var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
                 ////// lỗi ko xài đc cái chọn ngày giao nó sẽ mặc định chọn ngày hôm nay
-                dh.NgayGiao = DateTime.Today.AddDays(2); // giao hàng sau 2 ngày
+               /* dh.NgayGiao = DateTime.Today.AddDays(2); */// giao hàng sau 2 ngày
                 ///// quý đã thử tìm cách nhưng chưa thanh
                 dh.DiaChi = kh.DiaChi;
                 dh.Status = true;
-                dh.ThanhTien = TongTienhang();
+                dh.Status2 = true;
+                dh.ThanhTien = TongTienThu();
                 data.DonHangs.InsertOnSubmit(dh);
                 data.SubmitChanges();
                 foreach (var item in gh)
@@ -329,7 +330,6 @@ namespace Test2.Controllers
                 content = content.Replace("{{Email}}", kh.Email);
                 content = content.Replace("{{Address}}", kh.DiaChi);
                 content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
-                content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
                 content = content.Replace("{{Total}}", TongTienThu().ToString());
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 

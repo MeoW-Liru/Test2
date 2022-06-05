@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Test2.Models.DonHang>
+
+@{
+    ViewBag.Title = "DonHang";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+
+
+<div id="page-wrapper" style=" padding-left:200px; padding-top: 50px; padding-right: 100px; padding-bottom: 100px">
+    <h3>
+        LỊCH SỬ MUA HÀNG
+    </h3>
+    <p>
+
+    </p>
+    <table class="table" width="300px">
+        <tr>
+        <tr>
+            <th style="width:300px">
+                Mã Đơn Hàng
+            </th>
+            <th style="width:300px">
+                Mã Khách Hàng
+            </th>
+            <th style="width:300px">
+                Tên Khách Hàng
+            </th>
+
+            <th style="width:300px">
+                Ngày Lập
+            </th>
+            <th style="width:300px">
+                Ngày Giao:
+            </th>
+            <th style="width:300px">
+                Địa Chỉ Giao:
+            </th>
+            <th style="width:300px">
+                Ghi Chú:
+            </th>
+            <th style="width:300px">
+                Thanh toán:
+            </th>
+            <th style="width:300px">
+                Trạng Thái:
+            </th>
+            <th style="width:300px">
+                Hủy đơn:
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            <a href="@Url.Action("ChiTiet","Admin", new {MaDH = item.MaDH})">
+                @Html.DisplayFor(modelItem => item.MaDH)
+            </a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.HoVaTen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayLap)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayGiao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GhiChu)
+        </td>
+        @if (item.Status == true)
+        {
+            <td>Đã thanh toán</td>
+        }
+        else
+        {
+            <td style="color:red">Chưa thanh toán</td>
+        }
+        @if (item.Status2 == true)
+        {
+            <td style="color:red">Đã hủy</td>
+        }
+        else
+        {
+            <td>Tồn tại</td>
+        }
+    <td>
+        @if (item.Status2 == true)
+        {
+
+            <a href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
+        }
+        else
+        {
+            @*<button class="btn-danger" style="width:80px"> Hủy</button>*@
+            <a href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy</a>
+        }
+    </td>
+
+        </tr>
+        }
+
+    </table>
+</div>

@@ -182,5 +182,6 @@ namespace Test2.Controllers
             var tra = from sp in data.SanPhams where sp.MaLoaiSP == "SP7" select sp;
             return View(tra.ToPagedList(pageNum, pageSize));
         }
+        
     }
 }

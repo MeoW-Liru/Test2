@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Test2.Models.DonHang>
+
+@{ ViewBag.Title = "TimHoaDon";
+                Layout = "~/Views/_LayoutAdmin.cshtml"; }
+
+<div id="page-wrapper">
+    <div style="color:red;font-size:30px;padding-top:20px;padding-bottom:20px">@ViewBag.Thongbao</div>
+    <div class="mobile-search mobile-header-padding-border-1">
+        @using (Html.BeginForm("TimHoaDon", "Admin", FormMethod.Post))
+        {
+            <form class="search-form" action="TimHoaDon">
+                <input name="txtTimKiem" type="text" placeholder="Tìm kiếm hóa đơn…">
+                <button class="button-search"><i class="fa fa-search"></i></button>
+            </form>
+        }
+
+    </div>
+    <h3>
+        THÔNG TIN HÓA ĐƠN
+    </h3>
+    <table class="table" width="300px">
+        <tr>
+        <tr>
+            <th style="width:300px">
+                Mã Đơn Hàng
+            </th>
+            <th style="width:300px">
+                Mã Khách Hàng
+            </th>
+            <th style="width:300px">
+                Tên Khách Hàng
+            </th>
+
+            <th style="width:300px">
+                Ngày Lập
+            </th>
+            <th style="width:300px">
+                Ngày Giao:
+            </th>
+            <th style="width:300px">
+                Địa Chỉ:
+            </th>
+            <th style="width:300px">
+                Ghi Chú:
+            </th>
+            <th style="width:300px">
+                Trạng Thái:
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        <a href="@Url.Action("ChiTiet","Admin", new {MaDH = item.MaDH})">
+            @Html.DisplayFor(modelItem => item.MaDH)
+        </a>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaKH)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.KhachHang.HoVaTen)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayLap)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayGiao)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DiaChi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GhiChu)
+    </td>
+    @if (item.Status == true)
+    {
+<td>Đã thanh toán</td>
+ }
+else
+{
+<td>Chưa thanh toán</td>
+}
+
+</tr>
+}
+
+    </table>
+</div>

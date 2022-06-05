@@ -275,6 +275,7 @@
     <Content Include="images\banner\banner-8.jpg" />
     <Content Include="images\banner\banner-9.jpg" />
     <Content Include="images\banner\BannerTra.jpg" />
+    <Content Include="images\banner\giaoHang.jpg" />
     <Content Include="images\bg\bg-1.jpg" />
     <Content Include="images\bg\bg-2.jpg" />
     <Content Include="images\bg\bg-3.jpg" />
@@ -711,6 +712,7 @@
     <Content Include="Views\Admin\listDonhang.cshtml" />
     <Content Include="Views\Admin\XoaKh.cshtml" />
     <Content Include="Views\Admin\DoanhThu.cshtml" />
+    <Content Include="Views\Admin\TimHoaDon.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -23,7 +23,7 @@
         QUẢN LÝ THÔNG TIN SẢN PHẨM
     </h3>
     <p>
-        @Html.ActionLink("Tạo sản phẩm", "ThemSP")
+        @Html.ActionLink("Tạo sản phẩm", "ThemSP", new { @style = "color:orange" } )
     </p>
     <table class="table">
         <tr>
@@ -94,14 +94,14 @@
             @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
         </td>
         <td>
-            <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnh)" width="150" />
+            <img src="@Url.Content("~/images/CafeProduct/" + item.HinhAnh)" width="150" />
         </td>
-        @if (item.Status == true){<td>Còn hàng</td> }else{<td>Hết hàng</td>}
-        <td>
-            @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }) |
-            @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }) |
-            @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP })
-        </td>
+        @if (item.Status == true) {<td>Còn hàng</td> } else {<td>Hết hàng</td>}
+    <td>
+        @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }, new {@style = "color:orange" }) |
+        @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }) |
+        @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP }, new { @style = "color:red" })
+    </td>
     </tr>
         }
 

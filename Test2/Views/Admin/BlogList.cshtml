@@ -15,6 +15,7 @@
 @{ ViewBag.Title = "BlogList";
                 Layout = "~/Views/_LayoutAdmin.cshtml"; }
 <div id="page-wrapper">
+
     <h3>Danh sách các Tin vắn đang hiển thị</h3>
 
     <p>
@@ -48,33 +49,40 @@
 
         @foreach (var item in Model)
         {
-<tr>
-    <td>
-        <img src="@Url.Content("~/images/BlogPicture/"+ item.HinhAnh)" width="150" />
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TieuDe)
-    </td>
-    <td>
-        @Truncate(item.MoTa, 100)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NgayDang)
-    </td>
-        @if (item.Status == true){<td>Đang Đăng</td> }else{<td>Không sử dụng</td>}
-    <td>
-        @Truncate(item.MoTaChiTiet, 100)
-    </td>
-    <td>
-        @Truncate(item.MoTaThem, 100)
-    </td>
-    <td>
-        @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }) |
-        @Html.ActionLink("Chi tiết", "ChiTietBlog", new { id = item.MaSK }) |
-        @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK })
-    </td>
-</tr>
+            <tr>
+                <td>
+                    <img src="@Url.Content("~/images/BlogPicture/"+ item.HinhAnh)" width="150" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TieuDe)
+                </td>
+                <td>
+                    @Truncate(item.MoTa, 100)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                @if (item.Status == true)
+                {
+                    <td>Đang Đăng</td>
+ }
+                else
+                {
+                    <td>Không sử dụng</td>
 }
+                <td>
+                    @Truncate(item.MoTaChiTiet, 100)
+                </td>
+                <td>
+                    @Truncate(item.MoTaThem, 100)
+                </td>
+                <td>
+                    @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }, new { @style = "color:orange" }) |
+                    @Html.ActionLink("Chi tiết", "ChiTietBlog", new { id = item.MaSK }) |
+                    @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK }, new { @style = "color:red" })
+                </td>
+            </tr>
+        }
 
     </table>
     <div class="pro-pagination-style">

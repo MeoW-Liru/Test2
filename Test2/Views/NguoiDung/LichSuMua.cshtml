@@ -95,12 +95,12 @@
         @if (item.Status2 == true)
         {
 
-            <a href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
+            <a class="btn btn-success" style="width: 120px"  href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
         }
         else
         {
             @*<button class="btn-danger" style="width:80px"> Hủy</button>*@
-            <a href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy</a>
+            <a class="btn btn-danger" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy đơn</a>
         }
     </td>
 

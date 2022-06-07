@@ -513,7 +513,7 @@ namespace Test2.Controllers
 
         public ActionResult DoanhThu(int? page)
         {
-           
+
             var TongDonHangNgay = data.DonHangs.ToList();
             int pageSize = 7;
             int pageNum = page ?? 1;
@@ -560,6 +560,39 @@ namespace Test2.Controllers
             ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
             return View();
         }
+
+        [HttpGet]
+        public ActionResult TimHoaDon(int? page, string sTuKhoa)
+        {
+            ViewBag.TuKhoa = sTuKhoa;
+            List<DonHang> listKQTK = data.DonHangs.Where(n => n.KhachHang.HoVaTen.Contains(sTuKhoa)).ToList();
+            if (listKQTK.Count == 0)
+            {
+                ViewBag.Thongbao = "KHÔNG TÌM THẤY HÓA ĐƠN BẠN CẦN Tham khảo";
+                return View(data.DonHangs.OrderBy(n => n.KhachHang.HoVaTen));
+            }
+            ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
+            return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
+        }
+
+        [HttpPost]
+        public ActionResult TimHoaDon(int? page, FormCollection f)
+        {
+            string sTuKhoa = f["txtTimKiem"].ToString();
+            ViewBag.TuKhoa = sTuKhoa;
+            List<DonHang> listKQTK = data.DonHangs.Where(n => n.KhachHang.HoVaTen.Contains(sTuKhoa)).ToList();
+            int pageSize = 6;
+            int pageNum = (page ?? 1);
+            if (listKQTK.Count == 0)
+            {
+                ViewBag.Thongbao = "KHÔNG TÌM THẤY HÓA ĐƠN BẠN CẦN";
+                return View(data.DonHangs.OrderBy(n => n.KhachHang.HoVaTen));
+            }
+            ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
+            return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
+        }
+
+
 
     }
 }

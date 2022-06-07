@@ -71,11 +71,6 @@
                         <div class="your-order-middle">
                             Họ tên: @kh.HoVaTen
                         </div>
-                        @*
-        <div class="your-order-middle">
-            Địa chỉ: @kh.DiaChi
-        </div>
-                        *@
 
                         <div class="your-order-middle">
                             Điện thoại: @kh.SDT
@@ -85,6 +80,7 @@
                         </div>
 
                         <div class="your-order-middle">
+<<<<<<< HEAD
                             Ngày giao dự kiến: @DateTime.Now.AddDays(2).ToShortDateString() - @DateTime.Now.AddDays(4).ToShortDateString()
                         </div>
 
@@ -93,6 +89,12 @@
                         </div>
                         <div class="your-order-middle">
                             <h5>Ghi chú:</h5> <input name="cuthe" type="text" / required>
+=======
+                            Ngày Dự kiến giao: @DateTime.Now.AddDays(2).ToShortDateString()
+                        </div>
+                        <div class="your-order-middle">
+                            <h5>Địa chỉ cụ thể:</h5> <input name="diachi" type="text" required>
+>>>>>>> c2884645acd7d8196a1d1e7eb66fc8017c975b6a
                         </div>
                         <div class="total-shipping">
                             <h5>Tổng sản phẩm: @ViewBag.Tongsoluong</h5>

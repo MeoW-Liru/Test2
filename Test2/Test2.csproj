@@ -43,12 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BotDetect, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.dll</HintPath>
-    </Reference>
-    <Reference Include="BotDetect.Web.Mvc, Version=4.4.2.0, Culture=neutral, PublicKeyToken=74616036388b765f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Captcha.4.4.2\lib\net35\BotDetect.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.95.4\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
@@ -281,6 +275,7 @@
     <Content Include="images\banner\banner-8.jpg" />
     <Content Include="images\banner\banner-9.jpg" />
     <Content Include="images\banner\BannerTra.jpg" />
+    <Content Include="images\banner\giaoHang.jpg" />
     <Content Include="images\bg\bg-1.jpg" />
     <Content Include="images\bg\bg-2.jpg" />
     <Content Include="images\bg\bg-3.jpg" />
@@ -717,6 +712,7 @@
     <Content Include="Views\Admin\listDonhang.cshtml" />
     <Content Include="Views\Admin\XoaKh.cshtml" />
     <Content Include="Views\Admin\DoanhThu.cshtml" />
+    <Content Include="Views\Admin\TimHoaDon.cshtml" />
     <Content Include="Views\NguoiDung\LichSuMua.cshtml" />
     <Content Include="Views\NguoiDung\LSFix.cshtml" />
     <None Include="Web.Debug.config">

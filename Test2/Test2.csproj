@@ -715,6 +715,11 @@
     <Content Include="Views\Admin\TimHoaDon.cshtml" />
     <Content Include="Views\NguoiDung\LichSuMua.cshtml" />
     <Content Include="Views\NguoiDung\LSFix.cshtml" />
+    <Content Include="Views\Admin\fixDonHang.cshtml" />
+    <Content Include="Views\Admin\FixKhachHang.cshtml" />
+    <Content Include="Views\Admin\ListNCC.cshtml" />
+    <Content Include="Views\Admin\ThemNCC.cshtml" />
+    <Content Include="Views\Admin\XoaNCC.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

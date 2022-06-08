@@ -134,10 +134,6 @@ namespace Test2.Controllers
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
             return View(sanpham);
         }
-
-
-
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult SuaSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload, string id)
@@ -153,6 +149,11 @@ namespace Test2.Controllers
             UpdateSanPham.MaLoaiSP = sanpham.MaLoaiSP;
             UpdateSanPham.MaNCC = sanpham.MaNCC;
             UpdateSanPham.Status = sanpham.Status;
+
+
+
+
+
             for (int i = 0; i < ProductUpload.Length; i++)
             {
                 if (ProductUpload[i] != null && ProductUpload[i].ContentLength > 0)
@@ -223,6 +224,68 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("ListLoaiSP");
         }
+
+
+        public ActionResult ListNCC(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.NhaCungCaps.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
+        }
+        [HttpGet]
+        public ActionResult ThemNCC()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThemNCC(NhaCungCap NCC, FormCollection collection)
+        {
+            string sMaNCC = collection["txtMaNCC"];
+            string sTenNCC = collection["txtTenNCC"];
+            string sDiaChi = collection["txtDiaChi"];
+
+            NCC.MaNCC = sMaNCC;
+            NCC.TenNCC = sTenNCC;
+            NCC.DiaChi = sDiaChi;
+            NCC.Status = true;
+
+            data.NhaCungCaps.InsertOnSubmit(NCC);
+            data.SubmitChanges();
+            return RedirectToAction("ListNCC");
+        }
+        [HttpGet]
+        public ActionResult XoaNCC(string id)
+        {
+            NhaCungCap NCC = data.NhaCungCaps.SingleOrDefault(n => n.MaNCC == id);
+            ViewBag.MaNCC = NCC.MaNCC;
+            if (NCC == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(NCC);
+        }
+        [HttpPost, ActionName("XoaNCC")]
+        public ActionResult XacNhanXoaNCC(string id)
+        {
+            NhaCungCap NCC = data.NhaCungCaps.SingleOrDefault(n => n.MaNCC == id);
+            ViewBag.MaNCC = NCC.MaNCC;
+            if (NCC == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            data.NhaCungCaps.DeleteOnSubmit(NCC);
+            data.SubmitChanges();
+            return RedirectToAction("ListNCC");
+        }
+
+
+
+
+
+
+
 
         [HttpGet]
         public ActionResult XoaLoaiSP(string id)
@@ -429,6 +492,52 @@ namespace Test2.Controllers
             return View(data.DonHangs.ToList());
         }
 
+        [HttpGet]
+        public ActionResult fixDonHang(string id )
+        {
+            DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
+            ViewBag.MaKH = donhang.MaDH;
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        [HttpPost]
+        public ActionResult fixDonHang(string id, FormCollection collection)
+        {
+            DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
+            var MaKH = collection["MaKH"];
+            var ngaylap = collection["NgayLap"];
+            var ngaygiao = collection["NgayGiao"];
+            var ThanhTien = collection["ThanhTien"];
+            var DiaChi = collection["DiaChi"];
+            var ghichu = collection["GhiChu"];
+            var status = collection["Status"];
+            var status2 = collection["Status2"];
+            donhang.MaDH = int.Parse(id);
+            if (string.IsNullOrEmpty(MaKH))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+
+                donhang.MaKH = int.Parse(MaKH);
+                donhang.NgayLap = Convert.ToDateTime(ngaylap);
+                donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
+                donhang.GhiChu = ghichu;
+                donhang.DiaChi = DiaChi;
+                donhang.Status = Convert.ToBoolean(status);
+                donhang.Status2 = Convert.ToBoolean(status2);
+                UpdateModel(donhang);
+                data.SubmitChanges();
+                return RedirectToAction("DonHang");
+            }
+            return View(donhang);
+        }
+
 
         public ActionResult listDonhang(int? page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
         {
@@ -473,6 +582,54 @@ namespace Test2.Controllers
         public ActionResult QuanLyKH()
         {
             return View(data.KhachHangs.ToList());
+        }
+
+        [HttpGet]
+        public ActionResult FixKhachHang(string id)
+        {
+            KhachHang khachHang = data.KhachHangs.SingleOrDefault(n => n.MaKH == int.Parse(id));
+            ViewBag.MaKH = khachHang.MaKH;
+            if (khachHang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(khachHang);
+        }
+        [HttpPost]
+        public ActionResult FixKhachHang(string id, FormCollection collection)
+        {
+            var khachHang = data.KhachHangs.First(a => a.MaKH == int.Parse(id));
+            var maKH = collection["maKH"];
+            var TenKH = collection["HoVaTen"];
+            var tendn = collection["TenDN"];
+            var matkhau = collection["Password"];
+            var email = collection["Email"];
+            var SDT = collection["SDT"];
+            var NgaySinh = Convert.ToDateTime(collection["NgaySinh"]);
+            var DiaChi = collection["DiaChi"];
+            var status = collection["Status"];
+            khachHang.MaKH = int.Parse(id);
+            if (string.IsNullOrEmpty(TenKH))
+            {
+                ViewData["Error"] = "Don't empty!";
+            }
+            else
+            {
+                khachHang.UserName = tendn;
+                khachHang.HoVaTen = TenKH;
+                khachHang.PassWord = matkhau;
+                khachHang.Email = email;
+                khachHang.SDT = SDT;
+                khachHang.NgaySinh = NgaySinh;
+                khachHang.DiaChi = DiaChi;
+                khachHang.Status = Convert.ToBoolean(status);
+                UpdateModel(khachHang);
+                data.SubmitChanges();
+                return RedirectToAction("QuanLyKH");
+            }
+            return this.FixKhachHang(id);
+
         }
 
         [HttpGet]
@@ -522,22 +679,6 @@ namespace Test2.Controllers
 
 
 
-        //// cái này tạo ra 1 view cho họ nhập tháng rồi năm rồi sau đó cho nó quăng ra tháng năm tương ứng như y chan tìm sản phẩm
-        //// tạo sau chưa làm view 
-        //// cũng hóa đơn tháng nhưng cho nhập để tìm 
-        //public decimal ThongKeDoanhThuTheoThang(int thang, int Nam)
-        //{
-        //    var listHoaDon = data.DonHangs.Where(n => n.NgayLap.Value.Month == thang &&
-        //    n.NgayLap.Value.Year == Nam);
-        //    decimal TongTien = 0;
-        //    foreach (var item in listHoaDon)
-        //    {
-        //        TongTien += decimal.Parse(item.ChiTietDonHangs.Sum(n => n.SoLuongSP * n.ThanhTien).Value.ToString());
-        //    }
-        //    return TongTien;
-        //}
-        ////
-
         public double TongDonHang()
         {
             double slDH = data.DonHangs.Count();
@@ -560,6 +701,7 @@ namespace Test2.Controllers
             ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
             return View();
         }
+
 
         [HttpGet]
         public ActionResult TimHoaDon(int? page, string sTuKhoa)

@@ -715,15 +715,14 @@
     <Content Include="Views\Admin\TimHoaDon.cshtml" />
     <Content Include="Views\NguoiDung\LichSuMua.cshtml" />
     <Content Include="Views\NguoiDung\LSFix.cshtml" />
-<<<<<<< HEAD
+
     <Content Include="Views\Admin\ChinhSuaHoaDon.cshtml" />
-=======
     <Content Include="Views\Admin\fixDonHang.cshtml" />
     <Content Include="Views\Admin\FixKhachHang.cshtml" />
     <Content Include="Views\Admin\ListNCC.cshtml" />
     <Content Include="Views\Admin\ThemNCC.cshtml" />
     <Content Include="Views\Admin\XoaNCC.cshtml" />
->>>>>>> e1b5502d0ca37a65c5dba4315c805c37a994289d
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

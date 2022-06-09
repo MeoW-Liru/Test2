@@ -14,6 +14,7 @@
         @using (Html.BeginForm("Export", "Admin", FormMethod.Post))
         {
             <input type="submit" value="Xuất Excel" class="btn btn-success" />}
+
     </p>
     <div class="mobile-search mobile-header-padding-border-1">
         @using (Html.BeginForm("TimHoaDon", "Admin", FormMethod.Post))
@@ -87,7 +88,7 @@
                 }
                 else
                 {
-                    <td>Chưa thanh toán</td>
+                    <td style="color:red">Chưa thanh toán</td>
                 }
 
             </tr>

@@ -7,11 +7,7 @@
 
 <div id="page-wrapper">
     <h2>Thông tin khách hàng</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="table-responsive table-bordered">
@@ -56,9 +52,8 @@
                                     </td>
                                     @if (item.Status == true){<td>Sẵng sàng</td>}else{<td>Bị khóa</td>}
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.MaKH }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.MaKH }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.MaKH })
+                                        @Html.ActionLink("chỉnh sửa", "FixKhachHang", new { id = item.MaKH },new { @style = "color:orange" }) |
+                                        @Html.ActionLink("Xóa", "XoaKh", new { id = item.MaKH },new { @style = "color:red" })
                                     </td>
                                 </tr>
                             }

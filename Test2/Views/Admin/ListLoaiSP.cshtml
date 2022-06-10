@@ -11,7 +11,7 @@
     <h2>Danh sách loại sản phẩm</h2>
 
     <p>
-        @Html.ActionLink("Thêm Loại", "ThemLoaiSP")
+        @Html.ActionLink("Thêm Loại", "ThemLoaiSP", new {}, new { @class = "btn btn-success" })
     </p>
     <div class="col-lg-6">
         <div class="panel panel-default">
@@ -33,7 +33,7 @@
                     </td>
                         @if (item.Status == true){<td>Còn Kinh Doanh</td> }else{<td>Hết Kinh Doanh</td>}
                     <td>
-                        @Html.ActionLink("Xóa", "XoaLoaiSP", new { id = item.MaLoaiSP })
+                        @Html.ActionLink("Xóa", "XoaLoaiSP", new { id = item.MaLoaiSP },new { @class = "btn btn-danger" })
                     </td>
                 </tr>
 }

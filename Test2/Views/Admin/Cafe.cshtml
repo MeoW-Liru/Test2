@@ -106,9 +106,9 @@
                     <td style="color:red">Hết hàng</td>
 }
                 <td>
-                    @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Chỉnh Sửa", "SuaSP", new { id = item.MaSP }, new { @class = "btn btn-warning", style = "width:90px" })
+                    @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }, new { @class = "btn btn-info", style = "width:90px" })
+                    @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP }, new { @class = "btn btn-danger", style = "width:90px" })
                 </td>
             </tr>
         }

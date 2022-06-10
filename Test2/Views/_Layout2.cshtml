@@ -119,8 +119,8 @@
                                         else
                                         {
                                             <ul>
-                                                <li style="color:red">
-                                                    Xin Chào : <a href="@Url.Action("ChinhSuaTK","NguoiDung", new { id = Session["MaKH"]})"> @Session["UserName1"]</a>
+                                                <li style=" width: 150px">
+                                                    <b>Xin Chào : </b> <a href="@Url.Action("ChinhSuaTK","NguoiDung", new { id = Session["MaKH"]})"> @Session["UserName1"]</a>
                                                 </li>
                                                 <li>
                                                     @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="same-style-2 header-cart">
                                         <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
-                                            <i class="icon-basket-loaded"></i><span class="pro-count red">@ViewBag.Tongsoluong</span><h4>&nbsp;&nbsp;&nbsp;@ViewBag.TongTien$</h4>
+                                            <i class="icon-basket-loaded"></i><span class="pro-count red">@ViewBag.Tongsoluong</span>
                                         </a>
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
             </div>
         </header>
         <!-- Mobile menu start,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
-        <div class="mobile-header-active mobile-header-wrapper-style">
+        <!--<div class="mobile-header-active mobile-header-wrapper-style">
             <div class="clickalbe-sidebar-wrap">
                 <a class="sidebar-close"><i class="icon_close"></i></a>
                 <div class="mobile-header-content-area">
@@ -184,9 +184,9 @@
                             <button class="button-search"><i class="icon-magnifier"></i></button>
                         </form>
                     </div>
-                    <div class="mobile-menu-wrap mobile-header-padding-border-2">
+                    <div class="mobile-menu-wrap mobile-header-padding-border-2">-->
                         <!-- mobile menu start -->
-                        <nav>
+                        <!--<nav>
                             <ul class="mobile-menu">
                                 <li class="menu-item-has-children">
                                     <a href="index.html">Trang Chủ</a>
@@ -245,9 +245,9 @@
                                 </li>
                                 <li><a href="contact.html">Contact us</a></li>
                             </ul>
-                        </nav>
+                        </nav>-->
                         <!-- mobile menu end -->
-                    </div>
+                    <!--</div>
                     <div class="mobile-header-info-wrap mobile-header-padding-border-3">
                         <div class="single-mobile-header-info">
                             <a href="order-tracking.html"><i class="lastudioicon-pin-3-2"></i> Track Your Order </a>
@@ -290,9 +290,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- mini cart start -->
-        <div class="sidebar-cart-active">
+        <!--<div class="sidebar-cart-active">
             <div class="sidebar-cart-all">
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
@@ -332,7 +332,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->>
 
         <div>
             @RenderBody()

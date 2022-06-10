@@ -733,7 +733,52 @@ namespace Test2.Controllers
             ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
             return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
         }
+        // xử lý đơn hàng ở đây 
 
+        public ActionResult DonHangDTT()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status==true).ToList();
+           
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangCTT()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status == false).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangBiHuy()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status2 == false).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangTonTai()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status2 == true).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
 
 
     }

@@ -715,14 +715,16 @@
     <Content Include="Views\Admin\TimHoaDon.cshtml" />
     <Content Include="Views\NguoiDung\LichSuMua.cshtml" />
     <Content Include="Views\NguoiDung\LSFix.cshtml" />
-
     <Content Include="Views\Admin\ChinhSuaHoaDon.cshtml" />
     <Content Include="Views\Admin\fixDonHang.cshtml" />
     <Content Include="Views\Admin\FixKhachHang.cshtml" />
     <Content Include="Views\Admin\ListNCC.cshtml" />
     <Content Include="Views\Admin\ThemNCC.cshtml" />
     <Content Include="Views\Admin\XoaNCC.cshtml" />
-
+    <Content Include="Views\Admin\DonHangDTT.cshtml" />
+    <Content Include="Views\Admin\DonHangCTT.cshtml" />
+    <Content Include="Views\Admin\DonHangBiHuy.cshtml" />
+    <Content Include="Views\Admin\DonHangTonTai.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

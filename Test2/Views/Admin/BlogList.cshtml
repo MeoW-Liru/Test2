@@ -19,27 +19,27 @@
     <h3>Danh sách các Tin vắn đang hiển thị</h3>
 
     <p>
-        @Html.ActionLink("Thêm tin", "ThemBlog")
+        @Html.ActionLink("Thêm tin", "ThemBlog", new { }, new { @class = "btn btn-success" })
     </p>
     <table class="table">
         <tr>
             <th style="width:200px">
-                Hình Ngoài List:
+                Hình Ngoài List
             </th>
             <th style="width:200px">
-                Tiêu Đề:
+                Tiêu Đề
             </th>
             <th style="width:200px">
-                Mô tả:
+                Mô tả
             </th>
             <th style="width:200px">
-                Ngày đăng:
+                Ngày đăng
             </th>
             <th style="width:200px">
-                Tình trạng:
+                Tình trạng
             </th>
             <th style="width:200px">
-                Mô tả chi tiêt:
+                Mô tả chi tiêt
             </th>
             <th style="width:200px">
                 Mô tả thêm
@@ -75,11 +75,11 @@
                 </td>
                 <td>
                     @Truncate(item.MoTaThem, 100)
-                </td>
+                </td >
                 <td>
-                    @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }, new { @style = "color:orange" }) |
-                    @Html.ActionLink("Chi tiết", "ChiTietBlog", new { id = item.MaSK }) |
-                    @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK }, new { @style = "color:red" })
+                    @Html.ActionLink("Chỉnh tin", "SuaBlog", new { id = item.MaSK }, new { @class = "btn btn-warning", style = "width:90px" }) 
+                    @Html.ActionLink(" Chi tiết", "ChiTietBlog", new { id = item.MaSK }, new { @class = "btn btn-info", style = "width:90px" })  
+                    @Html.ActionLink("Xóa", "XoaBlog", new { id = item.MaSK }, new { @class = "btn btn-danger" , style = "width:90px" })
                 </td>
             </tr>
         }

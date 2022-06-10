@@ -7,12 +7,11 @@
 
 <div id="page-wrapper">
     <h2>Thông tin khách hàng</h2>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="table-responsive table-bordered">
+    <div class="#">
+        <div class="#">
+            <div class="#">
+                <div class="#">
                     <table class="table">
-                        <thead>
                             <tr>
                                 <th>Tên Đăng nhập</th>
                                 <th>PassWord     </th>
@@ -23,8 +22,6 @@
                                 <th>Ngày sinh    </th>
                                 <th>Tình trạng     </th>
                             </tr>
-                        </thead>
-
                         <tbody>
                             @foreach (var item in Model)
                             {
@@ -50,10 +47,10 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.NgaySinh)
                                     </td>
-                                    @if (item.Status == true){<td>Sẵng sàng</td>}else{<td>Bị khóa</td>}
+                                    @if (item.Status == true){<td style="color:green">Sẵng sàng</td>}else{<td style="color:red">Bị khóa</td>}
                                     <td>
-                                        @Html.ActionLink("chỉnh sửa", "FixKhachHang", new { id = item.MaKH },new { @style = "color:orange" }) |
-                                        @Html.ActionLink("Xóa", "XoaKh", new { id = item.MaKH },new { @style = "color:red" })
+                                        @Html.ActionLink("chỉnh sửa", "FixKhachHang", new { id = item.MaKH }, new { @class = "btn btn-warning", style = "width:90px" }) 
+                                        @Html.ActionLink("Xóa", "XoaKh", new { id = item.MaKH }, new { @class = "btn btn-danger", style = "width:90px" })
                                     </td>
                                 </tr>
                             }

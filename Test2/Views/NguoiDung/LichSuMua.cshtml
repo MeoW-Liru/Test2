@@ -30,22 +30,22 @@
                 Ngày Lập
             </th>
             <th style="width:300px">
-                Ngày Giao:
+                Ngày Giao
             </th>
             <th style="width:300px">
-                Địa Chỉ Giao:
+                Địa Chỉ Giao
             </th>
             <th style="width:300px">
-                Ghi Chú:
+                Ghi Chú
             </th>
             <th style="width:300px">
-                Thanh toán:
+                Thanh toán
             </th>
             <th style="width:300px">
-                Trạng Thái:
+                Trạng Thái
             </th>
             <th style="width:300px">
-                Hủy đơn:
+                Xử lý đơn hàng
             </th>
         </tr>
 
@@ -95,13 +95,23 @@
         @if (item.Status2 == true)
         {
 
-            <a class="btn btn-success" style="width: 120px"  href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
+            <a class="btn btn-success" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
         }
         else
         {
-            @*<button class="btn-danger" style="width:80px"> Hủy</button>*@
-            <a class="btn btn-danger" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy đơn</a>
+
+            if (item.Status == true)
+            {
+                <a href="~/Home/LienHe"><i style="color: blue">Liên hệ với chủ shop để hủy đơn hàng</i> </a>
+               
+            }
+            else
+            {
+                <a class="btn btn-danger" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy đơn</a>
+            }
+
         }
+
     </td>
 
         </tr>

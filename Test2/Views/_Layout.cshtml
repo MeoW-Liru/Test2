@@ -66,15 +66,15 @@
                                     @if (Session["UserName"] == null)
                                     {
                                         <div class="header-login-regi">
-                                            <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-user"></i> Đăng nhập</a>
+                                            <a href="@Url.Action("DangNhap","NguoiDung")"><i class="icon-login"></i> Đăng nhập</a>
                                             <a href="@Url.Action("DangKy","NguoiDung")"><i class="icon-user"></i> Đăng Ký</a>
                                         </div>
                                     }
                                     else
                                     {
                                         <ul>
-                                            <li style="color: red">
-                                                Xin Chào : <a href="@Url.Action("ChinhSuaTK","NguoiDung", new { id = Session["MaKH"]})"> @Session["UserName1"]
+                                            <li style=" width: 150px">
+                                                <b> Xin Chào : </b> <a href="@Url.Action("ChinhSuaTK","NguoiDung", new { id = Session["MaKH"]})"> @Session["UserName1"]
                                             </li>
                                             <li>
                                                 @Html.ActionLink("Đăng xuất", "DangXuat", "NguoiDung")
@@ -83,7 +83,7 @@
                                     }
                                     <div class="header-cart-2">
                                         <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
-                                            <i class="icon-basket-loaded"></i> <span class="red">@ViewBag.Tongsoluong</span>@ViewBag.TongTien
+                                            <i class="icon-basket-loaded"></i> <span class="red">@ViewBag.Tongsoluong</span>
                                         </a>
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
                 <div class="header-small-device small-device-ptb-1">
-                    <div class="row align-items-center">
+                    <div class="row align-items-center">s
                         <div class="col-6">
                             <div class="mobile-logo">
                                 <a href="Index">
@@ -131,8 +131,8 @@
                                     <a href="Login"><i class="icon-user"></i></a>
                                 </div>
                                 <div class="same-style-2 header-cart">
-                                    <a class="cart-active" href="#">
-                                        <i class="icon-basket-loaded"></i><span class="pro-count black">02</span>
+                                    <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
+                                        <i class="icon-basket-loaded"></i><span class="pro-count red">@ViewBag.Tongsoluong</span><h4>&nbsp;&nbsp;&nbsp;@ViewBag.TongTien VNĐ</h4>
                                     </a>
                                 </div>
                                 <div class="same-style-2 main-menu-icon">
@@ -145,9 +145,9 @@
             </div>
         </header>
 
-        <!-- mini cart start -->
-        <div class="sidebar-cart-active">
-            <div class="sidebar-cart-all">
+         @*mini cart start*@ 
+        <!--<div class="sidebar-cart-active">-->
+            @*<div class="sidebar-cart-all">
                 <a class="cart-close" href="#"><i class="icon_close"></i></a>
                 <div class="cart-content">
                     <h3>Giỏ Hàng</h3>
@@ -161,9 +161,9 @@
                                     <h4><a href="#"></a></h4>
                                     <span></span>
                                 </div>
-                                @*<div class="cart-delete">
+                                <div class="cart-delete">
                                     <a href="#">×</a>
-                                </div>*@
+                                </div>
                             </li>
                         </ul>
                     
@@ -176,8 +176,8 @@
                         <a class="no-mrg btn-hover cart-btn-style" href="#">thanh toán</a>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div>*@
+        <!--</div>-->
 
         <!-- Mobile menu start -->
         <div class="mobile-header-active mobile-header-wrapper-style">

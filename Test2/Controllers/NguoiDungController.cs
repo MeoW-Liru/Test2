@@ -72,16 +72,26 @@ namespace Test2.Controllers
                 var tendn = collection["TenDN"];
                 var matkhau = collection["Password"];
                 KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
+                
                 if (kh != null)
                 {
-                    Session["UserName1"] = tendn;
-                    Session["UserName"] = kh;
-                    Session["MaKH"] = kh.MaKH;
-                    return RedirectToAction("GioHang", "Giohang");
+                    if (kh.Status == true)
+                    {
+                        Session["UserName1"] = tendn;
+                        Session["UserName"] = kh;
+                        Session["MaKH"] = kh.MaKH;
+                        return RedirectToAction("GioHang", "Giohang");
+                    }
+                    else
+                    {
+                        ViewBag.Thongbao = "Tài khoản hiện đang bị khóa !!! Vui lòng liên hệ admin để mở tài khoản";
+                    }
+                    return View();
                 }
 
                 else
                 {
+                    
                     ViewBag.Thongbao = "Tên đăng nhập hoặc Mật khẩu không đúng";
                 }
                 return View();
@@ -214,11 +224,12 @@ namespace Test2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // lịch su mau hang 
+        // lịch su mua hang 
 
         [HttpGet]
         public ActionResult LichSuMua(int id)
         {
+            
             List<DonHang> listDonHang = data.DonHangs.Where(n => n.MaKH == id).ToList();
             if (listDonHang == null)
             {
@@ -237,6 +248,7 @@ namespace Test2.Controllers
         [HttpPost]
         public ActionResult LSFix(string id, FormCollection collection)
         {
+            
             DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
             var MaKH = collection["MaKH"];
             var ngaylap = collection["NgayLap"];
@@ -248,13 +260,14 @@ namespace Test2.Controllers
             var status2 = collection["Status2"];
 
             donhang.MaDH= int.Parse(id);
+          
             if (string.IsNullOrEmpty(MaKH))
             {
                 ViewData["Error"] = "Don't empty!";
             }
             else
             {
-               
+                   
                     donhang.MaKH = int.Parse(MaKH);
                     donhang.NgayLap = Convert.ToDateTime(ngaylap);
                     donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
@@ -264,8 +277,8 @@ namespace Test2.Controllers
                     donhang.Status2 = Convert.ToBoolean(status2);
                     UpdateModel(donhang);
                     data.SubmitChanges();
-                    return RedirectToAction("LSFix");
-                }
+                return RedirectToAction("SanPham", "Home");
+            }
                 //else
                 //{
                 //    donhang.MaKH = int.Parse(MaKH);

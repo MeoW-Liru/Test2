@@ -151,6 +151,17 @@ namespace Test2.Controllers
             lstGiohang.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public ActionResult DatHang()
         {
@@ -166,8 +177,7 @@ namespace Test2.Controllers
             List<Giohang> lstGiohang = Laygiohang();
            
             ViewBag.TongtienThu = TongTienThu();
-           
-
+            ViewBag.Tongsoluong = TongSoLuong();
             // Select tổng hóa đơn chưa thanh toán.
 
             return View(lstGiohang);

@@ -41,8 +41,12 @@
             <th style="width:300px">
                 Thanh toán
             </th>
+
             <th style="width:300px">
                 Trạng Thái
+            </th>
+            <th style="width:300px">
+                Giao hàng
             </th>
             <th style="width:300px">
                 Xử lý đơn hàng
@@ -91,30 +95,53 @@
         {
             <td>Tồn tại</td>
         }
-    <td>
-        @if (item.Status2 == true)
-        {
 
-            <a class="btn btn-success" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
+
+        @if (item.giaohang == "DGH")
+        {
+            <td style="color: green"> Đã giao hàng</td>
         }
-        else
+        @if (item.giaohang == "CGH")
         {
+            <td style="color: red"> Chưa giao hàng</td>
+        }
+        @if (item.giaohang == "DVC")
+        {
+            <td style="color: blue"> Đang giao hàng</td>
+        }
+        @if (item.giaohang == null)
+        {
+            <td></td>
+        }
 
-            if (item.Status == true)
+
+
+
+
+        <td>
+            @if (item.Status2 == true)
             {
-                <a href="~/Home/LienHe"><i style="color: blue">Liên hệ với chủ shop để hủy đơn hàng</i> </a>
-               
+
+                <a class="btn btn-success" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id = item.MaDH })">Khôi phục</a>
             }
             else
             {
-                <a class="btn btn-danger" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy đơn</a>
+
+                if (item.Status == true)
+                {
+                    <a href="~/Home/LienHe"><i style="color: blue">Liên hệ với chủ shop để hủy đơn hàng</i> </a>
+
+                }
+                else
+                {
+                    <a class="btn btn-danger" style="width: 120px" href="@Url.Action("LSFix", "NguoiDung", new { id =item.MaDH})">Hủy đơn</a>
+                }
+
             }
 
-        }
+        </td>
 
-    </td>
-
-        </tr>
+    </tr>
         }
 
     </table>

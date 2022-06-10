@@ -156,9 +156,19 @@
                         <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
                     </div>
                     <div class="pro-add-to-cart">
-                        <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
-                            <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
-                        </a>
+                        @if (caphe.Status == true)
+                        {
+                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
+                                <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })"  style="pointer-events: none">
+                                <button title="Thêm Vào Giỏ Hàng" disabled>Hết hàng</button>
+                            </a>
+                        }
+
                     </div>
                 </div>
             </div>

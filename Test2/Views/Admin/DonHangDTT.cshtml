@@ -22,22 +22,38 @@
             </th>
             <th style="padding-top: 9px; padding-left: 5px">
                 <p>
-                    @Html.ActionLink("Đã thanh toán", "DonHangDTT", new { }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Đã thanh toán", "DonHangDTT", new { }, new { @class = "btn btn-info" })
                 </p>
             </th>
             <th style="padding-top: 9px; padding-left: 5px">
                 <p>
-                    @Html.ActionLink("Chưa thanh toán", "DonHangCTT", new { }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Chưa thanh toán", "DonHangCTT", new { }, new { @class = "btn btn-danger" })
                 </p>
             </th>
             <th style="padding-top: 9px; padding-left: 5px">
                 <p>
-                    @Html.ActionLink("Đơn hàng bị hủy", "DonHangBiHuy", new { }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Đơn hàng tồn tại", "DonHangTonTai", new { }, new { @class = "btn btn-info" })
                 </p>
             </th>
             <th style="padding-top: 9px; padding-left: 5px">
                 <p>
-                    @Html.ActionLink("Đơn hàng tồn tại", "DonHangTonTai", new { }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Đơn hàng bị hủy", "DonHangBiHuy", new { }, new { @class = "btn btn-danger" })
+                </p>
+            </th>
+
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng đang giao", "DonHangDangGiao", new { }, new { @class = "btn btn-warning" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng đã giao", "DonHangDaGiao", new { }, new { @class = "btn btn-info" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng chưa giao", "DonHangChuaGiao", new { }, new { @class = "btn btn-danger" })
                 </p>
             </th>
         </tr>
@@ -86,6 +102,12 @@
                 <th style="width:300px">
                     Trạng thái
                 </th>
+                <th style="width:300px">
+                    Giao hàng
+                </th>
+                <th style="width:300px">
+                    Chỉnh sửa đơn hàng
+                </th>
             </tr>
 
             @foreach (var item in Model)
@@ -133,10 +155,26 @@
                     {
                         <td style="color: red">Đã bị hủy</td>
                     }
+                    @if (item.giaohang == "DGH")
+                    {
+                        <td style="color: green"> Đã giao hàng</td>
+                    }
+                    @if (item.giaohang == "CGH")
+                    {
+                        <td style="color: red"> Chưa giao hàng</td>
+                    }
+                    @if (item.giaohang == "DVC")
+                    {
+                        <td style="color: blue"> Đang giao hàng</td>
+                    }
+                    @if (item.giaohang == null)
+                    {
+                        <td></td>
+                    }
 
 
                     <td>
-                        @Html.ActionLink("Chỉnh Đơn Hàng", "fixDonHang", new { id = item.MaDH }, new { @class = "btn btn-warning" })
+                        @Html.ActionLink("Chỉnh Đơn Hàng", "fixDonHang", new { id = item.MaDH }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
 

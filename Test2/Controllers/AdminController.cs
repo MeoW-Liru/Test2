@@ -516,6 +516,7 @@ namespace Test2.Controllers
             var ghichu = collection["GhiChu"];
             var status = collection["Status"];
             var status2 = collection["Status2"];
+            var giaohang = collection["giaohang"];
             donhang.MaDH = int.Parse(id);
             if (string.IsNullOrEmpty(MaKH))
             {
@@ -531,6 +532,7 @@ namespace Test2.Controllers
                 donhang.DiaChi = DiaChi;
                 donhang.Status = Convert.ToBoolean(status);
                 donhang.Status2 = Convert.ToBoolean(status2);
+                donhang.giaohang = giaohang;
                 UpdateModel(donhang);
                 data.SubmitChanges();
                 return RedirectToAction("DonHang");
@@ -771,6 +773,47 @@ namespace Test2.Controllers
         public ActionResult DonHangTonTai()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.Status2 == true).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+
+
+
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
+
+        public ActionResult DonHangDaGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang== "DGH").ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangDangGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "DVC").ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangChuaGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang== "CGH").ToList();
 
             if (donhang == null)
             {

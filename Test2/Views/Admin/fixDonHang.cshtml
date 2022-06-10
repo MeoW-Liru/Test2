@@ -98,8 +98,25 @@
     </div>
 
     <div class="form-group">
+        <div class="control-label col-md-2"><strong>Trạng thái giao hàng</strong></div>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.giaohang, new SelectList(
+    new[]
+    {
+    new { Value = "DGH", Text = "Đã giao hàng" },
+    new { Value = "CGH", Text = "Chưa giao hàng" },
+     new { Value = "DVC", Text = "Đang giao hàng" },
+    },
+    "Value",
+    "Text",
+    Model
+    ))
+        </div>
+    </div>
+
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Xác nhận" class="btn btn-default" />
+            <input type="submit" value="Xác nhận" class="btn btn-danger" />
         </div>
     </div>
 </div>

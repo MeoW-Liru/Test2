@@ -173,9 +173,17 @@
             }
 
 
-            <td>
+        <td>
+            @if (item.giaohang == "DGH")
+            {
+                <a> Đơn hàng đã được giao </a>
+            }
+            else
+            {
                 @Html.ActionLink("Chỉnh Đơn Hàng", "fixDonHang", new { id = item.MaDH }, new { @class = "btn btn-primary" })
-            </td>
+            }
+
+        </td>
         </tr>
 
             }

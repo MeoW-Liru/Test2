@@ -728,6 +728,13 @@
     <Content Include="Views\Admin\DonHangDaGiao.cshtml" />
     <Content Include="Views\Admin\DonHangDangGiao.cshtml" />
     <Content Include="Views\Admin\DonHangChuaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDTT.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangCTT.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangTonTai.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangBiHuy.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDangGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangChuaGiao.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

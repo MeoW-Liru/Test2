@@ -300,5 +300,92 @@ namespace Test2.Controllers
         }
 
 
+
+        public ActionResult DonHangDTT()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status == true).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangCTT()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status == false).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangBiHuy()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status2 == false).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangTonTai()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.Status2 == true).ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+
+
+
+        /// <summary>
+        /// /
+        /// </summary>
+        /// <returns></returns>
+
+        public ActionResult DonHangDaGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "DGH").ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangDangGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "DVC").ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+        public ActionResult DonHangChuaGiao()
+        {
+            List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "CGH").ToList();
+
+            if (donhang == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(donhang);
+        }
+
     }
 }

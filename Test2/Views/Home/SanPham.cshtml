@@ -59,17 +59,21 @@
                 <div class="sidebar-wrapper sidebar-wrapper-mrg-right">
                     <div class="sidebar-widget mb-40">
                         <h4 class="sidebar-widget-title">Tìm kiếm </h4>
-                        <div class="sidebar-search">
 
-                            @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post)) 
-                                {
+                        @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post))
+                        {
+                            <div class="sidebar-search">
                                 <form class="sidebar-search-form" action="KetQuaTimKiem">
                                     <input name="txtTimKiem" type="text" placeholder="Nhập từ khóa...">
-                                    <button class="button-search"><i class="icon-magnifier"></i></button>
+                                    <button>
+                                        <i class="icon-magnifier"></i>
+                                    </button>
                                 </form>
-                                 }
-                        </div>
+                            </div>
+                        }
                     </div>
+                </div>
+
                     <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">
                         <h4 class="sidebar-widget-title">Sản phẩm </h4>
                         <div class="shop-catigory">
@@ -82,5 +86,3 @@
             </div>
         </div>
     </div>
-</div>
-

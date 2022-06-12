@@ -6,96 +6,102 @@
 }
 
 <div id="page-wrapper">
-<h2>ChiTietBlog</h2>
+<h2>Chi Tiết Blog</h2>
 
 <div>
-    <h4>SuKien</h4>
+    <h4>Sự Kiện</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+
+        <dt style=" width:160px">
             @Html.DisplayNameFor(model => model.HinhAnh)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HinhAnh)
+            <img src="@Url.Content("~/images/BlogPicture/"+ Model.HinhAnh)" width="150" />
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TieuDe)
+        <dt style=" width:160px">
+            Tiêu đề bài viết :
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TieuDe)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MoTa)
+        <dt style=" width:160px">
+            Mô tả:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.MoTa)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayDang)
+        <dt style=" width:160px">
+            Ngày đăng:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.NgayDang)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
+        <dt style=" width:160px">
+            Tình trạng:
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Status)
+        @if (@Model.Status == true)
+        {
+            <d>Đang sử dụng</d>
+        }
+        else
+        {
+            <d>Ngưng sử dụng</d>
+        }
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MoTaChiTiet)
+        <dt style=" width:160px">
+            Mô tả chi tiết:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.MoTaChiTiet)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MoTaThem)
+        <dt style=" width:160px">
+            Mô tả thêm:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.MoTaThem)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhAnhChiTiet)
+        <dt style=" width:160px">
+            Hình ảnh 1:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HinhAnhChiTiet)
+            <img src="@Url.Content("~/images/BlogPicture/"+ Model.HinhAnhChiTiet)" width="150" />
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhAnhChiTietThem)
+        <dt style=" width:160px">
+            Hình ảnh 2:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HinhAnhChiTietThem)
+            <img src="@Url.Content("~/images/BlogPicture/"+ Model.HinhAnhChiTietThem)" width="150" />
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HinhAnhTongQuat)
+        <dt style=" width:160px">
+            Hình 3:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HinhAnhTongQuat)
+            <img src="@Url.Content("~/images/BlogPicture/"+ Model.HinhAnhTongQuat)" width="150" />
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSK }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Chỉnh sửa ", "SuaBlog", new { id = Model.MaSK }) |
+    @Html.ActionLink("Quay lại", "BlogList")
 </p>
 </div>

@@ -82,7 +82,7 @@
                                         </ul>
                                     }
                                     <div class="header-cart-2">
-                                        <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
+                                        <a href="@Url.Action("Giohang","Giohang")">
                                             <i class="icon-basket-loaded"></i> <span class="red">@ViewBag.Tongsoluong</span>
                                         </a>
                                     </div>
@@ -108,7 +108,6 @@
                                             </li>
                                             <li><a href="~/Home/LienHe">Liên Hệ </a></li>
                                             <li><a href="~/Home/Blog">Blog và tin tức</a></li>
-                                            <li><a href="~/Home/">Chat online với shop</a></li> @*Chỗ này sẽ fix thành chat online*@
                                         </ul>
                                     </nav>
                                 </div>
@@ -131,8 +130,8 @@
                                     <a href="Login"><i class="icon-user"></i></a>
                                 </div>
                                 <div class="same-style-2 header-cart">
-                                    <a class="cart-active" href="@Url.Action("Giohang","Giohang")">
-                                        <i class="icon-basket-loaded"></i><span class="pro-count red">@ViewBag.Tongsoluong</span><h4>&nbsp;&nbsp;&nbsp;@ViewBag.TongTien VNĐ</h4>
+                                    <a href="@Url.Action("Giohang","Giohang")">
+                                        <i class="icon-basket"></i><span class="pro-count red">@ViewBag.Tongsoluong</span><h4>&nbsp;&nbsp;&nbsp;@ViewBag.TongTien VNĐ</h4>
                                     </a>
                                 </div>
                                 <div class="same-style-2 main-menu-icon">

@@ -30,7 +30,7 @@ namespace Test2
         protected void Session_End()
         {
             Application.Lock();
-            Application["Online"] = (int)Application["Online"] - 1;
+            Application["Online"] = (int)Application["Online"]-1;
             Application.UnLock();
         }
 

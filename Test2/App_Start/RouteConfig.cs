@@ -19,13 +19,6 @@ namespace Test2
                 new { botdetch = @"(.*)BotDetectCaptcha\.ashx" }
                 );
 
-               // làm seo
-               //routes.MapRoute(
-               //name: "BanCaPhe",
-               //url: "{controller}/{action}/{id}",
-               //defaults: new { controller = "Home", action = "Details", id = UrlParameter.Optional }
-               // );
-
 
                 routes.MapRoute(
                 name: "Default",

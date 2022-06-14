@@ -312,9 +312,6 @@ namespace Test2.Controllers
                 dh.MaKH = kh.MaKH;
                 dh.NgayLap = DateTime.Now;
                 var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
-                ////// lỗi ko xài đc cái chọn ngày giao nó sẽ mặc định chọn ngày hôm nay
-               /* dh.NgayGiao = DateTime.Today.AddDays(2); */// giao hàng sau 2 ngày
-                ///// quý đã thử tìm cách nhưng chưa thanh
                 dh.DiaChi = kh.DiaChi;
                 dh.Status = true;
                 dh.Status2 = true;

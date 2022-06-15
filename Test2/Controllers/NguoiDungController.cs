@@ -12,7 +12,6 @@ using System.Configuration;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using GoogleRecaptcha;
-
 namespace Test2.Controllers
 {
     public class NguoiDungController : Controller

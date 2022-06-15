@@ -30,8 +30,7 @@
   </div>            }
           </div>
       </div>
-      <div class="pro-pagination-style text-center mt-10">
-          Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+      <div class="pro-pagination-style text-center mt-10" style="padding-left:950px">
           <div>
               @Html.PagedListPager(Model, page => Url.Action("Blog", new { page = page }))
           </div>

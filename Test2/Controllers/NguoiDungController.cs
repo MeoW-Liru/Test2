@@ -387,5 +387,48 @@ namespace Test2.Controllers
             return View(donhang);
         }
 
+        public ActionResult ChitietSP(string id)
+        {
+            SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
+            ViewBag.MaSP = sp.MaSP;
+            if (sp == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+            return View(sp);
+        }
+        public ActionResult ChiTiet(int MaDH)
+        {
+            using (dbCoffeeDataContext db = new dbCoffeeDataContext())
+            {
+                List<KhachHang> khachhang = db.KhachHangs.ToList();
+                List<DonHang> donhang = db.DonHangs.ToList();
+                List<SanPham> sanpham = db.SanPhams.ToList();
+                List<ChiTietDonHang> ctdh = db.ChiTietDonHangs.ToList();
+                var main = from h in donhang
+                           join k in khachhang on h.MaKH equals k.MaKH
+                           where (h.MaDH == MaDH)
+                           select new ThongTinHD
+                           {
+                               donHang = h,
+                               khachhang = k
+                           };
+                var sub = from c in ctdh
+                          join s in sanpham on c.MaSP equals s.MaSP
+                          where (c.MaDH == MaDH)
+                          select new ThongTinHD
+                          {
+                              ctdh = c,
+                              SP = s,
+                              TongTien = Convert.ToDouble(c.ThanhTien * c.SoLuongSP)
+                          };
+                ViewBag.Main = main;
+                ViewBag.Sub = sub;
+                return View();
+            }
+
+        }
+
     }
 }

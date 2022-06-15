@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Test2.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Views/_Layout2.cshtml";
+}
+<div id="page-wrapper">
+    <h3>
+        QUẢN LÝ CHI TIẾT ĐƠN HÀNG
+    </h3>
+    @foreach (var m in ViewBag.Main)
+    {
+        <h3>Số Hóa Đơn: @m.donHang.MaDH</h3>
+        <h3>Tên Khách Hàng: @m.khachhang.HoVaTen</h3>
+    }
+    <table class="table" width="300px">
+        <tr>
+            <th>Số Thứ Tự</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Tổng tiền</th>
+        </tr>
+        @{
+            double tongtien = 0;
+            int i = 0;
+        }
+        @foreach (var item in ViewBag.Sub)
+        {
+            i++;
+            tongtien += (Convert.ToDouble(@item.ctdh.SoLuongSP) * Convert.ToDouble(@item.ctdh.ThanhTien));
+            <tr>
+                <td>@i</td>
+                <td>@item.SP.TenSP</td>
+                <td>@item.ctdh.SoLuongSP</td>
+                <td>@String.Format("{0:0,##0}", item.ctdh.ThanhTien) VNĐ</td>
+                <td>@String.Format("{0:0,##0}", item.TongTien) VNĐ</td>
+            </tr>
+
+        }
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Tổng Tiền:</th>
+            <th><text>@String.Format("{0:0,##0}", tongtien) VNĐ</text></th>
+        </tr>
+
+    </table>
+</div>

@@ -3,7 +3,7 @@
 @using System.Linq
 @model  PagedList.PagedList<SanPham>
 
-@{ ViewBag.Title = "KetQuaTimKiem";
+@{ ViewBag.Title = "Kết quả tìm kiếm";
                 Layout = "~/Views/_Layout.cshtml"; }
 
 <div class="main-wrapper">
@@ -23,13 +23,13 @@
                         </a>
                     </div>
                     <div class="product-content-wrap-2 text-center">
-                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})"> @caphe.TenSP</a></h3>
                         <div class="product-price-2">
                             <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
                         </div>
                     </div>
                     <div class="product-content-wrap-2 product-content-position text-center">
-                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                        <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})"> @caphe.TenSP</a></h3>
                         <div class="product-price-2">
                             <p><span>@String.Format("{0:0,0}", caphe.GiaTien)</span>đ</p>
                         </div>

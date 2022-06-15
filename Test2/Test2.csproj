@@ -752,6 +752,8 @@
     <Content Include="Views\NguoiDung\DonHangDangGiao.cshtml" />
     <Content Include="Views\NguoiDung\DonHangDaGiao.cshtml" />
     <Content Include="Views\NguoiDung\DonHangChuaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\ChitietSP.cshtml" />
+    <Content Include="Views\NguoiDung\ChiTiet.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

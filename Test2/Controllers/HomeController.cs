@@ -123,7 +123,7 @@ namespace Test2.Controllers
                 ViewBag.Thongbao = "KHÔNG TÌM THẤY SẢN PHẨM (sản phẩm thay thế)";
                 return View(data.SanPhams.OrderBy(n => n.TenSP).ToPagedList(pageNum, pageSize));
             }
-            ViewBag.Thongbao = "Đã Tìm THấy Sản Phẩm" + listKQTK.Count + "Kết Quả";
+            ViewBag.Thongbao = "Đã Tìm Thấy Sản Phẩm: \t" + listKQTK.Count + "\t Kết Quả";
             return View(listKQTK.OrderBy(n => n.TenSP).ToPagedList(pageNum, pageSize));
         }
 

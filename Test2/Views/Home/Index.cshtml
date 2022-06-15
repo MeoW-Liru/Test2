@@ -91,7 +91,7 @@
 <div class="product-area pt-115 pb-110">
     <div class="container">
         <div class="section-title-2 text-center mb-45">
-            <h2><span>New</span> Arrivals</h2>
+            <h2><span>Hàng</span> Mới</h2>
             <p>Các loại cà phê mới nhập của quán</p>
         </div>
         @Html.Action("CafeHot", "Home")
@@ -196,7 +196,7 @@
         <div class="blog-area pt-115">
             <div class="container">
                 <div class="section-title-2 text-center mb-45">
-                    <h2><span>Xanh</span> & Tra</h2>
+                    <h2><span>Trà</span> & Xanh</h2>
                     <p>Các dòng sản phẩm trà xanh hiện tại đang bán</p>
                 </div>
                 @Html.Action("Tra", "Home")
@@ -211,8 +211,7 @@
                 @Html.Action("BlogKT", "Home")
             </div>
         </div>
-        <div class="pro-pagination-style text-center mt-10">
-            Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+        <div class="pro-pagination-style text-center mt-10" style="padding-left:570px">
             <div>
                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
             </div>

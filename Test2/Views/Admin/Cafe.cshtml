@@ -20,18 +20,19 @@
 }
 <div id="page-wrapper">
     <h3>
-        QUẢN LÝ THÔNG TIN SẢN PHẨM
+        <b>QUẢN LÝ THÔNG TIN SẢN PHẨM</b>
     </h3>
-    <p>
-        @Html.ActionLink("Tạo sản phẩm", "ThemSP")
-    </p>
+    <b>
+        @Html.ActionLink("Tạo sản phẩm", "ThemSP", new { id = 1 }, new { @class = "btn btn-success" })
+    </b></br>
+
     <table class="table">
         <tr>
             <th style="width:200px">
-               Tên sản phẩm
+                Tên sản phẩm
             </th>
             <th style="width:200px">
-               Mô tả
+                Mô tả
             </th>
             <th style="width:200px">
                 Giá tiền
@@ -39,7 +40,7 @@
             <th style="width:200px">
                 Ngày đăng sản phẩm
             </th>
-            <th style="width:200px" >
+            <th style="width:200px">
                 trọng lượng
             </th>
             <th style="width:200px">
@@ -48,7 +49,7 @@
             <th style="width:200px">
                 Ngày sản xuất
             </th>
-            <th style="width:200px" >
+            <th style="width:200px">
                 Mã loại
             </th>
             <th style="width:200px">
@@ -57,7 +58,7 @@
             <th style="width:200px">
                 Hình
             </th>
-            <th style="width:200px" >
+            <th style="width:200px">
                 Trạng thái
             </th>
             <th style="width:300px">Thao tác</th>
@@ -65,44 +66,51 @@
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenSP)
-        </td>
-        <td>
-            @Truncate(item.MoTa, 100)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiaTien) VNĐ
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrongLuong) Gram
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HSD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NSX)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
-        </td>
-        <td>
-            <img src="@Url.Content("~/images/CafeProduct/"+ item.HinhAnh)" width="150" />
-        </td>
-        @if (item.Status == true){<td>Còn hàng</td> }else{<td>Hết hàng</td>}
-        <td>
-            @Html.ActionLink("Sửa", "SuaSP", new { id = item.MaSP }) |
-            @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }) |
-            @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP })
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    @Truncate(item.MoTa, 100)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaTien) VNĐ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayDang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrongLuong) Gram
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HSD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NSX)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NhaCungCap.TenNCC)
+                </td>
+                <td>
+                    <img src="@Url.Content("~/images/CafeProduct/" + item.HinhAnh)" width="150" />
+                </td>
+                @if (item.Status == true)
+                {
+                    <td>Còn hàng</td>
+ }
+                else
+                {
+                    <td style="color:red">Hết hàng</td>
+}
+                <td>
+                    @Html.ActionLink("Chỉnh Sửa", "SuaSP", new { id = item.MaSP }, new { @class = "btn btn-warning", style = "width:90px" })
+                    @Html.ActionLink("Chi Tiết", "ChitietSP", new { id = item.MaSP }, new { @class = "btn btn-info", style = "width:90px" })
+                    @Html.ActionLink("Xóa", "XoaSP", new { id = item.MaSP }, new { @class = "btn btn-danger", style = "width:90px" })
+                </td>
+            </tr>
         }
 
     </table>

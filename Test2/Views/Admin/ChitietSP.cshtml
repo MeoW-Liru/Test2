@@ -1,7 +1,7 @@
 ﻿@model Test2.Models.SanPham
 
 @{
-    ViewBag.Title = "ChitietSP";
+    ViewBag.Title = "Chi tiết sản phẩm";
     Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
@@ -85,7 +85,7 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Sửa thông tin", "Edit", new { id = Model.MaSP }) |
+        @Html.ActionLink("Sửa thông tin", "SuaSP", new { id = Model.MaSP }) |
         @Html.ActionLink("Về lại danh sách", "Cafe")
     </p>
 </div>

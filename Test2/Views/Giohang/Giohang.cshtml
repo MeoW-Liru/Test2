@@ -40,8 +40,8 @@
                                         </td>
                                         <td class="product-subtotal">@String.Format("{0:0,0}", item.dThanhtien)</td>
                                         <td>
-                                            @Html.ActionLink("Xóa", "XoaGiohang", new { @sMaSP = item.sMaSP })
-                                            <input type="submit" class = "btn btn-default" value="Cập Nhật">
+                                            @Html.ActionLink("Xóa", "XoaGiohang", new { @sMaSP = item.sMaSP }, new {@class = "btn btn-danger",style = "width:100px; height: 40px" })
+                                            <input type="submit" class = "btn btn-warning" value="Cập Nhật" style="width:100px; height: 40px">
                                         </td>
                                     }
                                 </tr>

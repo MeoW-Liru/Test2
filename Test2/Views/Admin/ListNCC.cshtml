@@ -1,0 +1,66 @@
+﻿@using Test2.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<Test2.Models.NhaCungCap>
+
+@{
+    ViewBag.Title = "Danh sách hãng";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<div id="page-wrapper">
+    <h2>Các nhà cung cấp</h2>
+
+    <p>
+        @Html.ActionLink("Thêm", "Create")
+    </p>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="table-responsive table-bordered">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tên Công Ty</th>
+                                <th>Địa Chỉ</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TenNCC)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DiaChi)
+                                    </td>
+                                    @if (item.Status == true)
+                                    {
+                                        <td>Còn Kinh Doanh</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Hết Kinh Doanh</td>
+                                    }
+                                    <td>
+                                        @Html.ActionLink("Sửa", "XoaLoaiSP", new { id = item.MaNCC })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Xóa", "XoaNCC", new { id = item.MaNCC })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pro-pagination-style">
+                    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+                    <ul>
+                        @Html.PagedListPager(Model, page => Url.Action("ListLoaiSP", new { page = page }))
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

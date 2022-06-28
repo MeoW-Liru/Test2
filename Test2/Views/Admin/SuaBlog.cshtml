@@ -1,24 +1,24 @@
 ﻿@model Test2.Models.SuKien
 
 @{
-    ViewBag.Title = "SuaBlog";
+    ViewBag.Title = "Sửa Blog";
     Layout = "~/Views/_LayoutAdmin.cshtml";
 }
 
 <div id="page-wrapper">
-    <h2>SuaBlog</h2>
+    <h2>Sửa Thông tin Blog</h2>
 
     @using (Html.BeginForm("SuaBlog", "Admin",FormMethod.Post, new { @enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>SuKien</h4>
+    <div class="form-horizontal">
+    <h4>Chỉnh sửa blog</h4>
     <hr />
     <input type="text" name="Mã Sự kiện" value="@Model.MaSK" hidden />
 
     <div class="form-group">
-        @Html.LabelFor(model => model.TieuDe, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="control-label col-md-2"><strong>Sửa tiêu đề</strong></div>
         <div class="col-md-10">
             @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
@@ -26,14 +26,14 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="control-label col-md-2"><strong>Mô tả</strong></div>
         <div class="col-md-10">
             <textarea name="MoTa" rows="5">@Model.MoTa</textarea>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.NgayDang, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="control-label col-md-2"><strong>Ngày đăng </strong></div>
         <div class="col-md-10">
             <input type="date" name="NgayDang" /> Ngày hiện tại chọn: @Model.NgayDang
         </div>
@@ -41,14 +41,14 @@
 
 
     <div class="form-group">
-        @Html.LabelFor(model => model.MoTaChiTiet, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="control-label col-md-2"><strong>Mô tả chi tiết</strong></div>
         <div class="col-md-10">
             <textarea name="MoTaChiTiet" rows="5">@Model.MoTaChiTiet</textarea>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.MoTaThem, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="control-label col-md-2"><strong>Những mô tả thêm</strong></div>
         <div class="col-md-10">
             <textarea name="MoTaThem" rows="5">@Model.MoTaThem</textarea>
         </div>

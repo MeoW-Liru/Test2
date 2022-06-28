@@ -27,13 +27,13 @@
                                             <div class="product-content-wrap-2 text-center">
                                                 <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
                                                 <div class="product-price-2">
-                                                    <span>@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
+                                                    <span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-position text-center">
                                                 <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
-                                                <div class="product-price-2">
-                                                    <span>@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
+                                                <div class="product-price-2" >
+                                                    <span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span>
                                                 </div>
                                                 <div class="pro-add-to-cart">
                                                     <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
@@ -47,8 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pro-pagination-style text-center mt-10">
-                        Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+                    <div class="pro-pagination-style text-center mt-10" style="padding-left:370px">
                         <div>
                            @Html.PagedListPager(Model,page=>Url.Action("SanPham",new { page = page }))
                         </div>
@@ -59,17 +58,18 @@
                 <div class="sidebar-wrapper sidebar-wrapper-mrg-right">
                     <div class="sidebar-widget mb-40">
                         <h4 class="sidebar-widget-title">Tìm kiếm </h4>
-                        <div class="sidebar-search">
 
-                            @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post)) 
-                                {
+                        @using (Html.BeginForm("KetQuaTimKiem", "Home", FormMethod.Post))
+                        {
+                            <div class="sidebar-search">
                                 <form class="sidebar-search-form" action="KetQuaTimKiem">
                                     <input name="txtTimKiem" type="text" placeholder="Nhập từ khóa...">
-                                    <button class="button-search"><i class="icon-magnifier"></i></button>
                                 </form>
-                                 }
-                        </div>
+                            </div>
+                        }
                     </div>
+                </div>
+
                     <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">
                         <h4 class="sidebar-widget-title">Sản phẩm </h4>
                         <div class="shop-catigory">
@@ -82,5 +82,3 @@
             </div>
         </div>
     </div>
-</div>
-

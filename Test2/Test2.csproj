@@ -58,6 +58,15 @@
     <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
+    <Reference Include="GoogleRecaptcha, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleRecaptcha.1.2.1\lib\GoogleRecaptcha.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleRecaptchaMvc, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleRecaptchaMvc.1.0.1\lib\GoogleRecaptchaMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=8.0.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.8.0.5.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Connections.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Connections.Abstractions.7.0.0-preview.4.22251.1\lib\net462\Microsoft.AspNetCore.Connections.Abstractions.dll</HintPath>
     </Reference>
@@ -84,7 +93,7 @@
       <HintPath>..\packages\Microsoft.Extensions.Primitives.7.0.0-preview.4.22229.4\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -92,6 +101,8 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="Recaptcha.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RecaptchaMVC.1.0.1.0\lib\net45\Recaptcha.MVC.dll</HintPath>
     <Reference Include="SendGrid, Version=9.28.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\SendGrid.9.28.0\lib\net452\SendGrid.dll</HintPath>
     </Reference>
@@ -102,6 +113,9 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
       <Private>True</Private>
@@ -161,6 +175,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xamarin.Essentials.1.7.3\lib\netstandard2.0\Xamarin.Essentials.dll</HintPath>
@@ -191,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\DonHang.html" />
+    <Content Include="Content\MatKhau.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.css" />
@@ -269,9 +287,23 @@
     <Content Include="images\banner\banner-8.jpg" />
     <Content Include="images\banner\banner-9.jpg" />
     <Content Include="images\banner\BannerTra.jpg" />
+    <Content Include="images\banner\giaoHang.jpg" />
     <Content Include="images\bg\bg-1.jpg" />
     <Content Include="images\bg\bg-2.jpg" />
     <Content Include="images\bg\bg-3.jpg" />
+    <Content Include="images\BlogPicture\42425d5f373553a3f986734d1f575bf7.jpg" />
+    <Content Include="images\BlogPicture\71GHq5UVwWL._SL1500_.jpg" />
+    <Content Include="images\BlogPicture\CA-PHE-BOHEMIAN.png" />
+    <Content Include="images\BlogPicture\CA-PHE-Scandinavian.png" />
+    <Content Include="images\BlogPicture\CA-PHE-VINTAGE.jpg" />
+    <Content Include="images\BlogPicture\cafekho5_uzym.jpg" />
+    <Content Include="images\BlogPicture\exsss.jpg" />
+    <Content Include="images\BlogPicture\khoa.jpg" />
+    <Content Include="images\BlogPicture\may-pha-ca-phe-coffee-machine-melitta-caffeo-passione-silver-1-zoom.jpg" />
+    <Content Include="images\BlogPicture\QUAY-PHA-CHE.jpg" />
+    <Content Include="images\BlogPicture\stock-photo-coffee-pan-in-fireplace-68271623-300x236.jpg" />
+    <Content Include="images\BlogPicture\THE-ART-COFFEE-HOUSE-1.jpg" />
+    <Content Include="images\BlogPicture\VeQueCafe.jpg" />
     <Content Include="images\brand-logo\brand-logo-1.png" />
     <Content Include="images\brand-logo\brand-logo-10.png" />
     <Content Include="images\brand-logo\brand-logo-11.png" />
@@ -295,6 +327,9 @@
     <Content Include="images\CafeLayout\Logo_CafeTeam_3_70.png" />
     <Content Include="images\CafeProduct\Bean270x324.jpg" />
     <Content Include="images\CafeProduct\CafeCherry290x230.png" />
+    <Content Include="images\CafeProduct\tra-xanh-lai-wao-500gr.jpg" />
+    <Content Include="images\CafeProduct\TraDen.jpg" />
+    <Content Include="images\CafeProduct\TraXanh.jpg" />
     <Content Include="images\CafeProduct\[270x340] ca phe 01.jpg" />
     <Content Include="images\CafeProduct\[270x340] ca phe 02.jpg" />
     <Content Include="images\CafeProduct\[270x340] ca phe 03.jpg" />
@@ -359,11 +394,14 @@
     <Content Include="js\vendor\vendor.min.js" />
     <Content Include="mail-php\mail.php" />
     <Content Include="Web.config" />
+    <Content Include="_nuget\nuget.exe" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="common\common.cs" />
     <Compile Include="common\MailHelper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CaptchaResponse.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GiohangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -379,6 +417,8 @@
     <Compile Include="Models\Don.cs" />
     <Compile Include="Models\Giohang.cs" />
     <Compile Include="Models\ThongTinHD.cs" />
+    <Compile Include="Other\MoMoSecurity.cs" />
+    <Compile Include="Other\PaymentRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -516,9 +556,9 @@
     <Content Include="Views\Admin\XoaSP.cshtml" />
     <Content Include="Views\Admin\ChiTiet.cshtml" />
     <Content Include="Views\Admin\DonHang.cshtml" />
-    <Content Include="Views\Admin\SuaSP.cshtml" />
     <Content Include="Views\Home\KetQuaTimKiem.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -541,9 +581,39 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Tra.cshtml" />
     <Content Include="Views\NguoiDung\ChinhSuaTK.cshtml" />
-
+    <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
+    <Content Include="Views\NguoiDung\QuenMatKhau.cshtml" />
+    <Content Include="Views\Admin\SuaSP.cshtml" />
+    <Content Include="Views\Home\BinhLuan.cshtml" />
+    <Content Include="Views\Admin\listDonhang.cshtml" />
+    <Content Include="Views\Admin\XoaKh.cshtml" />
+    <Content Include="Views\Admin\DoanhThu.cshtml" />
+    <Content Include="Views\Admin\TimHoaDon.cshtml" />
+    <Content Include="Views\NguoiDung\LichSuMua.cshtml" />
+    <Content Include="Views\NguoiDung\LSFix.cshtml" />
+    <Content Include="Views\Admin\ChinhSuaHoaDon.cshtml" />
+    <Content Include="Views\Admin\fixDonHang.cshtml" />
+    <Content Include="Views\Admin\FixKhachHang.cshtml" />
+    <Content Include="Views\Admin\ListNCC.cshtml" />
+    <Content Include="Views\Admin\ThemNCC.cshtml" />
+    <Content Include="Views\Admin\XoaNCC.cshtml" />
+    <Content Include="Views\Admin\DonHangDTT.cshtml" />
+    <Content Include="Views\Admin\DonHangCTT.cshtml" />
+    <Content Include="Views\Admin\DonHangBiHuy.cshtml" />
+    <Content Include="Views\Admin\DonHangTonTai.cshtml" />
+    <Content Include="Views\Admin\DonHangDaGiao.cshtml" />
+    <Content Include="Views\Admin\DonHangDangGiao.cshtml" />
+    <Content Include="Views\Admin\DonHangChuaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDTT.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangCTT.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangTonTai.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangBiHuy.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDangGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangDaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\DonHangChuaGiao.cshtml" />
+    <Content Include="Views\NguoiDung\ChitietSP.cshtml" />
+    <Content Include="Views\NguoiDung\ChiTiet.cshtml" />
     <Content Include="Views\Home\Tra.cshtml" />
-
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -553,8 +623,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\BlogPicture\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -591,9 +659,11 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

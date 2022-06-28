@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Test2.Models;
 using PagedList;
 using PagedList.Mvc;
-
+using static ClosedXML.Excel.XLPredefinedFormat;
 
 namespace Test2.Controllers
 {
@@ -69,15 +69,44 @@ namespace Test2.Controllers
             var caphe = layCaPhe(8);
             return View(caphe.ToPagedList(pageNum, pageSize));
         }
-
+       
         public ActionResult Details(string id)
         {
+            Session["masp"] = id;
             var sanpham = from sp in data.SanPhams
                           where sp.MaSP == id
                           select sp;
+
             return View(sanpham.Single());
         }
+        // bình luận ở đây///////////////////////////////////////////////////////////////////////////////////////
+        [HttpGet]
+        public ActionResult BinhLuan(string id)
+        {
+            var binhluan = from bl in data.BinhLuans
+                           where bl.MaSP == id
+                           select bl;
+            return View(binhluan.ToList());
+        }
 
+        [HttpPost]
+        public ActionResult BinhLuan(FormCollection collection, BinhLuan bl, String id)
+        {
+            var TenNguoiBL = collection["ten"];
+            var ngaybl = System.DateTime.Now;
+            var noidung = collection["noidung"];
+            var masp = collection["masp"];
+
+            bl.MaSP = masp;
+            bl.NgayLap = ngaybl;
+            bl.TenNguoiBL = TenNguoiBL;
+            bl.NoiDung = noidung;
+            data.BinhLuans.InsertOnSubmit(bl);
+            data.SubmitChanges();
+            return this.BinhLuan(id);
+
+        }
+        // end bình luận ./////////////////////////////////////
 
         [HttpPost]
         // GET: SearchSanPham
@@ -94,7 +123,7 @@ namespace Test2.Controllers
                 ViewBag.Thongbao = "KHÔNG TÌM THẤY SẢN PHẨM (sản phẩm thay thế)";
                 return View(data.SanPhams.OrderBy(n => n.TenSP).ToPagedList(pageNum, pageSize));
             }
-            ViewBag.Thongbao = "Đã Tìm THấy Sản Phẩm" + listKQTK.Count + "Kết Quả";
+            ViewBag.Thongbao = "Đã Tìm Thấy Sản Phẩm: \t" + listKQTK.Count + "\t Kết Quả";
             return View(listKQTK.OrderBy(n => n.TenSP).ToPagedList(pageNum, pageSize));
         }
 
@@ -153,5 +182,6 @@ namespace Test2.Controllers
             var tra = from sp in data.SanPhams where sp.MaLoaiSP == "SP7" select sp;
             return View(tra.ToPagedList(pageNum, pageSize));
         }
+        
     }
 }

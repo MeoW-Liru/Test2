@@ -1,3 +1,4 @@
+﻿using MoMo;
 ﻿using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
+using Newtonsoft.Json.Linq;
 //using Xamarin.Essentials;
 using Test2.common;
 
@@ -55,7 +57,27 @@ namespace Test2.Controllers
             return iTongSoLuong;
         }
 
-        private decimal TongTien()
+        //private decimal TongTienhang()
+        //{
+        //    decimal iTongTien = 0;
+        //    List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
+        //    if (lstGiohang != null)
+        //    {
+        //        iTongTien = lstGiohang.Sum(n => n.dThanhtien);
+
+        //    }
+        //    return iTongTien;
+        //}
+        // Tien ship ............................
+
+        //private decimal TienShip()
+        //{
+        //    decimal TienShip =25000;
+           
+        //    return TienShip;
+        //}
+
+        private decimal TongTienThu()
         {
             decimal iTongTien = 0;
             List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
@@ -64,9 +86,27 @@ namespace Test2.Controllers
                 iTongTien = lstGiohang.Sum(n => n.dThanhtien);
 
             }
-            return iTongTien;
+            return iTongTien ;
         }
- 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        private decimal TongTienDola()
+        {
+            decimal iTongTien = 0;
+            decimal dola = 23300;
+            List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
+            if (lstGiohang != null)
+            {
+                iTongTien = lstGiohang.Sum(n => n.dThanhtien);
+
+            }
+            return iTongTien/dola;
+        }
+
         public ActionResult Giohang()
         {
             List<Giohang> lstGiohang = Laygiohang();
@@ -76,7 +116,7 @@ namespace Test2.Controllers
 
             }
             ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtien = TongTien();
+            ViewBag.Tongtien = TongTienThu();
             return View(lstGiohang);
         }
 
@@ -114,6 +154,17 @@ namespace Test2.Controllers
             lstGiohang.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public ActionResult DatHang()
         {
@@ -127,22 +178,30 @@ namespace Test2.Controllers
             }
 
             List<Giohang> lstGiohang = Laygiohang();
+           
+            ViewBag.TongtienThu = TongTienThu();
             ViewBag.Tongsoluong = TongSoLuong();
-            ViewBag.Tongtien = TongTien();
+            // Select tổng hóa đơn chưa thanh toán.
 
             return View(lstGiohang);
         }
 
         public ActionResult DatHang(FormCollection collection)
         {
+           // if( n<5){ cụm dưới} n: là đơn hàng giao tại nhà chưa thanh toán 
+           // else{ Thông báo bạn chỉ  dc đặt thanh toán trực tuyến  }; // đây là nút đặt hàng giao sau 
             DonHang dh = new DonHang();
             KhachHang kh = (KhachHang)Session["UserName"];
             List<Giohang> gh = Laygiohang();
             dh.MaKH = kh.MaKH;
             dh.NgayLap = DateTime.Now;
-            var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
-            dh.NgayGiao = DateTime.Parse(ngaygiao);
-            dh.DiaChi = kh.DiaChi;
+          //  var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
+            dh.NgayGiao = DateTime.Now.AddDays(1);
+            dh.DiaChi = collection["diachi"];
+            dh.GhiChu = collection["cuthe"];
+            dh.Status = true;
+            dh.Status2 = true;
+            dh.ThanhTien = TongTienThu();
             data.DonHangs.InsertOnSubmit(dh);
             data.SubmitChanges();
             foreach(var item in gh)
@@ -158,22 +217,18 @@ namespace Test2.Controllers
             data.SubmitChanges();
 
 
-            // viet mail o sday //////////////////////////////////////////
-
             String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
-            content = content.Replace("{{CustomerName}}",kh.HoVaTen);
+            content = content.Replace("{{CustomerName}}", kh.HoVaTen);
             content = content.Replace("{{Phone}}", kh.SDT);
             content = content.Replace("{{Email}}", kh.Email);
-            content = content.Replace("{{Address}}", kh.DiaChi);
+            content = content.Replace("{{Address}}", dh.DiaChi);
+            content = content.Replace("{{cuthe}}", dh.GhiChu);
             content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
-            content = content.Replace("{{NgayGiao}}", dh.NgayGiao.ToString());
-            content = content.Replace("{{Total}}", TongTien().ToString());
+            content = content.Replace("{{Total}}", TongTienThu().ToString());
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ Tiệm cafe của Anh Khoa và Quý", content);
-            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ Tiệm cafe của Anh Khoa và Quý", content);
-            //////////////////////////////////////////////////////
-
+            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");
         }
@@ -181,6 +236,152 @@ namespace Test2.Controllers
         public ActionResult XacNhan()
         {
             return View();
+        }
+
+
+        public ActionResult ThanhToanOnline()
+        {
+            List<Giohang> gioHang = Session["GioHang"] as List<Giohang>;
+            string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            string partnerCode = "MOMOOJOI20210710";
+            string accessKey = "iPXneGmrJH0G8FOP";
+            string serectKey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string orderInfo = "Đơn hàng của bạn";
+            string returnUrl = "https://localhost:44332/Giohang/ReturnUrl";
+            string notifyurl = "http://ba1adf48beba.ngrok.io/Giohang/NotifyUrl";
+
+            string amount = gioHang.Sum(n => n.dThanhtien).ToString();
+            string orderid = DateTime.Now.Ticks.ToString();
+            string requestId = DateTime.Now.Ticks.ToString();
+            string extraData = "";
+
+            string rawHash =
+                "partnerCode=" +
+                partnerCode + "&accessKey=" +
+                accessKey + "&requestId=" +
+                requestId + "&amount=" +
+                amount + "&orderId=" +
+                orderid + "&orderInfo=" +
+                orderInfo + "&returnUrl=" +
+                returnUrl + "&notifyUrl=" +
+                notifyurl + "&extraData=" +
+                extraData;
+
+            MoMoSecurity crypto = new MoMoSecurity();
+            string signature = crypto.signSHA256(rawHash, serectKey);
+            JObject message = new JObject
+            {
+                { "partnerCode", partnerCode },
+                { "accessKey", accessKey },
+                { "requestId", requestId },
+                { "amount", amount },
+                { "orderId", orderid },
+                { "orderInfo", orderInfo },
+                { "returnUrl", returnUrl },
+                { "notifyUrl", notifyurl },
+                { "extraData", extraData },
+                { "requestType", "captureMoMoWallet" },
+                { "signature", signature }
+            };
+            string responseFromMomo = PaymentRequest.sendPaymentRequest(endpoint, message.ToString());
+
+            JObject jmessage = JObject.Parse(responseFromMomo);
+
+            return Redirect(jmessage.GetValue("payUrl").ToString());
+        }
+
+
+        public ActionResult ReturnUrl(FormCollection collection)
+        {
+            string param = Request.QueryString.ToString().Substring(0, Request.QueryString.ToString().IndexOf("signature") - 1);
+            param = Server.UrlDecode(param);
+            MoMoSecurity crypto = new MoMoSecurity();
+            string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
+            string signature = crypto.signSHA256(param, serectkey);
+            if (signature != Request["signature"].ToString())
+            {
+                ViewBag.message = "Thông tin Request không hợp lệ";
+                return View();
+            }
+            if (!Request.QueryString["errorCode"].Equals("0"))
+            {
+                ViewBag.message = "Thanh toán thất bại";
+            }
+            else
+            {
+                DonHang dh = new DonHang();
+                KhachHang kh = (KhachHang)Session["UserName"];
+                List<Giohang> gh = Laygiohang();
+                dh.MaKH = kh.MaKH;
+                dh.NgayLap = DateTime.Now;
+                var ngaygiao = string.Format("{0:MM/dd/yyyy}", collection["NgayGiao"]);
+                dh.DiaChi = kh.DiaChi;
+                dh.Status = true;
+                dh.Status2 = true;
+                dh.ThanhTien = TongTienThu();
+                data.DonHangs.InsertOnSubmit(dh);
+                data.SubmitChanges();
+                foreach (var item in gh)
+                {
+                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ctdh.MaDH = dh.MaDH;
+                    ctdh.MaSP = item.sMaSP;
+                    ctdh.SoLuongSP = item.iSoluong;
+                    ctdh.ThanhTien = (decimal)item.dThanhtien;
+                    data.ChiTietDonHangs.InsertOnSubmit(ctdh);
+                }
+                data.SubmitChanges();
+                Session["Giohang"] = null;
+                return RedirectToAction("XacNhan", "Giohang");
+
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
+                content = content.Replace("{{CustomerName}}", kh.HoVaTen);
+                content = content.Replace("{{Phone}}", kh.SDT);
+                content = content.Replace("{{Email}}", kh.Email);
+                content = content.Replace("{{Address}}", kh.DiaChi);
+                content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
+                content = content.Replace("{{Total}}", TongTienThu().ToString());
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+                new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+
+            }
+            return View();
+        }
+        [HttpPost]
+        public JsonResult NotifyUrl()
+        {
+            string param = "";
+            param =
+                "partner_code=" + Request["partner_code"] +
+                "&access_key=" + Request["access_key"] +
+                "&amount=" + Request["amount"] +
+                "&order_id=" + Request["order_id"] +
+                "&order_info=" + Request["order_info"] +
+                "&order_type=" + Request["order_type"] +
+                "&transaction_id=" + Request["transaction_id"] +
+                "&message=" + Request["message"] +
+                "&response_time=" + Request["response_time"] +
+                "&status_code=" + Request["status_code"];
+            param = Server.UrlDecode(param);
+            MoMoSecurity crypto = new MoMoSecurity();
+            string serectkey = ConfigurationManager.AppSettings["serectkey"].ToString();
+            string signature = crypto.signSHA256(param, serectkey);
+            if (signature != Request["signature"].ToString())
+            {
+
+            }
+            string status_code = Request["status_code"].ToString();
+            if ((status_code != "0"))
+            {
+
+            }
+            else
+            {
+
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
         }
 
     }

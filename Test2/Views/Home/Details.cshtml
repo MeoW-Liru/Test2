@@ -1,10 +1,13 @@
-﻿@{ ViewBag.Title = "Chi tiết";
-                Layout = "~/Views/_Layout2.cshtml"; }
+﻿
+
+@{ ViewBag.Title = "Chi tiết";
+    Layout = "~/Views/_Layout2.cshtml"; }
 
 
 <div class="product-details-area pt-120 pb-115">
     <div class="container">
         <div class="row">
+            
             <div class="col-lg-6 col-md-6">
                 <div class="product-details-tab">
                     <div class="pro-dec-big-img-slider">
@@ -22,22 +25,9 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product-details-content pro-details-content-mrg">
                     <h2>@Model.TenSP</h2>
-                    <div class="product-ratting-review-wrap">
-                        <div class="product-ratting-digit-wrap">
-                            <div class="product-ratting">
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                                <i class="icon_star"></i>
-                            </div>
-                            <div class="product-digit">
-                                <span>5.0</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="pro-details-price">
-                        <span class="new-price"> Giá sản phẩm : @String.Format("{0:0,0}", @Model.GiaTien) đ</span>
+                        <span class="new-price"> Giá : @String.Format("{0:0,0}", @Model.GiaTien) đ</span>
                     </div>
 
                     <div class="product-details-meta">
@@ -48,7 +38,14 @@
                     </div>
                     <div class="pro-details-action-wrap">
                         <div class="pro-details-add-to-cart">
-                            <a title="Thêm Vào Giỏ Hàng" href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = @Model.MaSP , @strURL=Request.Url.ToString() })">Thêm Vào Giỏ Hàng </a>
+                            @if (@Model.Status == true)
+                            {
+                                <a title="Thêm Vào Giỏ Hàng" href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = @Model.MaSP , @strURL=Request.Url.ToString() })" >Thêm Vào Giỏ Hàng </a>
+                            }
+                            else
+                            {
+                                <a title="Thêm Vào Giỏ Hàng" href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = @Model.MaSP , @strURL=Request.Url.ToString() })" style="pointer-events: none">Hết hàng </a>
+                            }
                         </div>
                     </div>
                     </br>
@@ -107,7 +104,11 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+
+
     </div>
 </div>
+@Html.Action("BinhLuan", "Home")

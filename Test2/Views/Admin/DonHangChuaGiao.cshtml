@@ -1,0 +1,192 @@
+﻿@model IEnumerable<Test2.Models.DonHang>
+
+
+
+@{ ViewBag.Title = "Đơn hàng chưa giao";
+    Layout = "~/Views/_LayoutAdmin.cshtml"; }
+
+
+<div id="page-wrapper">
+    <h3>
+        THÔNG TIN HÓA ĐƠN
+    </h3>
+    <table>
+        <tr>
+            <th style="padding: 5px">
+                <p>
+                    @using (Html.BeginForm("Export", "Admin", FormMethod.Post))
+                    {
+                        <input type="submit" value="Xuất Excel" class="btn btn-success" />}
+
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đã thanh toán", "DonHangDTT", new { }, new { @class = "btn btn-info" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Chưa thanh toán", "DonHangCTT", new { }, new { @class = "btn btn-danger" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng tồn tại", "DonHangTonTai", new { }, new { @class = "btn btn-info" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng bị hủy", "DonHangBiHuy", new { }, new { @class = "btn btn-danger" })
+                </p>
+            </th>
+
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng đang giao", "DonHangDangGiao", new { }, new { @class = "btn btn-warning" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng đã giao", "DonHangDaGiao", new { }, new { @class = "btn btn-info" })
+                </p>
+            </th>
+            <th style="padding-top: 9px; padding-left: 5px">
+                <p>
+                    @Html.ActionLink("Đơn hàng chưa giao", "DonHangChuaGiao", new { }, new { @class = "btn btn-danger" })
+                </p>
+            </th>
+        </tr>
+    </table>
+    <div class="col-lg-12">
+
+
+        <div class="mobile-search mobile-header-padding-border-1">
+            @using (Html.BeginForm("TimHoaDon", "Admin", FormMethod.Post))
+            {
+                <form class="search-form" action="TimHoaDon">
+                    <input name="txtTimKiem" type="text" placeholder="Tìm kiếm hóa đơn…">
+                    <button class="button-search"><i class="fa fa-search"></i></button>
+                </form>
+            }
+
+        </div>
+        <table class="table" width="300px">
+            <tr>
+            <tr>
+                <th style="width:300px">
+                    Mã Đơn Hàng
+                </th>
+                <th style="width:300px">
+                    Mã Khách Hàng
+                </th>
+                <th style="width:300px">
+                    Tên Khách Hàng
+                </th>
+
+                <th style="width:300px">
+                    Ngày Lập
+                </th>
+                <th style="width:300px">
+                    Ngày Giao
+                </th>
+                <th style="width:300px">
+                    Địa Chỉ
+                </th>
+                <th style="width:300px">
+                    Ghi Chú
+                </th>
+                <th style="width:300px">
+                    Thanh toán
+                </th>
+                <th style="width:300px">
+                    Trạng thái
+                </th>
+                <th style="width:300px">
+                    Giao hàng
+                </th>
+                <th style="width:300px">
+                    Chỉnh sửa đơn hàng
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("ChiTiet","Admin", new {MaDH = item.MaDH})">
+                            @Html.DisplayFor(modelItem => item.MaDH)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaKH)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KhachHang.HoVaTen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayLap)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayGiao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaChi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GhiChu)
+                    </td>
+
+                    @if (item.Status == true)
+                    {
+                        <td>Đã thanh toán</td>
+                    }
+                    else
+                    {
+                        <td style="color: red">Chưa thanh toán</td>
+                    }
+
+
+                    @if (item.Status2 == true)
+                    {
+                        <td>Tồn tại</td>
+                    }
+                    else
+                    {
+                        <td style="color: red">Đã bị hủy</td>
+                    }
+                    @if (item.giaohang == "DGH")
+                    {
+                        <td style="color: green"> Đã giao hàng</td>
+                    }
+                    @if (item.giaohang == "CGH")
+                    {
+                        <td style="color: red"> Chưa giao hàng</td>
+                    }
+                    @if (item.giaohang == "DVC")
+                    {
+                        <td style="color: blue"> Đang giao hàng</td>
+                    }
+                    @if (item.giaohang == null)
+                    {
+                        <td></td>
+                    }
+
+
+                    <td>
+                        @if (item.giaohang == "DGH")
+                        {
+                            <a> Đơn hàng đã được giao </a>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Chỉnh Đơn Hàng", "fixDonHang", new { id = item.MaDH }, new { @class = "btn btn-primary" })
+                        }
+
+                    </td>
+                </tr>
+
+            }
+        </table>
+    </div>
+</div>

@@ -29,25 +29,20 @@
                                         @Html.AntiForgeryToken()
                                         <input name="TenDN" placeholder="Tên đăng nhập" type="text" required>
                                         <input name="Password" placeholder="Mật khẩu" type="password" required>
-
                                         @*<div class="g-recaptcha" data-sitekey="@_googlesitekey"></div>*@
-
                                         @Html.RecaptchaV2("6LdnoyogAAAAAPJdBFefXvZ6SvN_6fl2X5Iar5GL")
-
                                         @*@Html.RecaptchaV2("6LfHRGQgAAAAAEBn8VbAX35ZfMbzxqE-UR5rnctO")*@
                                         <div class="button-box">
                                             <button type="submit">Đăng nhập</button>
                                         </div>
-
-
+                                        <div class="button-box">
+                                            <button type="submit">Quên mật khẩu</button>
+                                        </div>
                                     }
                                 </div>
-
                                 <div class="login-register-wrapper">
                                     <a href="@Url.Action("QuenMatKhau","NguoiDung")"> Bạn Quên Mật Khẩu ?</a>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>

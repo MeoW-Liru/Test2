@@ -5,15 +5,12 @@
     Layout = "~/Views/_Layout2.cshtml";
 }
 <div class="login-register-area pt-115 pb-120">
-
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-12 ml-auto mr-auto">
                 <div class="login-register-wrapper">
                     <div class="login-register-tab-list ">
-
                         <h2> Chỉnh sửa thông tin tài khoản </h2>
-
                     </div>
                     <div id="lg2" class="tab-pane">
                         <div class="login-form-container">
@@ -21,9 +18,7 @@
                                 @using (Html.BeginForm())
                                 {
                                     @Html.AntiForgeryToken()
-
                                     <div class="form-horizontal">
-
                                         <div class="form-group">
                                             <div class="control-label"><strong>Tên đăng nhập</strong></div>
                                             <div class="col-md-10">
@@ -31,7 +26,6 @@
                                                 @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="control-label"><strong>Tên khách hàng</strong></div>
                                             <div class="col-md-10">
@@ -39,7 +33,6 @@
                                                 @Html.ValidationMessageFor(model => model.HoVaTen, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="control-label"><strong>Mật khẩu</strong></div>
                                             <div class="col-md-10">
@@ -75,7 +68,6 @@
                                                 @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
-
                                         <div class="form-group">
                                             <div class="col-md-offset-2 col-md-10">
                                                 <input type="submit" value="Chỉnh sửa" class="btn btn-danger" />
@@ -94,4 +86,3 @@
 <div>
     @Html.ActionLink("Index", "Home")
 </div>
-

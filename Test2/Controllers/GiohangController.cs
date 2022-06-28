@@ -1,4 +1,5 @@
 ﻿using MoMo;
+﻿using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Test2.Models;
 using Newtonsoft.Json.Linq;
+//using Xamarin.Essentials;
+using Test2.common;
 
 namespace Test2.Controllers
 {
@@ -213,6 +216,7 @@ namespace Test2.Controllers
             dh.Status = false;
             data.SubmitChanges();
 
+
             String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
             content = content.Replace("{{CustomerName}}", kh.HoVaTen);
             content = content.Replace("{{Phone}}", kh.SDT);
@@ -225,7 +229,6 @@ namespace Test2.Controllers
 
             new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
             new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
-
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");
         }

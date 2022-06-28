@@ -21,7 +21,6 @@ namespace Test2.Models
 	using System.ComponentModel;
 	using System;
 	
-	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Cafe3")]
 	public partial class dbCoffeeDataContext : System.Data.Linq.DataContext
 	{
@@ -30,6 +29,7 @@ namespace Test2.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+
     partial void InsertBinhLuan(BinhLuan instance);
     partial void UpdateBinhLuan(BinhLuan instance);
     partial void DeleteBinhLuan(BinhLuan instance);
@@ -91,7 +91,6 @@ namespace Test2.Models
 		{
 			OnCreated();
 		}
-		
 		public System.Data.Linq.Table<BinhLuan> BinhLuans
 		{
 			get
@@ -108,6 +107,7 @@ namespace Test2.Models
 			}
 		}
 		
+
 		public System.Data.Linq.Table<ChiTietDonHang> ChiTietDonHangs
 		{
 			get
@@ -172,7 +172,6 @@ namespace Test2.Models
 			}
 		}
 	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.BinhLuan")]
 	public partial class BinhLuan : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -468,7 +467,6 @@ namespace Test2.Models
 			}
 		}
 	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChiTietDonHang")]
 	public partial class ChiTietDonHang : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -684,7 +682,6 @@ namespace Test2.Models
 			}
 		}
 	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DonHang")]
 	public partial class DonHang : INotifyPropertyChanging, INotifyPropertyChanged
 	{

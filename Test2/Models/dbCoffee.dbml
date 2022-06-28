@@ -1,3 +1,4 @@
+
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Cafe3" Class="dbCoffeeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-RUD1QTV;Initial Catalog=Cafe3;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Cafe3ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.BinhLuan" Member="BinhLuans">

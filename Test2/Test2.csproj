@@ -103,6 +103,11 @@
     </Reference>
     <Reference Include="Recaptcha.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RecaptchaMVC.1.0.1.0\lib\net45\Recaptcha.MVC.dll</HintPath>
+    <Reference Include="SendGrid, Version=9.28.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.28.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>..\packages\starkbank-ecdsa.1.3.3\lib\net452\StarkbankEcdsa.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -125,6 +130,7 @@
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
       <Private>True</Private>
@@ -155,7 +161,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -171,6 +179,9 @@
       <HintPath>..\packages\WebActivatorEx.2.0.3\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
+    <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Essentials.1.7.3\lib\netstandard2.0\Xamarin.Essentials.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -199,6 +210,7 @@
     <Content Include="Content\DonHang.html" />
     <Content Include="Content\MatKhau.html" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\loginAdmin\css\font-awesome.css" />
@@ -338,167 +350,10 @@
     <Content Include="images\icon-img\select.png" />
     <Content Include="images\icon-img\shop.png" />
     <Content Include="images\menu\menu-categori-1.png" />
-    <Content Include="images\product-details\b-large-1.jpg" />
-    <Content Include="images\product-details\b-large-10.jpg" />
-    <Content Include="images\product-details\b-large-11.jpg" />
-    <Content Include="images\product-details\b-large-12.jpg" />
-    <Content Include="images\product-details\b-large-2.jpg" />
-    <Content Include="images\product-details\b-large-3.jpg" />
-    <Content Include="images\product-details\b-large-4.jpg" />
-    <Content Include="images\product-details\b-large-9.jpg" />
-    <Content Include="images\product-details\brand-img.png" />
-    <Content Include="images\product-details\client-1.png" />
-    <Content Include="images\product-details\large-1.jpg" />
-    <Content Include="images\product-details\large-2.jpg" />
-    <Content Include="images\product-details\large-3.jpg" />
-    <Content Include="images\product-details\large-4.jpg" />
-    <Content Include="images\product-details\large-5.jpg" />
-    <Content Include="images\product-details\large-6.jpg" />
-    <Content Include="images\product-details\large-7.jpg" />
-    <Content Include="images\product-details\large-8.jpg" />
-    <Content Include="images\product-details\small-1.jpg" />
-    <Content Include="images\product-details\small-2.jpg" />
-    <Content Include="images\product-details\small-3.jpg" />
-    <Content Include="images\product-details\small-4.jpg" />
-    <Content Include="images\product-details\sticky-sidebar1.jpg" />
-    <Content Include="images\product-details\sticky-sidebar2.jpg" />
-    <Content Include="images\product-details\sticky-sidebar3.jpg" />
-    <Content Include="images\product-details\sticky-sidebar4.jpg" />
-    <Content Include="images\product\deal-product.png" />
-    <Content Include="images\product\product-1.jpg" />
-    <Content Include="images\product\product-10.jpg" />
-    <Content Include="images\product\product-11.jpg" />
-    <Content Include="images\product\product-12.jpg" />
-    <Content Include="images\product\product-13.jpg" />
-    <Content Include="images\product\product-14.jpg" />
-    <Content Include="images\product\product-15.jpg" />
-    <Content Include="images\product\product-16.jpg" />
-    <Content Include="images\product\product-17.jpg" />
-    <Content Include="images\product\product-18.jpg" />
-    <Content Include="images\product\product-19.jpg" />
-    <Content Include="images\product\product-2.jpg" />
-    <Content Include="images\product\product-20.jpg" />
-    <Content Include="images\product\product-21.jpg" />
-    <Content Include="images\product\product-22.jpg" />
-    <Content Include="images\product\product-23.jpg" />
-    <Content Include="images\product\product-24.jpg" />
-    <Content Include="images\product\product-25.jpg" />
-    <Content Include="images\product\product-26.jpg" />
-    <Content Include="images\product\product-27.jpg" />
-    <Content Include="images\product\product-28.jpg" />
-    <Content Include="images\product\product-29.jpg" />
-    <Content Include="images\product\product-3.jpg" />
-    <Content Include="images\product\product-30.jpg" />
-    <Content Include="images\product\product-31.jpg" />
-    <Content Include="images\product\product-32.jpg" />
-    <Content Include="images\product\product-33.jpg" />
-    <Content Include="images\product\product-34.jpg" />
-    <Content Include="images\product\product-35.jpg" />
-    <Content Include="images\product\product-36.jpg" />
-    <Content Include="images\product\product-37.jpg" />
-    <Content Include="images\product\product-38.jpg" />
-    <Content Include="images\product\product-39.jpg" />
-    <Content Include="images\product\product-4.jpg" />
-    <Content Include="images\product\product-40.jpg" />
-    <Content Include="images\product\product-41.jpg" />
-    <Content Include="images\product\product-42.jpg" />
-    <Content Include="images\product\product-43.jpg" />
-    <Content Include="images\product\product-44.jpg" />
-    <Content Include="images\product\product-45.jpg" />
-    <Content Include="images\product\product-46.jpg" />
-    <Content Include="images\product\product-47.jpg" />
-    <Content Include="images\product\product-48.jpg" />
-    <Content Include="images\product\product-49.jpg" />
-    <Content Include="images\product\product-5.jpg" />
-    <Content Include="images\product\product-50.png" />
-    <Content Include="images\product\product-51.png" />
-    <Content Include="images\product\product-52.png" />
-    <Content Include="images\product\product-53.png" />
-    <Content Include="images\product\product-54.png" />
-    <Content Include="images\product\product-55.png" />
-    <Content Include="images\product\product-56.jpg" />
-    <Content Include="images\product\product-57.jpg" />
-    <Content Include="images\product\product-58.jpg" />
-    <Content Include="images\product\product-59.jpg" />
-    <Content Include="images\product\product-6.jpg" />
-    <Content Include="images\product\product-60.jpg" />
-    <Content Include="images\product\product-61.jpg" />
-    <Content Include="images\product\product-62.jpg" />
-    <Content Include="images\product\product-63.jpg" />
-    <Content Include="images\product\product-64.jpg" />
-    <Content Include="images\product\product-65.jpg" />
-    <Content Include="images\product\product-66.jpg" />
-    <Content Include="images\product\product-67.jpg" />
-    <Content Include="images\product\product-68.jpg" />
-    <Content Include="images\product\product-69.jpg" />
-    <Content Include="images\product\product-7.jpg" />
-    <Content Include="images\product\product-70.jpg" />
-    <Content Include="images\product\product-71.jpg" />
-    <Content Include="images\product\product-72.jpg" />
-    <Content Include="images\product\product-73.jpg" />
-    <Content Include="images\product\product-74.jpg" />
-    <Content Include="images\product\product-75.jpg" />
-    <Content Include="images\product\product-76.jpg" />
-    <Content Include="images\product\product-77.jpg" />
-    <Content Include="images\product\product-78.jpg" />
-    <Content Include="images\product\product-79.jpg" />
-    <Content Include="images\product\product-8.jpg" />
-    <Content Include="images\product\product-80.jpg" />
-    <Content Include="images\product\product-81.jpg" />
-    <Content Include="images\product\product-82.jpg" />
-    <Content Include="images\product\product-83.jpg" />
-    <Content Include="images\product\product-84.jpg" />
-    <Content Include="images\product\product-85.jpg" />
-    <Content Include="images\product\product-86.jpg" />
-    <Content Include="images\product\product-87.jpg" />
-    <Content Include="images\product\product-88.jpg" />
-    <Content Include="images\product\product-89.png" />
-    <Content Include="images\product\product-9.jpg" />
-    <Content Include="images\product\product-90.png" />
-    <Content Include="images\product\product-91.png" />
-    <Content Include="images\product\product-92.png" />
-    <Content Include="images\product\product-93.png" />
-    <Content Include="images\product\product-94.png" />
-    <Content Include="images\product\product-95.jpg" />
-    <Content Include="images\product\product-96.jpg" />
-    <Content Include="images\product\product-97.jpg" />
-    <Content Include="images\product\product-98.jpg" />
-    <Content Include="images\product\product-99.jpg" />
-    <Content Include="images\product\product-categories-1.jpg" />
-    <Content Include="images\product\product-categories-2.jpg" />
-    <Content Include="images\product\product-categories-3.jpg" />
-    <Content Include="images\product\product-categories-4.jpg" />
-    <Content Include="images\product\product-categories-5.jpg" />
-    <Content Include="images\product\product-categories-6.jpg" />
-    <Content Include="images\product\quickview-large-1.jpg" />
-    <Content Include="images\product\quickview-s1.jpg" />
-    <Content Include="images\product\quickview-s2.jpg" />
-    <Content Include="images\product\quickview-s3.jpg" />
-    <Content Include="images\product\quickview-s4.jpg" />
-    <Content Include="images\slider\hm-1-slider-1.png" />
-    <Content Include="images\slider\hm-10-slider-1.png" />
-    <Content Include="images\slider\hm-2-slider-1.jpg" />
-    <Content Include="images\slider\hm-2-slider-2.jpg" />
-    <Content Include="images\slider\hm-3-slider-1.png" />
-    <Content Include="images\slider\hm-3-slider-2.png" />
-    <Content Include="images\slider\hm-3-slider-3.png" />
-    <Content Include="images\slider\hm-3-small-tshirt-1.jpg" />
-    <Content Include="images\slider\hm-3-small-tshirt-2.jpg" />
-    <Content Include="images\slider\hm-3-small-tshirt-3.jpg" />
-    <Content Include="images\slider\hm-4-slider-1.jpg" />
-    <Content Include="images\slider\hm-4-slider-2.jpg" />
-    <Content Include="images\slider\hm-5-slider-1.jpg" />
-    <Content Include="images\slider\hm-5-slider-2.jpg" />
-    <Content Include="images\slider\hm-7-slider-1.png" />
-    <Content Include="images\slider\hm-8-slider-1.jpg" />
-    <Content Include="images\slider\hm-9-slider-1.png" />
     <Content Include="images\team\team-1.jpg" />
     <Content Include="images\team\team-2.jpg" />
     <Content Include="images\team\team-3.jpg" />
     <Content Include="images\team\team-4.jpg" />
-    <Content Include="images\testimonial\client-1.png" />
-    <Content Include="images\testimonial\client-2.png" />
-    <Content Include="images\testimonial\client-3.png" />
     <Content Include="js\main.js" />
     <Content Include="js\plugins\ajax-mail.js" />
     <Content Include="js\plugins\pluginadmin\bootstrap.js" />
@@ -544,6 +399,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="common\common.cs" />
+    <Compile Include="common\MailHelper.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CaptchaResponse.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -720,6 +576,9 @@
     <Content Include="Views\Home\BlogKT.cshtml" />
     <Content Include="Views\Home\CafeHot.cshtml" />
     <Content Include="Views\Admin\QuanLyKH.cshtml" />
+
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Tra.cshtml" />
     <Content Include="Views\NguoiDung\ChinhSuaTK.cshtml" />
     <Content Include="Views\NguoiDung\EmailThongBao.cshtml" />
@@ -754,6 +613,7 @@
     <Content Include="Views\NguoiDung\DonHangChuaGiao.cshtml" />
     <Content Include="Views\NguoiDung\ChitietSP.cshtml" />
     <Content Include="Views\NguoiDung\ChiTiet.cshtml" />
+    <Content Include="Views\Home\Tra.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

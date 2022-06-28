@@ -12,6 +12,7 @@ using System.Configuration;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using GoogleRecaptcha;
+
 namespace Test2.Controllers
 {
     public class NguoiDungController : Controller
@@ -231,6 +232,16 @@ namespace Test2.Controllers
             
             List<DonHang> listDonHang = data.DonHangs.Where(n => n.MaKH == id).ToList();
             if (listDonHang == null)
+            return RedirectToAction("Index","Home");
+        }
+
+        [HttpGet]
+        public ActionResult ChinhSuaTK(String id )
+        {
+            
+            KhachHang khachHang = data.KhachHangs.FirstOrDefault(m => m.MaKH == int.Parse(id));
+            ViewBag.MaKH = khachHang.MaKH;
+            if (khachHang == null)
             {
                 Response.StatusCode = 404;
                 return null;
@@ -261,12 +272,31 @@ namespace Test2.Controllers
             donhang.MaDH= int.Parse(id);
           
             if (string.IsNullOrEmpty(MaKH))
+
+            return View(khachHang);
+        }
+        [HttpPost]
+        public ActionResult ChinhSuaTK(String id, FormCollection collection)
+        {
+            var khachHang = data.KhachHangs.First(m => m.MaKH == int.Parse(id));
+            var maKH = collection["maKH"];
+            var TenKH = collection["HoVaTen"];
+            var tendn = collection["TenDN"];
+            var matkhau = collection["Password"];
+            var Email = collection["Email"];
+            var SDT = collection["SDT"];
+            var NgaySinh = Convert.ToDateTime(collection["NgaySinh"]);
+            var DiaChi = collection["DiaChi"];
+            //  var trangThai = bool.Parse(collection["Status"]);
+
+
+            khachHang.MaKH = int.Parse(id);
+            if (string.IsNullOrEmpty(TenKH))
             {
                 ViewData["Error"] = "Don't empty!";
             }
             else
             {
-                   
                     donhang.MaKH = int.Parse(MaKH);
                     donhang.NgayLap = Convert.ToDateTime(ngaylap);
                     donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
@@ -278,27 +308,8 @@ namespace Test2.Controllers
                     data.SubmitChanges();
                 return RedirectToAction("SanPham", "Home");
             }
-                //else
-                //{
-                //    donhang.MaKH = int.Parse(MaKH);
-                //    donhang.NgayLap = Convert.ToDateTime(ngaylap);
-                //    donhang.NgayGiao = Convert.ToDateTime(ngaygiao);
-                //    donhang.GhiChu = ghichu;
-                //    donhang.DiaChi = DiaChi;
-                //    donhang.Status = Convert.ToBoolean(status);
-                //    donhang.Status2 = true;
-
-                //    UpdateModel(donhang);
-                //    data.SubmitChanges();
-                //    return RedirectToAction("LSFix");
-                //}
-            //}
-
             return View(donhang);
-           
         }
-
-
 
         public ActionResult DonHangDTT()
         {
@@ -345,17 +356,9 @@ namespace Test2.Controllers
             return View(donhang);
         }
 
-
-
-        /// <summary>
-        /// /
-        /// </summary>
-        /// <returns></returns>
-
         public ActionResult DonHangDaGiao()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "DGH").ToList();
-
             if (donhang == null)
             {
                 Response.StatusCode = 404;
@@ -363,10 +366,10 @@ namespace Test2.Controllers
             }
             return View(donhang);
         }
+
         public ActionResult DonHangDangGiao()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "DVC").ToList();
-
             if (donhang == null)
             {
                 Response.StatusCode = 404;
@@ -374,10 +377,10 @@ namespace Test2.Controllers
             }
             return View(donhang);
         }
+
         public ActionResult DonHangChuaGiao()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang == "CGH").ToList();
-
             if (donhang == null)
             {
                 Response.StatusCode = 404;
@@ -397,6 +400,7 @@ namespace Test2.Controllers
             }
             return View(sp);
         }
+
         public ActionResult ChiTiet(int MaDH)
         {
             using (dbCoffeeDataContext db = new dbCoffeeDataContext())
@@ -426,7 +430,6 @@ namespace Test2.Controllers
                 ViewBag.Sub = sub;
                 return View();
             }
-
         }
 
     }

@@ -86,6 +86,18 @@ namespace Test2.Controllers
             return iTongTien ;
         }
 
+
+        //private int DemDon()
+        //{
+        //    int dem = 0;
+        //    List<DonHang> donHangs = data.DonHangs.Where(n => n.Status2.Value==false).ToList();
+        //    if (donHangs != null)
+        //    {
+        //        dem = donHangs.Count();
+
+        //    }
+        //    return dem;
+        //}
         /// <summary>
         /// 
         /// </summary>
@@ -165,22 +177,32 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult DatHang()
         {
-            if (Session["UserName"] == null || Session["UserName"].ToString()=="")
-            {
-                return RedirectToAction("DangNhap", "NguoiDung");
-            }
-            if (Session["Giohang"]==null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            //if (DemDon() <=5)
+            //{
+                if (Session["UserName"] == null || Session["UserName"].ToString() == "")
+                {
+                    return RedirectToAction("DangNhap", "NguoiDung");
+                }
+                if (Session["Giohang"] == null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
-            List<Giohang> lstGiohang = Laygiohang();
-           
-            ViewBag.TongtienThu = TongTienThu();
-            ViewBag.Tongsoluong = TongSoLuong();
-            // Select tổng hóa đơn chưa thanh toán.
+                List<Giohang> lstGiohang = Laygiohang();
 
-            return View(lstGiohang);
+                ViewBag.TongtienThu = TongTienThu();
+                ViewBag.Tongsoluong = TongSoLuong();
+                // Select tổng hóa đơn chưa thanh toán.
+
+                return View(lstGiohang);
+            //}
+            //else
+            //{
+
+            //    ViewBag.ThongBao = "Bạn chưa thanh toán 5 đơn hàng !!! Vui lòng thanh toán để tiếp tục mua hàng";
+            //    return RedirectToAction("Quadon", "Giohang");
+            //}
+            //return View();
         }
 
         public ActionResult DatHang(FormCollection collection)
@@ -190,42 +212,52 @@ namespace Test2.Controllers
             DonHang dh = new DonHang();
             KhachHang kh = (KhachHang)Session["UserName"];
             List<Giohang> gh = Laygiohang();
-            dh.MaKH = kh.MaKH;
-            dh.NgayLap = DateTime.Now;
-          //  var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
-            dh.NgayGiao = DateTime.Now.AddDays(1);
-            dh.DiaChi = collection["diachi"];
-            dh.GhiChu = collection["cuthe"];
-            dh.Status = true;
-            dh.Status2 = true;
-            dh.ThanhTien = TongTienThu();
-            data.DonHangs.InsertOnSubmit(dh);
-            data.SubmitChanges();
-            foreach(var item in gh)
-            {
-                ChiTietDonHang ctdh = new ChiTietDonHang();
-                ctdh.MaDH = dh.MaDH;
-                ctdh.MaSP = item.sMaSP;
-                ctdh.SoLuongSP = item.iSoluong;
-                ctdh.ThanhTien = (decimal)item.dThanhtien;
-                data.ChiTietDonHangs.InsertOnSubmit(ctdh);
-            }
-            dh.Status = false;
-            data.SubmitChanges();
+            //if (DemDon() <= 5)
+            //{
+                dh.MaKH = kh.MaKH;
+                dh.NgayLap = DateTime.Now;
+                //  var ngaygiao = string.Format("0:MM/dd/yyyy}", collection["NgayGiao"]);
+                dh.NgayGiao = DateTime.Now.AddDays(1);
+                dh.DiaChi = collection["diachi"];
+                dh.GhiChu = collection["cuthe"];
+                dh.Status = true;
+                dh.Status2 = true;
+                dh.ThanhTien = TongTienThu();
+                data.DonHangs.InsertOnSubmit(dh);
+                data.SubmitChanges();
+                foreach (var item in gh)
+                {
+                    ChiTietDonHang ctdh = new ChiTietDonHang();
+                    ctdh.MaDH = dh.MaDH;
+                    ctdh.MaSP = item.sMaSP;
+                    ctdh.SoLuongSP = item.iSoluong;
+                    ctdh.ThanhTien = (decimal)item.dThanhtien;
+                    data.ChiTietDonHangs.InsertOnSubmit(ctdh);
+                }
+                dh.Status = false;
+                data.SubmitChanges();
 
-            String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
-            content = content.Replace("{{CustomerName}}", kh.HoVaTen);
-            content = content.Replace("{{Phone}}", kh.SDT);
-            content = content.Replace("{{Email}}", kh.Email);
-            content = content.Replace("{{Address}}", dh.DiaChi);
-            content = content.Replace("{{cuthe}}", dh.GhiChu);
-            content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
-            content = content.Replace("{{Total}}", TongTienThu().ToString());
-            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/DonHang.html"));
+                content = content.Replace("{{CustomerName}}", kh.HoVaTen);
+                content = content.Replace("{{Phone}}", kh.SDT);
+                content = content.Replace("{{Email}}", kh.Email);
+                content = content.Replace("{{Address}}", dh.DiaChi);
+                content = content.Replace("{{cuthe}}", dh.GhiChu);
+                content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
+                content = content.Replace("{{Total}}", TongTienThu().ToString());
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
-            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+                new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
 
+                Session["Giohang"] = null;
+                return RedirectToAction("XacNhan", "Giohang");
+            //}
+            //else
+            //{
+            //    ViewBag.ThongBao = "Bạn chưa thanh toán 5 đơn hàng !!! Vui lòng thanh toán để tiếp tục mua hàng";
+            //    return RedirectToAction("Quadon", "Giohang");
+            //}
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");
         }

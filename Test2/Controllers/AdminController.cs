@@ -11,6 +11,7 @@ using System.Data;
 using ClosedXML.Excel;
 using System.Data.Entity;
 
+
 namespace Test2.Controllers
 {
     public class AdminController : Controller
@@ -823,6 +824,10 @@ namespace Test2.Controllers
             return View(donhang);
         }
 
+        public ActionResult Analyst()
+        {
+            return View();
+        }
 
     }
 }

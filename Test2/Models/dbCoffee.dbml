@@ -84,7 +84,7 @@
   </Table>
   <Table Name="dbo.SALE" Member="SALEs">
     <Type Name="SALE">
-      <Column Name="saleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="saleID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="tenSK" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="moTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ngayBD" Type="System.DateTime" DbType="Date" CanBeNull="true" />
@@ -111,7 +111,7 @@
       <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HinhAnhMoTa" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="MoTaThem" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="saleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="saleID" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="SanPham_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="ChiTietDonHang" />
       <Association Name="BinhLuan_SanPham" Member="BinhLuan" ThisKey="MaBinhLuan" OtherKey="MaBinhLuan" Type="BinhLuan" IsForeignKey="true" />
       <Association Name="LoaiSP_SanPham" Member="LoaiSP" ThisKey="MaLoaiSP" OtherKey="MaLoaiSP" Type="LoaiSP" IsForeignKey="true" />

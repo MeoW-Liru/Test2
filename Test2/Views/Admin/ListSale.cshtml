@@ -1,0 +1,88 @@
+﻿@using Test2.Models
+@using PagedList.Mvc
+@model IEnumerable<Test2.Models.SALE>
+
+
+
+@helper Truncate(string input, int lenght)
+{if (input.Length < lenght)
+    {
+        @input }
+    else
+    {
+        @input.Substring(0, lenght)<text>...</text>}
+}
+
+
+@{
+    ViewBag.Title = "ListSale";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+<div id="page-wrapper">
+    <h2>List Sự Kiện Sale</h2>
+
+    <p>
+        @Html.ActionLink("Tạo Mới Sự Kiện", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th style="width:200px">
+                Tên Sự Kiện Sale
+            </th>
+            <th style="width:200px">
+                Mô Tả
+            </th>
+            <th style="width:200px">
+                Ngày Bắt Đầu:
+            </th>
+            <th style="width:200px">
+                Ngày Kết Thúc:
+            </th>
+            <th style="width:200px">
+                Mức Độ Sale:
+            </th>
+            <th style="width:200px">
+                Tình Trạng:
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenSK)
+                </td>
+                <td>
+                    @Truncate(item.moTa, 100)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ngayBD)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ngayKT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mucSale)
+                </td>
+
+                @if (item.status == true)
+                {
+                    <td>Đang Đăng</td>
+                }
+                else
+                {
+                    <td>Không sử dụng</td>
+                }
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.saleID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.saleID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.saleID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

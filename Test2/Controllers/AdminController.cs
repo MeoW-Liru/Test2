@@ -51,9 +51,9 @@ namespace Test2.Controllers
         {
             ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
+            ViewBag.saleID = new SelectList(data.SALEs.ToList().OrderBy(n => n.tenSK), "saleID", "TenSK");
             return View();
         }
-
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult ThemSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload)
@@ -151,10 +151,6 @@ namespace Test2.Controllers
             UpdateSanPham.MaNCC = sanpham.MaNCC;
             UpdateSanPham.Status = sanpham.Status;
 
-
-
-
-
             for (int i = 0; i < ProductUpload.Length; i++)
             {
                 if (ProductUpload[i] != null && ProductUpload[i].ContentLength > 0)
@@ -177,27 +173,6 @@ namespace Test2.Controllers
 
 
 
-        public ActionResult Form()
-        {
-            return View();
-        }
-
-        public ActionResult Table()
-        {
-
-            return View();
-        }
-
-        public ActionResult Typo()
-        {
-            return View();
-        }
-        public ActionResult Button()
-        {
-            return View();
-        }
-
-
         public ActionResult ListLoaiSP(int? page)
         {
             int pageNumber = (page ?? 1);
@@ -211,6 +186,8 @@ namespace Test2.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public ActionResult ThemLoaiSP(LoaiSP loaisp, FormCollection collection)
         {
@@ -225,6 +202,44 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("ListLoaiSP");
         }
+
+
+
+
+
+        //Sale Sản phẩm 
+        public ActionResult ListSale(int? page)
+        {
+            int pageNumber = (page ?? 1);
+            int pageSize = 9;
+            return View(data.SALEs.ToList().OrderBy(n => n.saleID).ToPagedList(pageNumber, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult ThemSale()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ThemSale(SALE sale , FormCollection collection)
+        {
+            string sMaSale = collection["txtIDSALE"];
+            string sTenSale = collection["txtTenSale"];
+            string sMoTa = collection["txtMoTa"];
+
+            sale.saleID = sMaSale;
+            sale.tenSK = sTenSale;
+            sale.moTa = sMoTa;
+
+            data.SALEs.InsertOnSubmit(sale);
+            data.SubmitChanges();
+            return RedirectToAction("ListSale");
+
+        }
+
+
+
+
 
 
         public ActionResult ListNCC(int? page)
@@ -824,6 +839,27 @@ namespace Test2.Controllers
         {
             return View();
         }
+
+        public ActionResult Form()
+        {
+            return View();
+        }
+
+        public ActionResult Table()
+        {
+
+            return View();
+        }
+
+        public ActionResult Typo()
+        {
+            return View();
+        }
+        public ActionResult Button()
+        {
+            return View();
+        }
+
 
     }
 }

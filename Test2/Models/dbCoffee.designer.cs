@@ -1765,7 +1765,7 @@ namespace Test2.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _saleID;
+		private string _saleID;
 		
 		private string _tenSK;
 		
@@ -1785,7 +1785,7 @@ namespace Test2.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnsaleIDChanging(int value);
+    partial void OnsaleIDChanging(string value);
     partial void OnsaleIDChanged();
     partial void OntenSKChanging(string value);
     partial void OntenSKChanged();
@@ -1807,8 +1807,8 @@ namespace Test2.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int saleID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string saleID
 		{
 			get
 			{
@@ -2029,7 +2029,7 @@ namespace Test2.Models
 		
 		private string _MoTaThem;
 		
-		private System.Nullable<int> _saleID;
+		private string _saleID;
 		
 		private EntitySet<ChiTietDonHang> _ChiTietDonHangs;
 		
@@ -2075,7 +2075,7 @@ namespace Test2.Models
     partial void OnHinhAnhMoTaChanged();
     partial void OnMoTaThemChanging(string value);
     partial void OnMoTaThemChanged();
-    partial void OnsaleIDChanging(System.Nullable<int> value);
+    partial void OnsaleIDChanging(string value);
     partial void OnsaleIDChanged();
     #endregion
 		
@@ -2401,8 +2401,8 @@ namespace Test2.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", DbType="Int")]
-		public System.Nullable<int> saleID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", DbType="VarChar(10)")]
+		public string saleID
 		{
 			get
 			{
@@ -2567,7 +2567,7 @@ namespace Test2.Models
 					}
 					else
 					{
-						this._saleID = default(Nullable<int>);
+						this._saleID = default(string);
 					}
 					this.SendPropertyChanged("SALE");
 				}

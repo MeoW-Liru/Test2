@@ -756,6 +756,8 @@
     <Content Include="Views\NguoiDung\ChiTiet.cshtml" />
     <Content Include="Views\Admin\View.cshtml" />
     <Content Include="Views\Admin\Analyst.cshtml" />
+    <Content Include="Views\Admin\ListSale.cshtml" />
+    <Content Include="Views\Admin\ThemSale.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

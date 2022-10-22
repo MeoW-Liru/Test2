@@ -785,10 +785,6 @@ namespace Test2.Controllers
 
 
 
-        /// <summary>
-        /// /
-        /// </summary>
-        /// <returns></returns>
 
         public ActionResult DonHangDaGiao()
         {

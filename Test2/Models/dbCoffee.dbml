@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DatabaseCafeWeb" Class="dbCoffeeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ahri;Initial Catalog=DatabaseCafeWeb;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseCafeWebConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=AHRI;Initial Catalog=DatabaseCafeWeb;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseCafeWebConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -15,6 +15,36 @@
       <Column Name="MaSP" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="TenNguoiBL" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="BinhLuan_SanPham" Member="SanPhams" ThisKey="MaBinhLuan" OtherKey="MaBinhLuan" Type="SanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HinhAnh" Member="HinhAnhs">
+    <Type Name="HinhAnh">
+      <Column Name="MaHA" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MaSP" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaSK" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoaiSP" Member="LoaiSPs">
+    <Type Name="LoaiSP">
+      <Column Name="MaLoaiSP" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="LoaiSP_SanPham" Member="SanPhams" ThisKey="MaLoaiSP" OtherKey="MaLoaiSP" Type="SanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KhachHang" Member="KhachHangs">
+    <Type Name="KhachHang">
+      <Column Name="MaKH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="PassWord" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
+      <Column Name="HoVaTen" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
+      <Column Name="SDT" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="KhachHang_DonHang" Member="DonHangs" ThisKey="MaKH" OtherKey="MaKH" Type="DonHang" />
     </Type>
   </Table>
   <Table Name="dbo.ChiTietDonHang" Member="ChiTietDonHangs">
@@ -43,36 +73,6 @@
       <Association Name="KhachHang_DonHang" Member="KhachHang" ThisKey="MaKH" OtherKey="MaKH" Type="KhachHang" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.HinhAnh" Member="HinhAnhs">
-    <Type Name="HinhAnh">
-      <Column Name="MaHA" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TenHA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="MaSP" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="MaSK" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.KhachHang" Member="KhachHangs">
-    <Type Name="KhachHang">
-      <Column Name="MaKH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserName" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
-      <Column Name="PassWord" Type="System.String" DbType="VarChar(254)" CanBeNull="true" />
-      <Column Name="HoVaTen" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(254) NOT NULL" CanBeNull="false" />
-      <Column Name="SDT" Type="System.String" DbType="VarChar(13) NOT NULL" CanBeNull="false" />
-      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
-      <Column Name="NgaySinh" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="KhachHang_DonHang" Member="DonHangs" ThisKey="MaKH" OtherKey="MaKH" Type="DonHang" />
-    </Type>
-  </Table>
-  <Table Name="dbo.LoaiSP" Member="LoaiSPs">
-    <Type Name="LoaiSP">
-      <Column Name="MaLoaiSP" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TenLoai" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
-      <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="LoaiSP_SanPham" Member="SanPhams" ThisKey="MaLoaiSP" OtherKey="MaLoaiSP" Type="SanPham" />
-    </Type>
-  </Table>
   <Table Name="dbo.NhaCungCap" Member="NhaCungCaps">
     <Type Name="NhaCungCap">
       <Column Name="MaNCC" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -80,6 +80,18 @@
       <Column Name="DiaChi" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
       <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="NhaCungCap_SanPham" Member="SanPhams" ThisKey="MaNCC" OtherKey="MaNCC" Type="SanPham" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SALE" Member="SALEs">
+    <Type Name="SALE">
+      <Column Name="saleID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="tenSK" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="moTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ngayBD" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ngayKT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="mucSale" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SALE_SanPham" Member="SanPhams" ThisKey="saleID" OtherKey="saleID" Type="SanPham" />
     </Type>
   </Table>
   <Table Name="dbo.SanPham" Member="SanPhams">
@@ -99,10 +111,12 @@
       <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HinhAnhMoTa" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="MoTaThem" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="saleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SanPham_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="ChiTietDonHang" />
       <Association Name="BinhLuan_SanPham" Member="BinhLuan" ThisKey="MaBinhLuan" OtherKey="MaBinhLuan" Type="BinhLuan" IsForeignKey="true" />
       <Association Name="LoaiSP_SanPham" Member="LoaiSP" ThisKey="MaLoaiSP" OtherKey="MaLoaiSP" Type="LoaiSP" IsForeignKey="true" />
       <Association Name="NhaCungCap_SanPham" Member="NhaCungCap" ThisKey="MaNCC" OtherKey="MaNCC" Type="NhaCungCap" IsForeignKey="true" />
+      <Association Name="SALE_SanPham" Member="SALE" ThisKey="saleID" OtherKey="saleID" Type="SALE" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.SuKien" Member="SuKiens">

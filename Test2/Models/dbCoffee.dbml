@@ -82,18 +82,6 @@
       <Association Name="NhaCungCap_SanPham" Member="SanPhams" ThisKey="MaNCC" OtherKey="MaNCC" Type="SanPham" />
     </Type>
   </Table>
-  <Table Name="dbo.SALE" Member="SALEs">
-    <Type Name="SALE">
-      <Column Name="saleID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="tenSK" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="moTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ngayBD" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="ngayKT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="mucSale" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="SALE_SanPham" Member="SanPhams" ThisKey="saleID" OtherKey="saleID" Type="SanPham" />
-    </Type>
-  </Table>
   <Table Name="dbo.SanPham" Member="SanPhams">
     <Type Name="SanPham">
       <Column Name="MaSP" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -132,6 +120,18 @@
       <Column Name="HinhAnhChiTiet" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="HinhAnhChiTietThem" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="HinhAnhTongQuat" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SALE" Member="SALEs">
+    <Type Name="SALE">
+      <Column Name="saleID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tenSK" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="moTa" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ngayBD" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ngayKT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="mucSale" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SALE_SanPham" Member="SanPhams" ThisKey="saleID" OtherKey="saleID" Type="SanPham" />
     </Type>
   </Table>
 </Database>

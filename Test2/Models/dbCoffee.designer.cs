@@ -54,15 +54,15 @@ namespace Test2.Models
     partial void InsertNhaCungCap(NhaCungCap instance);
     partial void UpdateNhaCungCap(NhaCungCap instance);
     partial void DeleteNhaCungCap(NhaCungCap instance);
-    partial void InsertSALE(SALE instance);
-    partial void UpdateSALE(SALE instance);
-    partial void DeleteSALE(SALE instance);
     partial void InsertSanPham(SanPham instance);
     partial void UpdateSanPham(SanPham instance);
     partial void DeleteSanPham(SanPham instance);
     partial void InsertSuKien(SuKien instance);
     partial void UpdateSuKien(SuKien instance);
     partial void DeleteSuKien(SuKien instance);
+    partial void InsertSALE(SALE instance);
+    partial void UpdateSALE(SALE instance);
+    partial void DeleteSALE(SALE instance);
     #endregion
 		
 		public dbCoffeeDataContext() : 
@@ -159,14 +159,6 @@ namespace Test2.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<SALE> SALEs
-		{
-			get
-			{
-				return this.GetTable<SALE>();
-			}
-		}
-		
 		public System.Data.Linq.Table<SanPham> SanPhams
 		{
 			get
@@ -180,6 +172,14 @@ namespace Test2.Models
 			get
 			{
 				return this.GetTable<SuKien>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SALE> SALEs
+		{
+			get
+			{
+				return this.GetTable<SALE>();
 			}
 		}
 	}
@@ -1759,240 +1759,6 @@ namespace Test2.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SALE")]
-	public partial class SALE : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _saleID;
-		
-		private string _tenSK;
-		
-		private string _moTa;
-		
-		private System.Nullable<System.DateTime> _ngayBD;
-		
-		private System.Nullable<System.DateTime> _ngayKT;
-		
-		private System.Nullable<double> _mucSale;
-		
-		private System.Nullable<bool> _status;
-		
-		private EntitySet<SanPham> _SanPhams;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnsaleIDChanging(string value);
-    partial void OnsaleIDChanged();
-    partial void OntenSKChanging(string value);
-    partial void OntenSKChanged();
-    partial void OnmoTaChanging(string value);
-    partial void OnmoTaChanged();
-    partial void OnngayBDChanging(System.Nullable<System.DateTime> value);
-    partial void OnngayBDChanged();
-    partial void OnngayKTChanging(System.Nullable<System.DateTime> value);
-    partial void OnngayKTChanged();
-    partial void OnmucSaleChanging(System.Nullable<double> value);
-    partial void OnmucSaleChanged();
-    partial void OnstatusChanging(System.Nullable<bool> value);
-    partial void OnstatusChanged();
-    #endregion
-		
-		public SALE()
-		{
-			this._SanPhams = new EntitySet<SanPham>(new Action<SanPham>(this.attach_SanPhams), new Action<SanPham>(this.detach_SanPhams));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string saleID
-		{
-			get
-			{
-				return this._saleID;
-			}
-			set
-			{
-				if ((this._saleID != value))
-				{
-					this.OnsaleIDChanging(value);
-					this.SendPropertyChanging();
-					this._saleID = value;
-					this.SendPropertyChanged("saleID");
-					this.OnsaleIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tenSK", DbType="VarChar(50)")]
-		public string tenSK
-		{
-			get
-			{
-				return this._tenSK;
-			}
-			set
-			{
-				if ((this._tenSK != value))
-				{
-					this.OntenSKChanging(value);
-					this.SendPropertyChanging();
-					this._tenSK = value;
-					this.SendPropertyChanged("tenSK");
-					this.OntenSKChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_moTa", DbType="NVarChar(MAX)")]
-		public string moTa
-		{
-			get
-			{
-				return this._moTa;
-			}
-			set
-			{
-				if ((this._moTa != value))
-				{
-					this.OnmoTaChanging(value);
-					this.SendPropertyChanging();
-					this._moTa = value;
-					this.SendPropertyChanged("moTa");
-					this.OnmoTaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayBD", DbType="Date")]
-		public System.Nullable<System.DateTime> ngayBD
-		{
-			get
-			{
-				return this._ngayBD;
-			}
-			set
-			{
-				if ((this._ngayBD != value))
-				{
-					this.OnngayBDChanging(value);
-					this.SendPropertyChanging();
-					this._ngayBD = value;
-					this.SendPropertyChanged("ngayBD");
-					this.OnngayBDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayKT", DbType="Date")]
-		public System.Nullable<System.DateTime> ngayKT
-		{
-			get
-			{
-				return this._ngayKT;
-			}
-			set
-			{
-				if ((this._ngayKT != value))
-				{
-					this.OnngayKTChanging(value);
-					this.SendPropertyChanging();
-					this._ngayKT = value;
-					this.SendPropertyChanged("ngayKT");
-					this.OnngayKTChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mucSale", DbType="Float")]
-		public System.Nullable<double> mucSale
-		{
-			get
-			{
-				return this._mucSale;
-			}
-			set
-			{
-				if ((this._mucSale != value))
-				{
-					this.OnmucSaleChanging(value);
-					this.SendPropertyChanging();
-					this._mucSale = value;
-					this.SendPropertyChanged("mucSale");
-					this.OnmucSaleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit")]
-		public System.Nullable<bool> status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SALE_SanPham", Storage="_SanPhams", ThisKey="saleID", OtherKey="saleID")]
-		public EntitySet<SanPham> SanPhams
-		{
-			get
-			{
-				return this._SanPhams;
-			}
-			set
-			{
-				this._SanPhams.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_SanPhams(SanPham entity)
-		{
-			this.SendPropertyChanging();
-			entity.SALE = this;
-		}
-		
-		private void detach_SanPhams(SanPham entity)
-		{
-			this.SendPropertyChanging();
-			entity.SALE = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SanPham")]
 	public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2906,6 +2672,240 @@ namespace Test2.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SALE")]
+	public partial class SALE : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _saleID;
+		
+		private string _tenSK;
+		
+		private string _moTa;
+		
+		private System.Nullable<System.DateTime> _ngayBD;
+		
+		private System.Nullable<System.DateTime> _ngayKT;
+		
+		private System.Nullable<decimal> _mucSale;
+		
+		private System.Nullable<bool> _status;
+		
+		private EntitySet<SanPham> _SanPhams;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnsaleIDChanging(string value);
+    partial void OnsaleIDChanged();
+    partial void OntenSKChanging(string value);
+    partial void OntenSKChanged();
+    partial void OnmoTaChanging(string value);
+    partial void OnmoTaChanged();
+    partial void OnngayBDChanging(System.Nullable<System.DateTime> value);
+    partial void OnngayBDChanged();
+    partial void OnngayKTChanging(System.Nullable<System.DateTime> value);
+    partial void OnngayKTChanged();
+    partial void OnmucSaleChanging(System.Nullable<decimal> value);
+    partial void OnmucSaleChanged();
+    partial void OnstatusChanging(System.Nullable<bool> value);
+    partial void OnstatusChanged();
+    #endregion
+		
+		public SALE()
+		{
+			this._SanPhams = new EntitySet<SanPham>(new Action<SanPham>(this.attach_SanPhams), new Action<SanPham>(this.detach_SanPhams));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_saleID", DbType="VarChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string saleID
+		{
+			get
+			{
+				return this._saleID;
+			}
+			set
+			{
+				if ((this._saleID != value))
+				{
+					this.OnsaleIDChanging(value);
+					this.SendPropertyChanging();
+					this._saleID = value;
+					this.SendPropertyChanged("saleID");
+					this.OnsaleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tenSK", DbType="VarChar(50)")]
+		public string tenSK
+		{
+			get
+			{
+				return this._tenSK;
+			}
+			set
+			{
+				if ((this._tenSK != value))
+				{
+					this.OntenSKChanging(value);
+					this.SendPropertyChanging();
+					this._tenSK = value;
+					this.SendPropertyChanged("tenSK");
+					this.OntenSKChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_moTa", DbType="NVarChar(MAX)")]
+		public string moTa
+		{
+			get
+			{
+				return this._moTa;
+			}
+			set
+			{
+				if ((this._moTa != value))
+				{
+					this.OnmoTaChanging(value);
+					this.SendPropertyChanging();
+					this._moTa = value;
+					this.SendPropertyChanged("moTa");
+					this.OnmoTaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayBD", DbType="Date")]
+		public System.Nullable<System.DateTime> ngayBD
+		{
+			get
+			{
+				return this._ngayBD;
+			}
+			set
+			{
+				if ((this._ngayBD != value))
+				{
+					this.OnngayBDChanging(value);
+					this.SendPropertyChanging();
+					this._ngayBD = value;
+					this.SendPropertyChanged("ngayBD");
+					this.OnngayBDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ngayKT", DbType="Date")]
+		public System.Nullable<System.DateTime> ngayKT
+		{
+			get
+			{
+				return this._ngayKT;
+			}
+			set
+			{
+				if ((this._ngayKT != value))
+				{
+					this.OnngayKTChanging(value);
+					this.SendPropertyChanging();
+					this._ngayKT = value;
+					this.SendPropertyChanged("ngayKT");
+					this.OnngayKTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mucSale", DbType="Decimal(18,0)")]
+		public System.Nullable<decimal> mucSale
+		{
+			get
+			{
+				return this._mucSale;
+			}
+			set
+			{
+				if ((this._mucSale != value))
+				{
+					this.OnmucSaleChanging(value);
+					this.SendPropertyChanging();
+					this._mucSale = value;
+					this.SendPropertyChanged("mucSale");
+					this.OnmucSaleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="Bit")]
+		public System.Nullable<bool> status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SALE_SanPham", Storage="_SanPhams", ThisKey="saleID", OtherKey="saleID")]
+		public EntitySet<SanPham> SanPhams
+		{
+			get
+			{
+				return this._SanPhams;
+			}
+			set
+			{
+				this._SanPhams.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_SanPhams(SanPham entity)
+		{
+			this.SendPropertyChanging();
+			entity.SALE = this;
+		}
+		
+		private void detach_SanPhams(SanPham entity)
+		{
+			this.SendPropertyChanging();
+			entity.SALE = null;
 		}
 	}
 }

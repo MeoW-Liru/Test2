@@ -195,6 +195,7 @@ namespace Test2.Controllers
                 kh.DiaChi = kh.DiaChi;
 
                 String content = System.IO.File.ReadAllText(Server.MapPath("~/Content/MatKhau.html"));
+
                 content = content.Replace("{{CustomerName}}", kh.HoVaTen);
                 content = content.Replace("{{Password}}", t);
 
@@ -209,6 +210,7 @@ namespace Test2.Controllers
             {
                 ViewBag.ThongBao = "Địa chỉ Email chưa đăng ký tài khoản !!! ";
             }
+
             return View();
         }
 

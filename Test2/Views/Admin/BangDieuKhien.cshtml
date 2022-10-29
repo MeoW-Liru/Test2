@@ -76,7 +76,7 @@
                     </div>
                 </div>
                 <!-- /.panel-heading -->
-                @Html.Action("listDonhang", "Admin")
+                @Html.Action("danhThuThang", "Admin")
                 <!-- /.panel-body -->
             </div>
         </div>
@@ -228,9 +228,11 @@
                     <h3>Tổng đơn hàng :@ViewBag.TongDonHang</h3>
                 </div>
                 <div>
-                    <h3>Số lượng khách hàng đã đăng kí :@ViewBag.SLKhachHang</h3>
+                    <h3>khách hàng đã đăng kí :@ViewBag.SLKhachHang</h3>
                 </div>
-
+                <div>
+                    <h3>Tổng mặt hàng đang bán:@ViewBag.slSanPham</h3>
+                </div>
                 <!-- /.panel-footer -->
             </div>
             <!-- /.panel .chat-panel -->

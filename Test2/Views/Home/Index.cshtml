@@ -5,6 +5,9 @@
 @{ ViewBag.Title = "Trang chủ";
     Layout = "~/Views/_Layout.cshtml"; }
 @*Đây là trang quảng cáo*@
+
+
+
 <div class="slider-area">
     <div class="container">
         <div id="slide">
@@ -134,14 +137,18 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-15">
-                    <a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})", herf="@Url.Action("BinhLuan","Home",new{ id = caphe.MaSP})">
+                    @*Chỗ này cái link đã sửa để tối ưu hóa*@
+                    <a href="@Url.RouteUrl("XemChiTiet",new{ id = caphe.MaSP,@tensp = caphe.TenSP})", herf="@Url.Action("BinhLuan","Home",new{ id = caphe.MaSP})">
                         <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="270" height="340"  />
                     </a>
+                    @*Chỗ này cái link đã sửa để tối ưu hóa*@
+
                     @*<div class="product-action-2 tooltip-style-2">
                         <button title="Yêu Thích"><i class="icon-heart"></i></button>
                         <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
                         <button title="So Sánh"><i class="icon-refresh"></i></button>
                     </div>*@
+
                 </div>
                 <div class="product-content-wrap-2 text-center">
                     <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>

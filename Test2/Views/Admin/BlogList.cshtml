@@ -62,14 +62,17 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NgayDang)
                 </td>
-                @if (item.Status == true)
+                @*@if (item.Status == true)
                 {
                     <td>Đang Đăng</td>
                 }
                 else
                 {
                     <td>Không sử dụng</td>
-                }
+                }*@
+
+
+
                 <td>
                     @Truncate(item.MoTaChiTiet, 100)
                 </td>

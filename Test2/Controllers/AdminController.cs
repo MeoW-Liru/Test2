@@ -24,7 +24,6 @@ namespace Test2.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult DangNhapAdmin(FormCollection collection)
         {
@@ -46,6 +45,10 @@ namespace Test2.Controllers
             return View();
         }
 
+
+
+
+
         [HttpGet]
         public ActionResult ThemSP()
         {
@@ -56,7 +59,7 @@ namespace Test2.Controllers
         }
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult ThemSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload)
+        public ActionResult ThemSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload, SALE sales)
         {
             for (int i = 0; i < ProductUpload.Length; i++)
             {
@@ -75,6 +78,12 @@ namespace Test2.Controllers
                 sanpham.HinhAnh = ProductUpload[0].FileName;
             if (ProductUpload[1] != null)
                 sanpham.HinhAnhMoTa = ProductUpload[1].FileName;
+
+            // làm sao để truyền đc giá trị đã sale cho sản phẩm vào database 
+            if (sanpham.GiaTien <= 0)
+                sanpham.GiaTien = sanpham.GiaTien * sales.mucSale;
+            //
+
             sanpham.Status = true;
             data.SanPhams.InsertOnSubmit(sanpham);
             data.SubmitChanges();
@@ -93,6 +102,7 @@ namespace Test2.Controllers
             }
             return View(sp);
         }
+
 
         [HttpGet]
         public ActionResult XoaSP(string id)
@@ -120,6 +130,7 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("Cafe");
         }
+
         [HttpGet]
         public ActionResult SuaSP(string id)
         {
@@ -295,11 +306,6 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("ListNCC");
         }
-
-
-
-
-
 
 
 
@@ -565,6 +571,16 @@ namespace Test2.Controllers
         }
 
 
+        public ActionResult DoanhThu(int? page)
+        {
+
+            var TongDonHangNgay = data.DonHangs.ToList();
+            int pageSize = 7;
+            int pageNum = page ?? 1;
+            return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
+        }
+
+
         ////In
         [HttpPost]
         public FileResult Export()
@@ -686,14 +702,6 @@ namespace Test2.Controllers
             return TongDoanhThu;
         }
 
-        public ActionResult DoanhThu(int? page)
-        {
-
-            var TongDonHangNgay = data.DonHangs.ToList();
-            int pageSize = 7;
-            int pageNum = page ?? 1;
-            return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
-        }
 
 
 
@@ -709,6 +717,12 @@ namespace Test2.Controllers
             return slKH;
         }
 
+        public double slSanPham()
+        {
+            double slSanPham = data.SanPhams.Count();
+            return slSanPham;
+        }
+
 
         public ActionResult BangDieuKhien()
         {
@@ -717,6 +731,8 @@ namespace Test2.Controllers
             ViewBag.TongDonHang = TongDonHang();
             ViewBag.SLKhachHang = SoluongKhachHang();
             ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
+            ViewBag.slSanPham = slSanPham();
+
             return View();
         }
 
@@ -800,7 +816,6 @@ namespace Test2.Controllers
 
 
 
-
         public ActionResult DonHangDaGiao()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.giaohang== "DGH").ToList();
@@ -834,6 +849,7 @@ namespace Test2.Controllers
             }
             return View(donhang);
         }
+
 
         public ActionResult Analyst()
         {

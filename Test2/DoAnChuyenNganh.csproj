@@ -95,6 +95,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.2-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NReco.Recommender, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a9abe3bdfd6b1a7f, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.Recommender.1.0.1\lib\net40\NReco.Recommender.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -499,6 +502,8 @@
     <Content Include="images\testimonial\client-1.png" />
     <Content Include="images\testimonial\client-2.png" />
     <Content Include="images\testimonial\client-3.png" />
+    <Content Include="js\jquery.validate.min.js" />
+    <Content Include="js\jquery.validate.unobtrusive.min.js" />
     <Content Include="js\main.js" />
     <Content Include="js\plugins\ajax-mail.js" />
     <Content Include="js\plugins\pluginadmin\bootstrap.js" />
@@ -553,6 +558,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\dbCoffee.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

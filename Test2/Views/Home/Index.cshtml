@@ -151,7 +151,7 @@
 
                 </div>
                 <div class="product-content-wrap-2 text-center">
-                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                    <h3><a href="@Url.RouteUrl("XemChiTiet",new{ id = caphe.MaSP,@tensp = caphe.TenSP})">@caphe.TenSP</a></h3>
                     <div class="product-price-2">
                         <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
                     </div>

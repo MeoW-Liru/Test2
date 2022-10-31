@@ -101,13 +101,13 @@
                                                 @Html.RouteLink("Trang Chủ","TrangChu")
                                             </li>
                                             <li>
-                                                <a href="~/Home/SanPham">Sản Phẩm </a>
+                                                @Html.RouteLink("Sản Phẩm", "SanPham")
                                                 <ul class="sub-menu-style">
                                                     @Html.Action("LoaiCaPhe", "Home")
                                                 </ul>
                                             </li>
-                                            <li><a href="~/Home/LienHe">Liên Hệ </a></li>
-                                            <li><a href="~/Home/Blog">Blog và tin tức</a></li>
+                                            <li>@Html.RouteLink("Liên Hệ", "LienHe")</li>
+                                            <li>@Html.RouteLink("Blog và tin tức", "Blog")</li>
                                         </ul>
                                     </nav>
                                 </div>
@@ -248,7 +248,7 @@
             </div>
         </div>
         <div class="footer-bottom copyright text-center">
-            <p><a>© @DateTime.Now.Year Team Qúy/Khoa - Lập Trình Web</a></p>
+            <p><a>© @DateTime.Now.Year Team Qúy - Lập Trình Web</a></p>
         </div>
     </footer>
 </body>

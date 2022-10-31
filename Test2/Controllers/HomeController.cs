@@ -63,6 +63,7 @@ namespace Test2.Controllers
             return View(sukien.ToPagedList(pageNum, pageSize));
         }
 
+
         public ActionResult SanPham(int? page)
         {
             int pageSize = 6;
@@ -77,7 +78,6 @@ namespace Test2.Controllers
             var sanpham = from sp in data.SanPhams
                           where sp.MaSP == id
                           select sp;
-
             return View(sanpham.Single());
         }
         // bình luận ở đây///////////////////////////////////////////////////////////////////////////////////////

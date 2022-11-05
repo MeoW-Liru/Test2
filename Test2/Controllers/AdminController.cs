@@ -14,6 +14,7 @@ using System.Data.Entity;
 
 namespace Test2.Controllers
 {
+    [HandleError]
     public class AdminController : Controller
     {
         // GET: Admin

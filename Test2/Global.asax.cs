@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Test2.App_Start;
 
 namespace Test2
 {
@@ -13,7 +14,9 @@ namespace Test2
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
             Application["SoNguoiTruyCap"] = 0;
             Application["Online"] = 0;
            

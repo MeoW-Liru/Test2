@@ -49,15 +49,12 @@ namespace Test2
             );
 
 
-
             //cấu hình đường dẫn xem chi tiết của sản phẩm
             routes.MapRoute(
                 name: "XemChiTiet",
                 url: "{tensp}-{id}",
                 defaults: new { controller = "Home", action = "Details", id = UrlParameter.Optional }
             );
-
-
 
 
             routes.MapRoute(

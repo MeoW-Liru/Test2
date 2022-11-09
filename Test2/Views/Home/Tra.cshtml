@@ -8,17 +8,20 @@
 <div class="product-slider-active dot-style-2 dot-style-2-position-static dot-style-2-mrg-1 dot-style-2-active-black">
     @foreach (var Tra in Model)
     {
+        if (Tra.Status == true)
+        {
         <div class="product-plr-1">
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-20">
-                    <a href="@Url.RouteUrl("XemChiTiet",new{ id = Tra.MaSP,@tensp = Tra.TenSP})">
+                    <a href="@Url.RouteUrl("XemChiTiet", new { id = Tra.MaSP, @tensp = Tra.TenSP })">
                         <img alt="@Tra.TenSP" src="~/images/CafeProduct/@Tra.HinhAnh" width="270" height="340"/>
                     </a>
                 </div>
                 <div class="product-content-2 text-center">
-                    <h3><a href="@Url.RouteUrl("XemChiTiet",new{ id = Tra.MaSP,@tensp = Tra.TenSP})"><span class="blod">@Tra.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
+                    <h3><a href="@Url.RouteUrl("XemChiTiet", new { id = Tra.MaSP, @tensp = Tra.TenSP })"><span class="blod">@Tra.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
                 </div>
             </div>
         </div>
+        }
     }
 </div>

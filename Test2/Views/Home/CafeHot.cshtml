@@ -5,17 +5,20 @@
 <div class="product-slider-active dot-style-2 dot-style-2-position-static dot-style-2-mrg-1 dot-style-2-active-black">
     @foreach (var cafehot in Model)
     {
+        if (cafehot.Status == true)
+        {
         <div class="product-plr-1">
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-20">
-                    <a href="@Url.RouteUrl("XemChiTiet",new{ id = cafehot.MaSP,@tensp = cafehot.TenSP})">
+                    <a href="@Url.RouteUrl("XemChiTiet", new { id = cafehot.MaSP, @tensp = cafehot.TenSP })">
                         <img alt="@cafehot.TenSP" src="~/images/CafeProduct/@cafehot.HinhAnh" width="270" height="340"/>
                     </a>
                 </div>
                 <div class="product-content-2 text-center">
-                    <h3><a href="@Url.RouteUrl("XemChiTiet",new{ id = cafehot.MaSP,@tensp = cafehot.TenSP})"><span class="blod">@cafehot.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
+                    <h3><a href="@Url.RouteUrl("XemChiTiet", new { id = cafehot.MaSP, @tensp = cafehot.TenSP })"><span class="blod">@cafehot.TenSP</span>@*<span class="available-product">(56)</span>*@</a></h3>
                 </div>
             </div>
         </div>
-     }
+        }
+    }
 </div>

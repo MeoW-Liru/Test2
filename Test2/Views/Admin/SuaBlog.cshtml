@@ -88,6 +88,21 @@
             <input type="file" class="form-control" name="ImageUpload">
         </div>
     </div>
+                    <div class="form-group">
+                <div class="control-label col-md-2"><strong>Trạng thái</strong></div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(
+            new[]
+            {
+            new { Value = "true", Text = "Đăng bài" },
+            new { Value = "false", Text = "Ẩn bài" },
+            },
+            "Value",
+            "Text",
+            Model
+            ))
+                </div>
+                        </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Lưu" class="btn btn-default" />

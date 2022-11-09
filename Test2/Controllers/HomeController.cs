@@ -48,27 +48,27 @@ namespace Test2.Controllers
 
         public ActionResult Index(int? page)
         {
-            int pageSize = 8;
+            int pageSize = 10;
             int pageNum = (page ?? 1);
-            var caphe = layCaPhe(8);
+            var caphe = layCaPhe(10);
             return View(caphe.ToPagedList(pageNum, pageSize));
 
         }
 
         public ActionResult CafeHot(int? page)
         {
-            int pageSize = 6;
+            int pageSize = 10;
             int pageNum = (page ?? 1);
-            var sukien = layCaPhe(8);
+            var sukien = layCaPhe(10);
             return View(sukien.ToPagedList(pageNum, pageSize));
         }
 
 
         public ActionResult SanPham(int? page)
         {
-            int pageSize = 6;
+            int pageSize = 10;
             int pageNum = (page ?? 1);
-            var caphe = layCaPhe(8);
+            var caphe = layCaPhe(10);
             return View(caphe.ToPagedList(pageNum, pageSize));
         }
        

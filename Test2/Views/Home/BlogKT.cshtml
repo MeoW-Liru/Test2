@@ -7,10 +7,12 @@
         <div class="row">
             @foreach (var sukien in Model)
             {
+                if (sukien.Status == true)
+                {
                 <div class="col-lg-4 col-md-6 col-12 col-sm-6">
                     <div class="blog-wrap mb-40">
                         <div class="blog-img mb-20">
-                            <a href="@Url.Action("ChitietBlog","Home",new{ id = sukien.MaSK})"><img src="~/images/BlogPicture/@sukien.HinhAnh"width="270" height="340" alt="blog-img"></a>
+                            <a href="@Url.Action("ChitietBlog", "Home", new { id = sukien.MaSK })"><img src="~/images/BlogPicture/@sukien.HinhAnh"width="270" height="340" alt="blog-img"></a>
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
@@ -19,10 +21,12 @@
                                     <li>@sukien.NgayDang</li>
                                 </ul>
                             </div>
-                            <h1><a href="@Url.Action("ChitietBlog","Home",new{ id = sukien.MaSK})">@sukien.TieuDe</a></h1>
+                            <h1><a href="@Url.Action("ChitietBlog", "Home", new { id = sukien.MaSK })">@sukien.TieuDe</a></h1>
                         </div>
                     </div>
-                </div>    }
+                </div>    
+                }
+            }
         </div>
     </div>
 </div>

@@ -48,6 +48,12 @@ namespace Test2
                 defaults: new { controller = "Home", action = "Blog", id = UrlParameter.Optional }
             );
 
+            ////Cấu hình sự kiện // chỉ route đc 1 cái rout mà set 2 cái là bị lỗi : cái này cần hỏi thầy 
+            //routes.MapRoute(
+            //    name: "XemBlogChiTiet",
+            //    url: "{tenblog}-{id}",
+            //    defaults: new { controller = "Home", action = "ChitietBlog", id = UrlParameter.Optional }
+            //    );
 
             //cấu hình đường dẫn xem chi tiết của sản phẩm
             routes.MapRoute(

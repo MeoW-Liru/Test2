@@ -49,7 +49,6 @@ namespace Test2.Controllers
 
 
 
-
         [HttpGet]
         public ActionResult ThemSP()
         {
@@ -135,6 +134,9 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult SuaSP(string id)
         {
+
+
+
             //var sanpham = data.SanPhams.First(m => m.MaSP == id);
             SanPham sanpham = data.SanPhams.Where(m => m.MaSP == id).FirstOrDefault();
             ViewBag.MaSP = sanpham.MaSP;
@@ -405,6 +407,7 @@ namespace Test2.Controllers
             UpdateSuKien.MoTa = sukien.MoTa;
             UpdateSuKien.MoTaThem = sukien.MoTaChiTiet;
             UpdateSuKien.MoTaChiTiet = sukien.MoTaThem;
+            UpdateSuKien.Status = sukien.Status;
             for (int i = 0; i < ImageUpload.Length; i++)
             {
                 if (ImageUpload[i] != null && ImageUpload[i].ContentLength > 0)

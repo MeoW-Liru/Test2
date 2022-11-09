@@ -134,11 +134,13 @@
                 <div class="row">
                     @foreach (var caphe in Model)
                     {
+                        if (caphe.Status == true)
+                        {
         <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="single-product-wrap mb-35">
                 <div class="product-img product-img-zoom mb-15">
                     @*Chỗ này cái link đã sửa để tối ưu hóa*@
-                    <a href="@Url.RouteUrl("XemChiTiet",new{ id = caphe.MaSP,@tensp = caphe.TenSP})", herf="@Url.Action("BinhLuan","Home",new{ id = caphe.MaSP})">
+                    <a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })", herf="@Url.Action("BinhLuan", "Home", new { id = caphe.MaSP })">
                         <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="270" height="340"  />
                     </a>
                     @*Chỗ này cái link đã sửa để tối ưu hóa*@
@@ -151,27 +153,27 @@
 
                 </div>
                 <div class="product-content-wrap-2 text-center">
-                    <h3><a href="@Url.RouteUrl("XemChiTiet",new{ id = caphe.MaSP,@tensp = caphe.TenSP})">@caphe.TenSP</a></h3>
+                    <h3><a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })">@caphe.TenSP</a></h3>
                     <div class="product-price-2">
                         <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
                     </div>
                 </div>
 
                 <div class="product-content-wrap-2 product-content-position text-center">
-                    <h3><a href="@Url.Action("Details","Home",new{ id = caphe.MaSP})">@caphe.TenSP</a></h3>
+                    <h3><a href="@Url.Action("Details", "Home", new { id = caphe.MaSP })">@caphe.TenSP</a></h3>
                     <div class="product-price-2" >
                         <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
                     </div>
                     <div class="pro-add-to-cart">
                         @if (caphe.Status == true)
                         {
-                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })">
+                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })">
                                 <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
                             </a>
                         }
                         else
                         {
-                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP , @strURL=Request.Url.ToString() })"  style="pointer-events: none">
+                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })"  style="pointer-events: none">
                                 <button title="Thêm Vào Giỏ Hàng" disabled>Hết hàng</button>
                             </a>
                         }
@@ -179,7 +181,9 @@
                     </div>
                 </div>
             </div>
-        </div> <!--End_Sản Phẩm HOT-->}
+        </div>
+                        }
+        <!--End_Sản Phẩm HOT-->}
                 </div>
             </div>
         </div>

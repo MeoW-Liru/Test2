@@ -314,6 +314,7 @@
     <Content Include="images\brand-logo\brand-logo-9.png" />
     <Content Include="images\CafeLayout\banner.png" />
     <Content Include="images\CafeLayout\banner6.jpg" />
+    <Content Include="images\CafeLayout\bannerTra.jpg" />
     <Content Include="images\CafeLayout\BeanLayout1.jpg" />
     <Content Include="images\CafeLayout\logo2.png" />
     <Content Include="images\CafeLayout\logoMobile.png" />
@@ -324,6 +325,8 @@
     <Content Include="images\CafeLayout\Logo_CafeTeam_3_70.png" />
     <Content Include="images\CafeProduct\Bean270x324.jpg" />
     <Content Include="images\CafeProduct\CafeCherry290x230.png" />
+    <Content Include="images\CafeLayout\layoutcafe.jpg" />
+    <Content Include="images\CafeLayout\jakub-dziubak-XtUd5SiX464-unsplash.jpg" />
     <Content Include="images\CafeProduct\tra-xanh-lai-wao-500gr.jpg" />
     <Content Include="images\CafeProduct\TraDen.jpg" />
     <Content Include="images\CafeProduct\TraXanh.jpg" />
@@ -565,7 +568,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\dbCoffee.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -134,4 +134,13 @@
       <Association Name="SALE_SanPham" Member="SanPhams" ThisKey="saleID" OtherKey="saleID" Type="SanPham" />
     </Type>
   </Table>
+  <Table Name="dbo.ThongTinNews" Member="ThongTinNews">
+    <Type Name="ThongTinNew">
+      <Column Name="id" Type="System.String" DbType="VarChar(5) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tieuDe" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="soLuongSale" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noiDung" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="hinh" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

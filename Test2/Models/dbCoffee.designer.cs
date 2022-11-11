@@ -63,6 +63,9 @@ namespace Test2.Models
     partial void InsertSALE(SALE instance);
     partial void UpdateSALE(SALE instance);
     partial void DeleteSALE(SALE instance);
+    partial void InsertThongTinNew(ThongTinNew instance);
+    partial void UpdateThongTinNew(ThongTinNew instance);
+    partial void DeleteThongTinNew(ThongTinNew instance);
     #endregion
 		
 		public dbCoffeeDataContext() : 
@@ -180,6 +183,14 @@ namespace Test2.Models
 			get
 			{
 				return this.GetTable<SALE>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ThongTinNew> ThongTinNews
+		{
+			get
+			{
+				return this.GetTable<ThongTinNew>();
 			}
 		}
 	}
@@ -2906,6 +2917,164 @@ namespace Test2.Models
 		{
 			this.SendPropertyChanging();
 			entity.SALE = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ThongTinNews")]
+	public partial class ThongTinNew : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _tieuDe;
+		
+		private System.Nullable<int> _soLuongSale;
+		
+		private string _noiDung;
+		
+		private string _hinh;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OntieuDeChanging(string value);
+    partial void OntieuDeChanged();
+    partial void OnsoLuongSaleChanging(System.Nullable<int> value);
+    partial void OnsoLuongSaleChanged();
+    partial void OnnoiDungChanging(string value);
+    partial void OnnoiDungChanged();
+    partial void OnhinhChanging(string value);
+    partial void OnhinhChanged();
+    #endregion
+		
+		public ThongTinNew()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="VarChar(5) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tieuDe", DbType="NVarChar(128)")]
+		public string tieuDe
+		{
+			get
+			{
+				return this._tieuDe;
+			}
+			set
+			{
+				if ((this._tieuDe != value))
+				{
+					this.OntieuDeChanging(value);
+					this.SendPropertyChanging();
+					this._tieuDe = value;
+					this.SendPropertyChanged("tieuDe");
+					this.OntieuDeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_soLuongSale", DbType="Int")]
+		public System.Nullable<int> soLuongSale
+		{
+			get
+			{
+				return this._soLuongSale;
+			}
+			set
+			{
+				if ((this._soLuongSale != value))
+				{
+					this.OnsoLuongSaleChanging(value);
+					this.SendPropertyChanging();
+					this._soLuongSale = value;
+					this.SendPropertyChanged("soLuongSale");
+					this.OnsoLuongSaleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noiDung", DbType="NVarChar(128)")]
+		public string noiDung
+		{
+			get
+			{
+				return this._noiDung;
+			}
+			set
+			{
+				if ((this._noiDung != value))
+				{
+					this.OnnoiDungChanging(value);
+					this.SendPropertyChanging();
+					this._noiDung = value;
+					this.SendPropertyChanged("noiDung");
+					this.OnnoiDungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hinh", DbType="NVarChar(MAX)")]
+		public string hinh
+		{
+			get
+			{
+				return this._hinh;
+			}
+			set
+			{
+				if ((this._hinh != value))
+				{
+					this.OnhinhChanging(value);
+					this.SendPropertyChanging();
+					this._hinh = value;
+					this.SendPropertyChanged("hinh");
+					this.OnhinhChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

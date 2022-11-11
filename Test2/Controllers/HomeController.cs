@@ -150,35 +150,8 @@ namespace Test2.Controllers
         public ActionResult LienHe()
         {
             ViewBag.Success = false;
-            return View(new Contact());
-        }
-
-        [HttpPost]
-        public ActionResult LienHe(Contact contact)
-        {
-            ViewBag.Success = false;
-            if (ModelState.IsValid)
-            {
-                // Collect additional data
-                contact.SentDate = System.DateTime.Now;
-                contact.IP = Request.UserHostAddress;
-
-
-                SmtpClient smtpClient = new SmtpClient();
-                smtpClient.EnableSsl = true;
-                MailMessage m = new MailMessage(
-                    "lirumeows@gmail.com", // From
-                    "meowsliru@gmail.com", // To
-                    "Someone is contacting you through your website!", // Subject
-                    contact.BuildMessage()); // Body
-                ViewBag.Success = true;
-                smtpClient.Send(m);
-            }
-
             return View();
         }
-
-
 
 
         public ActionResult Blog(int? page)
@@ -213,7 +186,6 @@ namespace Test2.Controllers
             var tra = from sp in data.SanPhams where sp.MaLoaiSP == "SP7" select sp;
             return View(tra.ToPagedList(pageNum, pageSize));
         }
-
 
 
         

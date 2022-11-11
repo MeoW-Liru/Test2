@@ -105,20 +105,6 @@
 <div class="product-area pb-80">
     <div class="container">
         <div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/CafeLayout/BeanLayout1.jpg)">
-            <div class="container">
-                @*<div class="deal-content-1">
-                    <span>deal of the day</span>
-                    <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
-                    <div class="timer-wrap">
-                        <h4>Expires in:</h4>
-                        <div class="timer-style-1" id="timer-1-active"></div>
-                    </div>
-                    <div class="deal-btn">
-                        <a href="product-details.html">Buy now</a>
-                    </div>
-                </div>*@
-            </div>
         </div>
         <div class="section-title-2 text-center mb-45">
             <h2 style="padding-top:30px">Sản Phẩm <span>HOT</span></h2>
@@ -136,74 +122,74 @@
                     {
                         if (caphe.Status == true)
                         {
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
-            <div class="single-product-wrap mb-35">
-                <div class="product-img product-img-zoom mb-15">
-                    @*Chỗ này cái link đã sửa để tối ưu hóa*@
-                    <a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })", herf="@Url.Action("BinhLuan", "Home", new { id = caphe.MaSP })">
-                        <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="270" height="340"  />
-                    </a>
-                    @*Chỗ này cái link đã sửa để tối ưu hóa*@
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12">
+                                <div class="single-product-wrap mb-35">
+                                    <div class="product-img product-img-zoom mb-15">
+                                        @*Chỗ này cái link đã sửa để tối ưu hóa*@
+                                        <a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })" , herf="@Url.Action("BinhLuan", "Home", new { id = caphe.MaSP })">
+                                            <img alt="@caphe.TenSP" src="~/images/CafeProduct/@caphe.HinhAnh" width="270" height="340" />
+                                        </a>
+                                        @*Chỗ này cái link đã sửa để tối ưu hóa*@
 
-                    @*<div class="product-action-2 tooltip-style-2">
-                        <button title="Yêu Thích"><i class="icon-heart"></i></button>
-                        <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                        <button title="So Sánh"><i class="icon-refresh"></i></button>
-                    </div>*@
+                                        <div class="product-action-2 tooltip-style-2">
+                                            <button title="Yêu Thích"><i class="icon-heart"></i></button>
+                                            <button title="Xem Nhanh" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
+                                            <button title="So Sánh"><i class="icon-refresh"></i></button>
+                                        </div>
 
-                </div>
-                <div class="product-content-wrap-2 text-center">
-                    <h3><a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })">@caphe.TenSP</a></h3>
-                    <div class="product-price-2">
-                        <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
-                    </div>
-                </div>
+                                    </div>
+                                    <div class="product-content-wrap-2 text-center">
+                                        <h3><a href="@Url.RouteUrl("XemChiTiet", new { id = caphe.MaSP, @tensp = caphe.TenSP })">@caphe.TenSP</a></h3>
+                                        <div class="product-price-2">
+                                            <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
+                                        </div>
+                                    </div>
 
-                <div class="product-content-wrap-2 product-content-position text-center">
-                    <h3><a href="@Url.Action("Details", "Home", new { id = caphe.MaSP })">@caphe.TenSP</a></h3>
-                    <div class="product-price-2" >
-                        <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
-                    </div>
-                    <div class="pro-add-to-cart">
-                        @if (caphe.Status == true)
-                        {
-                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })">
-                                <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
-                            </a>
+                                    <div class="product-content-wrap-2 product-content-position text-center">
+                                        <h3><a href="@Url.Action("Details", "Home", new { id = caphe.MaSP })">@caphe.TenSP</a></h3>
+                                        <div class="product-price-2">
+                                            <p><span style="color:red">@String.Format("{0:0,0}", caphe.GiaTien) đ</span></p>
+                                        </div>
+                                        <div class="pro-add-to-cart">
+                                            @if (caphe.Status == true)
+                                            {
+                                                <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })">
+                                                    <button title="Thêm Vào Giỏ Hàng">Thêm Vào Giỏ Hàng</button>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })" style="pointer-events: none">
+                                                    <button title="Thêm Vào Giỏ Hàng" disabled>Hết hàng</button>
+                                                </a>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
-                        else
-                        {
-                            <a href="@Url.Action("Themgiohang", "Giohang", new { @sMaSP = caphe.MaSP, @strURL = Request.Url.ToString() })"  style="pointer-events: none">
-                                <button title="Thêm Vào Giỏ Hàng" disabled>Hết hàng</button>
-                            </a>
-                        }
-
-                    </div>
-                </div>
-            </div>
-        </div>
-                        }
-        <!--End_Sản Phẩm HOT-->}
+                        <!--End_Sản Phẩm HOT-->}
                 </div>
             </div>
         </div>
         @*Quảng cáo trà*@
-        <div class="deal-area pt-150 pb-130 bg-img" style="background-image: url(/images/banner/BannerTra.jpg)">
+        <div class="deal-area pt-150 pb-130 bg-img" style="background-image:url(/images/CafeLayout/layoutcafe.jpg);">
             <div class="container">
-                @*<div class="deal-content-1">
-                    <span>deal of the day</span>
-                    <h2><span>50% OFF</span> Basic <br>Tee Flavor</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipis elit. Nunc imperdiet, nulla.</p>
+                <div class="deal-content-1">
+                    <span>Thông Tin Mới Ngày Hôm Nay</span>
+                    <h2><span>sản phẩm</span> Cà phê  <br>Trà Xanh</h2>
+                    <p>Các dòng sản phẩm trà và cà phê hảo hạng mới của chúng tôi luôn luôn được nhập mới mỗi ngày từ các vùng thảo nguyên đồi núi KON-TUM và GIA LAI</p>
                     <div class="timer-wrap">
-                        <h4>Expires in:</h4>
-                        <div class="timer-style-1" id="timer-1-active"></div>
+                        <h3>Thông tin sản phẩm</h3>
                     </div>
                     <div class="deal-btn">
-                        <a href="product-details.html">Buy now</a>
+                        @Html.RouteLink("Tham Khảo", "SanPham")
                     </div>
-                </div>*@
+                </div>
             </div>
         </div>
+        @*quảng cáo sản phẩm*@
         <div class="blog-area pt-115">
             <div class="container">
                 <div class="section-title-2 text-center mb-45">
@@ -213,6 +199,8 @@
                 @Html.Action("Tra", "Home")
             </div>
         </div>
+
+
         <div class="blog-area pt-115">
             <div class="container">
                 <div class="section-title-2 text-center mb-45">

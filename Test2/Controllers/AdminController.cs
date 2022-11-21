@@ -134,9 +134,6 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult SuaSP(string id)
         {
-
-
-
             //var sanpham = data.SanPhams.First(m => m.MaSP == id);
             SanPham sanpham = data.SanPhams.Where(m => m.MaSP == id).FirstOrDefault();
             ViewBag.MaSP = sanpham.MaSP;
@@ -229,30 +226,29 @@ namespace Test2.Controllers
             return View(data.SALEs.ToList().OrderBy(n => n.saleID).ToPagedList(pageNumber, pageSize));
         }
 
-        [HttpGet]
-        public ActionResult ThemSale()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult ThemSale(SALE sale , FormCollection collection)
-        {
-            string sMaSale = collection["txtIDSALE"];
-            string sTenSale = collection["txtTenSale"];
-            string sMoTa = collection["txtMoTa"];
 
-            sale.saleID = sMaSale;
-            sale.tenSK = sTenSale;
-            sale.moTa = sMoTa;
+        
+        //[HttpGet]
+        //public ActionResult ThemSale()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //public ActionResult ThemSale(SALE sale , FormCollection collection)
+        //{
+        //    string sMaSale = collection["txtIDSALE"];
+        //    string sTenSale = collection["txtTenSale"];
+        //    string sMoTa = collection["txtMoTa"];
 
-            data.SALEs.InsertOnSubmit(sale);
-            data.SubmitChanges();
-            return RedirectToAction("ListSale");
+        //    sale.saleID = sMaSale;
+        //    sale.tenSK = sTenSale;
+        //    sale.keySale = sMoTa;
 
-        }
+        //    data.SALEs.InsertOnSubmit(sale);
+        //    data.SubmitChanges();
+        //    return RedirectToAction("ListSale");
 
-
-
+        //}
 
 
 
@@ -262,6 +258,7 @@ namespace Test2.Controllers
             int pageSize = 9;
             return View(data.NhaCungCaps.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
         }
+
         [HttpGet]
         public ActionResult ThemNCC()
         {
@@ -283,6 +280,8 @@ namespace Test2.Controllers
             data.SubmitChanges();
             return RedirectToAction("ListNCC");
         }
+
+
         [HttpGet]
         public ActionResult XoaNCC(string id)
         {

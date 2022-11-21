@@ -25,6 +25,8 @@ namespace Test2.Controllers
             return lstGiohang;
         }
 
+
+
         public ActionResult Themgiohang (string sMaSP, string strURL)
         {
             List<Giohang> lstGiohang = Laygiohang();
@@ -44,6 +46,7 @@ namespace Test2.Controllers
 
         private int TongSoLuong()
         {
+
             int iTongSoLuong = 0;
             List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
             if(lstGiohang!=null)
@@ -54,43 +57,26 @@ namespace Test2.Controllers
             return iTongSoLuong;
         }
 
-        //private decimal TongTienhang()
-        //{
-        //    decimal iTongTien = 0;
-        //    List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
-        //    if (lstGiohang != null)
-        //    {
-        //        iTongTien = lstGiohang.Sum(n => n.dThanhtien);
-
-        //    }
-        //    return iTongTien;
-        //}
-        // Tien ship ............................
-
-        //private decimal TienShip()
-        //{
-        //    decimal TienShip =25000;
-           
-        //    return TienShip;
-        //}
-
+        // phải truyền đc cái sale vào đây 
         private decimal TongTienThu()
         {
             decimal iTongTien = 0;
+
+            // chỗ cần truyền vô để sale (hiện tại đang cần truyền thêm key để mở đc cái sale )
+             decimal iTiensale = 0;
+            //
+
+            decimal iTongTienSale = 0;
             List<Giohang> lstGiohang = Session["Giohang"] as List<Giohang>;
             if (lstGiohang != null)
             {
                 iTongTien = lstGiohang.Sum(n => n.dThanhtien);
-
+                iTongTienSale = iTongTien - iTiensale;
             }
-            return iTongTien ;
+            return iTongTienSale ;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// 
+        //
+ 
         private decimal TongTienDola()
         {
             decimal iTongTien = 0;
@@ -154,14 +140,6 @@ namespace Test2.Controllers
 
 
 
-
-
-
-
-
-
-
-
         [HttpGet]
         public ActionResult DatHang()
         {
@@ -222,9 +200,8 @@ namespace Test2.Controllers
             content = content.Replace("{{NgayDat}}", dh.NgayLap.ToString());
             content = content.Replace("{{Total}}", TongTienThu().ToString());
             var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
-
-            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
-            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+            new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê ", content);
+            new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê ", content);
 
             Session["Giohang"] = null;
             return RedirectToAction("XacNhan", "Giohang");
@@ -340,8 +317,8 @@ namespace Test2.Controllers
                 content = content.Replace("{{Total}}", TongTienThu().ToString());
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
-                new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê của Khoa và Quý <3", content);
+                new common.MailHelper().sendMail(kh.Email, "Đơn hàng mới từ tiệm cà phê ", content);
+                new common.MailHelper().sendMail(toEmail, "Đơn hàng mới từ tiệm cà phê ", content);
 
             }
             return View();

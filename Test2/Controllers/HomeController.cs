@@ -8,7 +8,6 @@ using PagedList;
 using PagedList.Mvc;
 using static ClosedXML.Excel.XLPredefinedFormat;
 using System.Net.Mail;
-
 namespace Test2.Controllers
 {
     public class HomeController : Controller
@@ -28,6 +27,14 @@ namespace Test2.Controllers
             return data.SanPhams.OrderByDescending(a => a.NgayDang).Take(count).ToList();
         }
 
+
+
+        public ActionResult Recommend()
+        {
+            
+            var Recom = layCaPhe(4);
+            return View(Recom);
+        }
 
 
         public ActionResult LoaiCaPhe()

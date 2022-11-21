@@ -17,9 +17,11 @@ namespace Test2.Models
 
         public int iSoluong { set; get; }
 
+        public decimal dSale { set; get; }
+
         public decimal dThanhtien
         {
-            get { return iSoluong * dGiatien; }
+            get { return (iSoluong * dGiatien); }
         }
 
         public Giohang (string MaSP)
@@ -30,7 +32,6 @@ namespace Test2.Models
             sHinhAnh = sp.HinhAnh;
             dGiatien = decimal.Parse(sp.GiaTien.ToString());
             iSoluong = 1;
-
         }
     }
 }

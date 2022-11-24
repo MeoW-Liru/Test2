@@ -10,7 +10,7 @@ using System.IO;
 using System.Data;
 using ClosedXML.Excel;
 using System.Data.Entity;
-
+using System.Web.Security;
 
 namespace Test2.Controllers
 {
@@ -46,16 +46,29 @@ namespace Test2.Controllers
             return View();
         }
 
+        public ActionResult DangXuat()
+        {
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("DangNhapAdmin", "Admin");
+        }
 
 
 
         [HttpGet]
         public ActionResult ThemSP()
         {
-            ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            { 
+                ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
             ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
             ViewBag.saleID = new SelectList(data.SALEs.ToList().OrderBy(n => n.tenSK), "saleID", "TenSK");
             return View();
+            }
         }
         [HttpPost]
         [ValidateInput(false)]
@@ -93,28 +106,42 @@ namespace Test2.Controllers
 
         public ActionResult ChitietSP(string id)
         {
-            SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
-            ViewBag.MaSP = sp.MaSP;
-            if (sp == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(sp);
+            else
+            {
+                SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
+                ViewBag.MaSP = sp.MaSP;
+                if (sp == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(sp);
+            }
         }
 
 
         [HttpGet]
         public ActionResult XoaSP(string id)
         {
-            SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
-            ViewBag.MaSP = sp.MaSP;
-            if (sp == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(sp);
+            else
+            {
+                SanPham sp = data.SanPhams.SingleOrDefault(n => n.MaSP == id);
+                ViewBag.MaSP = sp.MaSP;
+                if (sp == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(sp);
+            }
         }
         [HttpPost, ActionName("XoaSP")]
         public ActionResult XacNhanXoaSP(string id)
@@ -134,68 +161,96 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult SuaSP(string id)
         {
-            //var sanpham = data.SanPhams.First(m => m.MaSP == id);
-            SanPham sanpham = data.SanPhams.Where(m => m.MaSP == id).FirstOrDefault();
-            ViewBag.MaSP = sanpham.MaSP;
-            if (sanpham == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sanpham.MaLoaiSP);
-            ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
-            return View(sanpham);
+            else
+            {
+                //var sanpham = data.SanPhams.First(m => m.MaSP == id);
+                SanPham sanpham = data.SanPhams.Where(m => m.MaSP == id).FirstOrDefault();
+                ViewBag.MaSP = sanpham.MaSP;
+                if (sanpham == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai", sanpham.MaLoaiSP);
+                ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC", sanpham.MaNCC);
+                return View(sanpham);
+            }
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult SuaSP(SanPham sanpham, HttpPostedFileBase[] ProductUpload, string id)
         {
-            SanPham UpdateSanPham = data.SanPhams.Where(n => n.MaSP == id).FirstOrDefault();
-            UpdateSanPham.TenSP = sanpham.TenSP;
-            UpdateSanPham.MoTa = sanpham.MoTa;
-            UpdateSanPham.GiaTien = sanpham.GiaTien;
-            UpdateSanPham.NgayDang = sanpham.NgayDang;
-            UpdateSanPham.TrongLuong = sanpham.TrongLuong;
-            UpdateSanPham.HSD = sanpham.HSD;
-            UpdateSanPham.NSX = sanpham.NSX;
-            UpdateSanPham.MaLoaiSP = sanpham.MaLoaiSP;
-            UpdateSanPham.MaNCC = sanpham.MaNCC;
-            UpdateSanPham.Status = sanpham.Status;
-
-            for (int i = 0; i < ProductUpload.Length; i++)
+            if (Session["UserName"] == null)
             {
-                if (ProductUpload[i] != null && ProductUpload[i].ContentLength > 0)
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                SanPham UpdateSanPham = data.SanPhams.Where(n => n.MaSP == id).FirstOrDefault();
+                UpdateSanPham.TenSP = sanpham.TenSP;
+                UpdateSanPham.MoTa = sanpham.MoTa;
+                UpdateSanPham.GiaTien = sanpham.GiaTien;
+                UpdateSanPham.NgayDang = sanpham.NgayDang;
+                UpdateSanPham.TrongLuong = sanpham.TrongLuong;
+                UpdateSanPham.HSD = sanpham.HSD;
+                UpdateSanPham.NSX = sanpham.NSX;
+                UpdateSanPham.MaLoaiSP = sanpham.MaLoaiSP;
+                UpdateSanPham.MaNCC = sanpham.MaNCC;
+                UpdateSanPham.Status = sanpham.Status;
+
+                for (int i = 0; i < ProductUpload.Length; i++)
                 {
-                    var fileName = Path.GetFileName(ProductUpload[i].FileName);
-                    var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), fileName);
-                    if (!System.IO.File.Exists(path))
+                    if (ProductUpload[i] != null && ProductUpload[i].ContentLength > 0)
                     {
-                        ProductUpload[i].SaveAs(path);
+                        var fileName = Path.GetFileName(ProductUpload[i].FileName);
+                        var path = Path.Combine(Server.MapPath("~/images/CafeProduct"), fileName);
+                        if (!System.IO.File.Exists(path))
+                        {
+                            ProductUpload[i].SaveAs(path);
+                        }
                     }
                 }
+                if (ProductUpload[0] != null)
+                    UpdateSanPham.HinhAnh = ProductUpload[0].FileName;
+                if (ProductUpload[1] != null)
+                    UpdateSanPham.HinhAnhMoTa = ProductUpload[1].FileName;
+                data.SubmitChanges();
+                return RedirectToAction("Cafe");
             }
-            if (ProductUpload[0] != null)
-                UpdateSanPham.HinhAnh = ProductUpload[0].FileName;
-            if (ProductUpload[1] != null)
-                UpdateSanPham.HinhAnhMoTa = ProductUpload[1].FileName;
-            data.SubmitChanges();
-            return RedirectToAction("Cafe");
         }
 
 
 
         public ActionResult ListLoaiSP(int? page)
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.LoaiSPs.ToList().OrderBy(n => n.MaLoaiSP).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.LoaiSPs.ToList().OrderBy(n => n.MaLoaiSP).ToPagedList(pageNumber, pageSize));
+            }
         }
 
 
         [HttpGet]
         public ActionResult ThemLoaiSp()
         {
-            return View();
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
@@ -221,13 +276,20 @@ namespace Test2.Controllers
         //Sale Sản phẩm 
         public ActionResult ListSale(int? page)
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.SALEs.ToList().OrderBy(n => n.saleID).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.SALEs.ToList().OrderBy(n => n.saleID).ToPagedList(pageNumber, pageSize));
+            }
         }
 
 
-        
+
         //[HttpGet]
         //public ActionResult ThemSale()
         //{
@@ -254,15 +316,29 @@ namespace Test2.Controllers
 
         public ActionResult ListNCC(int? page)
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.NhaCungCaps.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.NhaCungCaps.ToList().OrderBy(n => n.MaNCC).ToPagedList(pageNumber, pageSize));
+            }
         }
 
         [HttpGet]
         public ActionResult ThemNCC()
         {
-            return View();
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         public ActionResult ThemNCC(NhaCungCap NCC, FormCollection collection)
@@ -285,14 +361,21 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult XoaNCC(string id)
         {
-            NhaCungCap NCC = data.NhaCungCaps.SingleOrDefault(n => n.MaNCC == id);
-            ViewBag.MaNCC = NCC.MaNCC;
-            if (NCC == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(NCC);
+            else
+            {
+                NhaCungCap NCC = data.NhaCungCaps.SingleOrDefault(n => n.MaNCC == id);
+                ViewBag.MaNCC = NCC.MaNCC;
+                if (NCC == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(NCC);
+            }
         }
         [HttpPost, ActionName("XoaNCC")]
         public ActionResult XacNhanXoaNCC(string id)
@@ -314,14 +397,21 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult XoaLoaiSP(string id)
         {
-            LoaiSP loaisp = data.LoaiSPs.SingleOrDefault(n => n.MaLoaiSP == id);
-            ViewBag.MaLoaiSP = loaisp.MaLoaiSP;
-            if (loaisp == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(loaisp);
+            else
+            {
+                LoaiSP loaisp = data.LoaiSPs.SingleOrDefault(n => n.MaLoaiSP == id);
+                ViewBag.MaLoaiSP = loaisp.MaLoaiSP;
+                if (loaisp == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(loaisp);
+            }
         }
         [HttpPost, ActionName("XoaLoaiSP")]
         public ActionResult XacNhanXoaLoaiSP(string id)
@@ -343,14 +433,21 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult ChiTietBlog(string id)
         {
-            SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
-            ViewBag.MaSK = sk.MaSK;
-            if (sk == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(sk);
+            else
+            {
+                SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+                ViewBag.MaSK = sk.MaSK;
+                if (sk == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(sk);
+            }
         }
 
 
@@ -358,7 +455,14 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult ThemBlog()
         {
-            return View();
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         public ActionResult ThemBlog(SuKien sukien, HttpPostedFileBase[] ImageUpload)
@@ -394,8 +498,15 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult SuaBlog(string id)
         {
-            var blog = data.SuKiens.Where(n => n.MaSK == id).FirstOrDefault();
-            return View(blog);
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                var blog = data.SuKiens.Where(n => n.MaSK == id).FirstOrDefault();
+                return View(blog);
+            }
         }
 
         [HttpPost]
@@ -439,14 +550,21 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult XoaBlog(string id)
         {
-            SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
-            ViewBag.MaSK = sk.MaSK;
-            if (sk == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(sk);
+            else
+            {
+                SuKien sk = data.SuKiens.SingleOrDefault(n => n.MaSK == id);
+                ViewBag.MaSK = sk.MaSK;
+                if (sk == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(sk);
+            }
         }
         [HttpPost, ActionName("XoaBlog")]
         public ActionResult XacNhanXoaSuKien(string id)
@@ -467,67 +585,101 @@ namespace Test2.Controllers
         //Xuất Blog
         public ActionResult BlogList(int? page)
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.SuKiens.ToList().OrderBy(n => n.MaSK).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.SuKiens.ToList().OrderBy(n => n.MaSK).ToPagedList(pageNumber, pageSize));
+            }
         }
 
         //Xuất sản phẩm
         public ActionResult Cafe(int? page)
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.SanPhams.ToList().OrderBy(n => n.MaSP).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.SanPhams.ToList().OrderBy(n => n.MaSP).ToPagedList(pageNumber, pageSize));
+            }
         }
 
         //Hóa đơn
         public ActionResult ChiTiet(int MaDH)
         {
-            using (dbCoffeeDataContext db = new dbCoffeeDataContext())
+            if (Session["UserName"] == null)
             {
-                List<KhachHang> khachhang = db.KhachHangs.ToList();
-                List<DonHang> donhang = db.DonHangs.ToList();
-                List<SanPham> sanpham = db.SanPhams.ToList();
-                List<ChiTietDonHang> ctdh = db.ChiTietDonHangs.ToList();
-                var main = from h in donhang
-                           join k in khachhang on h.MaKH equals k.MaKH
-                           where (h.MaDH == MaDH)
-                           select new ThongTinHD
-                           {
-                               donHang = h,
-                               khachhang = k
-                           };
-                var sub = from c in ctdh
-                          join s in sanpham on c.MaSP equals s.MaSP
-                          where (c.MaDH == MaDH)
-                          select new ThongTinHD
-                          {
-                              ctdh = c,
-                              SP = s,
-                              TongTien = Convert.ToDouble(c.ThanhTien * c.SoLuongSP)
-                          };
-                ViewBag.Main = main;
-                ViewBag.Sub = sub;
-                return View();
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-
+            else
+            {
+                using (dbCoffeeDataContext db = new dbCoffeeDataContext())
+                {
+                    List<KhachHang> khachhang = db.KhachHangs.ToList();
+                    List<DonHang> donhang = db.DonHangs.ToList();
+                    List<SanPham> sanpham = db.SanPhams.ToList();
+                    List<ChiTietDonHang> ctdh = db.ChiTietDonHangs.ToList();
+                    var main = from h in donhang
+                               join k in khachhang on h.MaKH equals k.MaKH
+                               where (h.MaDH == MaDH)
+                               select new ThongTinHD
+                               {
+                                   donHang = h,
+                                   khachhang = k
+                               };
+                    var sub = from c in ctdh
+                              join s in sanpham on c.MaSP equals s.MaSP
+                              where (c.MaDH == MaDH)
+                              select new ThongTinHD
+                              {
+                                  ctdh = c,
+                                  SP = s,
+                                  TongTien = Convert.ToDouble(c.ThanhTien * c.SoLuongSP)
+                              };
+                    ViewBag.Main = main;
+                    ViewBag.Sub = sub;
+                    return View();
+                }
+            }
         }
         public ActionResult DonHang()
         {
-            return View(data.DonHangs.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                return View(data.DonHangs.ToList());
+            }
         }
 
         [HttpGet]
-        public ActionResult fixDonHang(string id )
+        public ActionResult fixDonHang(string id)
         {
-            DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
-            ViewBag.MaKH = donhang.MaDH;
-            if (donhang == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(donhang);
+            else
+            {
+                DonHang donhang = data.DonHangs.SingleOrDefault(n => n.MaDH == int.Parse(id));
+                ViewBag.MaKH = donhang.MaDH;
+                if (donhang == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(donhang);
+            }
         }
         [HttpPost]
         public ActionResult fixDonHang(string id, FormCollection collection)
@@ -568,19 +720,33 @@ namespace Test2.Controllers
 
         public ActionResult listDonhang(int? page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
         {
-            int pageNumber = (page ?? 1);
-            int pageSize = 9;
-            return View(data.DonHangs.ToList().OrderBy(n => n.MaDH).ToPagedList(pageNumber, pageSize));
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                int pageNumber = (page ?? 1);
+                int pageSize = 9;
+                return View(data.DonHangs.ToList().OrderBy(n => n.MaDH).ToPagedList(pageNumber, pageSize));
+            }
         }
 
 
         public ActionResult DoanhThu(int? page)
         {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
 
-            var TongDonHangNgay = data.DonHangs.ToList();
-            int pageSize = 7;
-            int pageNum = page ?? 1;
-            return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
+                var TongDonHangNgay = data.DonHangs.ToList();
+                int pageSize = 7;
+                int pageNum = page ?? 1;
+                return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
+            }
         }
 
 
@@ -618,20 +784,34 @@ namespace Test2.Controllers
 
         public ActionResult QuanLyKH()
         {
-            return View(data.KhachHangs.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                return View(data.KhachHangs.ToList());
+            }
         }
 
         [HttpGet]
         public ActionResult FixKhachHang(string id)
         {
-            KhachHang khachHang = data.KhachHangs.SingleOrDefault(n => n.MaKH == int.Parse(id));
-            ViewBag.MaKH = khachHang.MaKH;
-            if (khachHang == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(khachHang);
+            else
+            {
+                KhachHang khachHang = data.KhachHangs.SingleOrDefault(n => n.MaKH == int.Parse(id));
+                ViewBag.MaKH = khachHang.MaKH;
+                if (khachHang == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(khachHang);
+            }
         }
         [HttpPost]
         public ActionResult FixKhachHang(string id, FormCollection collection)
@@ -672,14 +852,21 @@ namespace Test2.Controllers
         [HttpGet]
         public ActionResult XoaKh(int id)
         {
-            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.MaKH == id);
-            ViewBag.MaKH = kh.MaKH;
-            if (kh == null)
+            if (Session["UserName"] == null)
             {
-                Response.StatusCode = 404;
-                return null;
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            return View(kh);
+            else
+            {
+                KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.MaKH == id);
+                ViewBag.MaKH = kh.MaKH;
+                if (kh == null)
+                {
+                    Response.StatusCode = 404;
+                    return null;
+                }
+                return View(kh);
+            }
         }
         [HttpPost, ActionName("XoaKh")]
         public ActionResult XacNhanXoaKh(int id)
@@ -729,29 +916,43 @@ namespace Test2.Controllers
 
         public ActionResult BangDieuKhien()
         {
-            ViewBag.Online = HttpContext.Application["Online"].ToString();
-            ViewBag.SoNguoiTruyCap = HttpContext.Application["SoNguoiTruyCap"].ToString();// lấy số lượng người truy cập
-            ViewBag.TongDonHang = TongDonHang();
-            ViewBag.SLKhachHang = SoluongKhachHang();
-            ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
-            ViewBag.slSanPham = slSanPham();
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+                ViewBag.Online = HttpContext.Application["Online"].ToString();
+                ViewBag.SoNguoiTruyCap = HttpContext.Application["SoNguoiTruyCap"].ToString();// lấy số lượng người truy cập
+                ViewBag.TongDonHang = TongDonHang();
+                ViewBag.SLKhachHang = SoluongKhachHang();
+                ViewBag.TongDoanhThu = ThongKeTongDoanhThu();
+                ViewBag.slSanPham = slSanPham();
 
-            return View();
+                return View();
+            }
         }
 
 
         [HttpGet]
         public ActionResult TimHoaDon(int? page, string sTuKhoa)
         {
-            ViewBag.TuKhoa = sTuKhoa;
-            List<DonHang> listKQTK = data.DonHangs.Where(n => n.KhachHang.HoVaTen.Contains(sTuKhoa)).ToList();
-            if (listKQTK.Count == 0)
+            if (Session["UserName"] == null)
             {
-                ViewBag.Thongbao = "KHÔNG TÌM THẤY HÓA ĐƠN BẠN CẦN Tham khảo";
-                return View(data.DonHangs.OrderBy(n => n.KhachHang.HoVaTen));
+                return RedirectToAction("DangNhapAdmin", "Admin");
             }
-            ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
-            return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
+            else
+            {
+                ViewBag.TuKhoa = sTuKhoa;
+                List<DonHang> listKQTK = data.DonHangs.Where(n => n.KhachHang.HoVaTen.Contains(sTuKhoa)).ToList();
+                if (listKQTK.Count == 0)
+                {
+                    ViewBag.Thongbao = "KHÔNG TÌM THẤY HÓA ĐƠN BẠN CẦN Tham khảo";
+                    return View(data.DonHangs.OrderBy(n => n.KhachHang.HoVaTen));
+                }
+                ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
+                return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
+            }
         }
 
         [HttpPost]
@@ -770,8 +971,13 @@ namespace Test2.Controllers
             ViewBag.Thongbao = "Đã Tìm thấy  " + listKQTK.Count + " Kết Quả";
             return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
         }
-        // xử lý đơn hàng ở đây 
-
+       
+        
+        
+        
+        
+        
+        ///////////////// xử lý đơn hàng ở đây /////////////////////
         public ActionResult DonHangDTT()
         {
             List<DonHang> donhang = data.DonHangs.Where(n => n.Status==true).ToList();

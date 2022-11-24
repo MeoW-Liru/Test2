@@ -39,8 +39,17 @@
                 <li>
                     <a href="~/Home/Index"><i class="fa fa-home fa-fw"></i> Trang chủ</a>
                 </li>
+                <li class="dropdown ">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>
+                        @{
+                            var user = HttpContext.Current.Session["UserName"].ToString();
+                            <span>@user</span>
+                        }
+                    </a>
+                </li>
                 <li>
-                    <a href="DangNhapAdmin"><i class="fa fa-sign-out fa-fw"></i> Đăng xuất</a>
+                    @Html.ActionLink("Đăng xuất", "DangXuat", "Admin")
                 </li>
             </ul>
 

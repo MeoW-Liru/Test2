@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DatabaseCafeWeb" Class="dbCoffeeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-PJCTUPE0;Initial Catalog=DatabaseCafeWeb;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseCafeWebConnectionString5" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=TOBI\SQLEXPRESS;Initial Catalog=DatabaseCafeWeb;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DatabaseCafeWebConnectionString6" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Admin" Member="Admins">
     <Type Name="Admin">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -23,18 +23,8 @@
       <Column Name="MaDH" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="SoLuongSP" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ThanhTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
-      <Column Name="saleID" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="DonHang_ChiTietDonHang" Member="DonHang" ThisKey="MaDH" OtherKey="MaDH" Type="DonHang" IsForeignKey="true" />
-      <Association Name="SALE_ChiTietDonHang" Member="SALE" ThisKey="saleID" OtherKey="saleID" Type="SALE" IsForeignKey="true" />
       <Association Name="SanPham_ChiTietDonHang" Member="SanPham" ThisKey="MaSP" OtherKey="MaSP" Type="SanPham" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.HinhAnh" Member="HinhAnhs">
-    <Type Name="HinhAnh">
-      <Column Name="MaHA" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="TenHA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="MaSP" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="MaSK" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.DonHang" Member="DonHangs">
@@ -49,8 +39,18 @@
       <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Status2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="giaohang" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="saleID" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Association Name="DonHang_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaDH" OtherKey="MaDH" Type="ChiTietDonHang" />
       <Association Name="KhachHang_DonHang" Member="KhachHang" ThisKey="MaKH" OtherKey="MaKH" Type="KhachHang" IsForeignKey="true" />
+      <Association Name="SALE_DonHang" Member="SALE" ThisKey="saleID" OtherKey="saleID" Type="SALE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.HinhAnh" Member="HinhAnhs">
+    <Type Name="HinhAnh">
+      <Column Name="MaHA" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TenHA" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="MaSP" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="MaSK" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.KhachHang" Member="KhachHangs">
@@ -93,7 +93,7 @@
       <Column Name="ngayKT" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="mucSale" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="Status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="SALE_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="saleID" OtherKey="saleID" Type="ChiTietDonHang" />
+      <Association Name="SALE_DonHang" Member="DonHangs" ThisKey="saleID" OtherKey="saleID" Type="DonHang" />
     </Type>
   </Table>
   <Table Name="dbo.SanPham" Member="SanPhams">
@@ -113,6 +113,7 @@
       <Column Name="MaBinhLuan" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="HinhAnhMoTa" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="MoTaThem" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="luotXem" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="SanPham_ChiTietDonHang" Member="ChiTietDonHangs" ThisKey="MaSP" OtherKey="MaSP" Type="ChiTietDonHang" />
       <Association Name="BinhLuan_SanPham" Member="BinhLuan" ThisKey="MaBinhLuan" OtherKey="MaBinhLuan" Type="BinhLuan" IsForeignKey="true" />
       <Association Name="LoaiSP_SanPham" Member="LoaiSP" ThisKey="MaLoaiSP" OtherKey="MaLoaiSP" Type="LoaiSP" IsForeignKey="true" />

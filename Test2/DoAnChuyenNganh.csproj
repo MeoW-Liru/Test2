@@ -604,9 +604,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="common\common.cs" />
+    <Compile Include="common\md5Crypt.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CaptchaResponse.cs" />
-    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\GiohangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NguoiDungController.cs" />

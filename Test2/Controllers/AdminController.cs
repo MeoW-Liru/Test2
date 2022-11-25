@@ -11,6 +11,8 @@ using System.Data;
 using ClosedXML.Excel;
 using System.Data.Entity;
 using System.Web.Security;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Test2.Controllers
 {
@@ -19,6 +21,30 @@ namespace Test2.Controllers
     {
         // GET: Admin
         dbCoffeeDataContext data = new dbCoffeeDataContext();
+
+
+
+        public static string MD5Hash(string text)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+
+            //compute hash from the bytes of text  
+            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+
+            //get hash result after compute it  
+            byte[] result = md5.Hash;
+
+            StringBuilder strBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                //change it into 2 hexadecimal digits  
+                //for each byte  
+                strBuilder.Append(result[i].ToString("x2"));
+            }
+
+            return strBuilder.ToString();
+        }
+
 
         [HttpGet]
         public ActionResult DangNhapAdmin()
@@ -31,7 +57,10 @@ namespace Test2.Controllers
             var tendn = collection["UserName"];
             var matkhau = collection["PassWord"];
 
-            Admin ad = data.Admins.SingleOrDefault(n => n.UserName == tendn && n.PassWord == matkhau);
+            string pass_encryp = MD5Hash(matkhau);
+
+
+            Admin ad = data.Admins.SingleOrDefault(n => n.UserName == tendn && n.PassWord == pass_encryp);
             if (ad != null)
             {
                 //ViewBag.Thongbao = "Đăng nhập thành công";
@@ -63,11 +92,11 @@ namespace Test2.Controllers
                 return RedirectToAction("DangNhapAdmin", "Admin");
             }
             else
-            { 
+            {
                 ViewBag.MaLoaiSP = new SelectList(data.LoaiSPs.ToList().OrderBy(n => n.TenLoai), "MaLoaiSP", "TenLoai");
-            ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
-            ViewBag.saleID = new SelectList(data.SALEs.ToList().OrderBy(n => n.tenSK), "saleID", "TenSK");
-            return View();
+                ViewBag.MaNCC = new SelectList(data.NhaCungCaps.ToList().OrderBy(n => n.TenNCC), "MaNCC", "TenNCC");
+                ViewBag.saleID = new SelectList(data.SALEs.ToList().OrderBy(n => n.tenSK), "saleID", "TenSK");
+                return View();
             }
         }
         [HttpPost]

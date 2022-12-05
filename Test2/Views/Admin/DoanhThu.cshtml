@@ -25,20 +25,20 @@
                 </thead>
                 <tbody class="table-light">
                     @foreach (var item in Model.GroupBy(y => y.NgayLap).Distinct().Select(g => new
-                        {
-                            Pla = g.Key,
-                            Total = g.Sum(t => t.ThanhTien)
+                    {
+                        Pla = g.Key,
+                        Total = g.Sum(t => t.ThanhTien)
                     }))
                     {
-        <tr>
-            <td>
-                @item.Pla
-            </td>
-            <td>
-                @String.Format("{0:0,0}", item.Total) VNĐ
-            </td>
-        </tr>
-}
+                        <tr>
+                            <td>
+                                @item.Pla
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", item.Total)
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
             <div style=" margin-bottom:50px;">

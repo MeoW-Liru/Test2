@@ -200,7 +200,7 @@ namespace Test2.Controllers
                 content = content.Replace("{{Password}}", t);
 
 
-                new common.MailHelper().sendMail(Email, "Cấp mật khẩu mới từ Tiệm cafe của Anh Khoa và Quý", content);
+                new common.MailHelper().sendMail(Email, "Cấp mật khẩu mới từ Tiệm cafe ", content);
 
                 UpdateModel(kh);
                 data.SubmitChanges();

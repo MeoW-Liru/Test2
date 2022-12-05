@@ -28,17 +28,15 @@ namespace Test2.Controllers
         {
             MD5 md5 = new MD5CryptoServiceProvider();
 
-            //compute hash from the bytes of text  
+           
             md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
 
-            //get hash result after compute it  
+            
             byte[] result = md5.Hash;
 
             StringBuilder strBuilder = new StringBuilder();
             for (int i = 0; i < result.Length; i++)
             {
-                //change it into 2 hexadecimal digits  
-                //for each byte  
                 strBuilder.Append(result[i].ToString("x2"));
             }
 
@@ -58,7 +56,6 @@ namespace Test2.Controllers
             var matkhau = collection["PassWord"];
 
             string pass_encryp = MD5Hash(matkhau);
-
 
             Admin ad = data.Admins.SingleOrDefault(n => n.UserName == tendn && n.PassWord == pass_encryp);
             if (ad != null)
@@ -631,7 +628,7 @@ namespace Test2.Controllers
         {
             if (Session["UserName"] == null)
             {
-                return RedirectToAction("DangNhapAdmin", "Admin");
+                return RedirectToAction("DangNhapAdmin","Admin");
             }
             else
             {
@@ -747,36 +744,6 @@ namespace Test2.Controllers
         }
 
 
-        public ActionResult listDonhang(int? page) // chỗ này đáng lẽ sẽ là code hóa đơn hàng tháng không cần phải tìm kiếm nhưng chưa mò xong nên từ từ 
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("DangNhapAdmin", "Admin");
-            }
-            else
-            {
-                int pageNumber = (page ?? 1);
-                int pageSize = 9;
-                return View(data.DonHangs.ToList().OrderBy(n => n.MaDH).ToPagedList(pageNumber, pageSize));
-            }
-        }
-
-
-        public ActionResult DoanhThu(int? page)
-        {
-            if (Session["UserName"] == null)
-            {
-                return RedirectToAction("DangNhapAdmin", "Admin");
-            }
-            else
-            {
-
-                var TongDonHangNgay = data.DonHangs.ToList();
-                int pageSize = 7;
-                int pageNum = page ?? 1;
-                return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
-            }
-        }
 
 
         ////In
@@ -923,6 +890,27 @@ namespace Test2.Controllers
 
 
 
+        public ActionResult DoanhThu(int? page)
+        {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("DangNhapAdmin", "Admin");
+            }
+            else
+            {
+
+                var TongDonHangNgay = data.DonHangs.ToList();
+                int pageSize = 7;
+                int pageNum = page ?? 1;
+                return View(TongDonHangNgay.ToPagedList(pageNum, pageSize));
+            }
+        }
+
+
+
+
+
+
 
         public double TongDonHang()
         {
@@ -1001,9 +989,6 @@ namespace Test2.Controllers
             return View(listKQTK.OrderBy(n => n.KhachHang.HoVaTen));
         }
        
-        
-        
-        
         
         
         ///////////////// xử lý đơn hàng ở đây /////////////////////
